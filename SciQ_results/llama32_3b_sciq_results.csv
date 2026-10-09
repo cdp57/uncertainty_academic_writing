@@ -1905,7 +1905,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1915,7 +1915,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1925,7 +1925,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1935,7 +1935,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1945,7 +1945,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1955,17 +1955,17 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
-9,7,96,True,Water can be broken down into hydrogen and oxygen gases by the addition of what?,"Chemistry in Everyday Life Decomposition of Water / Production of Hydrogen Water consists of the elements hydrogen and oxygen combined in a 2 to 1 ratio. Water can be broken down into hydrogen and oxygen gases by the addition of energy. One way to do this is with a battery or power supply, as shown in (Figure 1.15).",energy,mineral,demand,motion,A,A,8,0.3,"1. C
+9,7,96,True,Water can be broken down into hydrogen and oxygen gases by the addition of what?,"Chemistry in Everyday Life Decomposition of Water / Production of Hydrogen Water consists of the elements hydrogen and oxygen combined in a 2 to 1 ratio. Water can be broken down into hydrogen and oxygen gases by the addition of energy. One way to do this is with a battery or power supply, as shown in (Figure 1.15).",energy,mineral,demand,motion,A,D,8,0.3,"1. C
 2. B
 3. B
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1975,7 +1975,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1985,7 +1985,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
@@ -1995,14 +1995,14 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. A
 5. B
 6. D
-7. A
+7. D
 8. D
 9. D
 10. D",CONFIDENT_COUNT: 8
 10,1,100,False,Where is the spinal trigeminal nucleus located?,,pons,spinal cord,medulla,cerebrum,C,C,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2012,7 +2012,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,2,101,False,The lithosphere is divided into a dozen major and several minor what?,,faults,crystals,plates,zones,C,C,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2022,17 +2022,17 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,3,102,False,"During the first year after birth, what is a baby called?",,newborn,toddler,infant,fetus,C,C,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
 8. D
 9. B
 10. B",CONFIDENT_COUNT: 9
-10,4,103,False,What are used to indicate the number of atoms of an element that are in the compound?,,indices,prefixes,suffixes,digits,B,D,9,0.3,"1. C
+10,4,103,False,What are used to indicate the number of atoms of an element that are in the compound?,,indices,prefixes,suffixes,digits,B,B,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2042,7 +2042,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,5,104,False,"Area, volume, and speed are all examples of what type of units?",,calculated measure,known units,derived units,fundamental units,C,C,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2052,7 +2052,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,6,105,False,Anything moving has what type of energy?,,kinetic,potential,thermal,magnetic,A,A,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2062,7 +2062,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,7,106,False,A skydiver will reach what when the air drag equals their weight?,,constant velocity,terminal velocity,building velocity,ending velocity,B,B,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2072,7 +2072,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,8,107,False,What organs are considered the female gonads?,,uterus,testes,fallopian tubes,ovaries,D,D,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2082,7 +2082,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,9,108,False,What is the adaptation that certain animals use to become less visible to predators and prey?,,insulation,camouflage,skeletons,speed,B,B,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2092,7 +2092,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 10,10,109,False,What is another term for blood clotting?,,adulation,coagulation,oxidation,differentiation,B,B,9,0.3,"1. C
 2. C
 3. C
-4. D
+4. B
 5. C
 6. A
 7. B
@@ -2299,7 +2299,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 8. C
 9. D
 10. B",CONFIDENT_COUNT: 8
-11,1,110,True,What do you call the study of how organisms interact with their environment and each other?,"Most biological sciences are specialized areas of study. Biology includes biochemistry, cell biology, microbiology, immunology, genetics, physiology, zoology, ecology, evolutionary biology, and botany. Biochemistry is the study of the chemicals that make up life. Cell biology is the study of life at the level of the cell. Microbiology is the study of microscopic organisms. Immunology is the study of an organism's resistance to disease. Genetics is the study of how organisms pass traits to their offspring. The study of how the human body works is called physiology. Zoology is the study of animals. The study of how organisms interact with their environment and each other is called ecology. Evolutionary biology is the study of how populations and species change over time. Botany is the study of plants. The four unifying principles are important foundations for each and every field of biology. Applied fields of biology such as medicine and genetic research involve many specialized areas of study.",biology,ecology,biochemistry,climatology,B,B,8,0.3,"1. B
+11,1,110,True,What do you call the study of how organisms interact with their environment and each other?,"Most biological sciences are specialized areas of study. Biology includes biochemistry, cell biology, microbiology, immunology, genetics, physiology, zoology, ecology, evolutionary biology, and botany. Biochemistry is the study of the chemicals that make up life. Cell biology is the study of life at the level of the cell. Microbiology is the study of microscopic organisms. Immunology is the study of an organism's resistance to disease. Genetics is the study of how organisms pass traits to their offspring. The study of how the human body works is called physiology. Zoology is the study of animals. The study of how organisms interact with their environment and each other is called ecology. Evolutionary biology is the study of how populations and species change over time. Botany is the study of plants. The four unifying principles are important foundations for each and every field of biology. Applied fields of biology such as medicine and genetic research involve many specialized areas of study.",biology,ecology,biochemistry,climatology,B,B,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2308,8 +2308,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,2,111,True,Childbirth usually starts when which sac breaks?,"During childbirth , a baby passes from the uterus, through the vagina, and out of the mother’s body. Childbirth usually starts when the amniotic sac breaks.",umbilical,uterine,amniotic,protein,C,C,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,2,111,True,Childbirth usually starts when which sac breaks?,"During childbirth , a baby passes from the uterus, through the vagina, and out of the mother’s body. Childbirth usually starts when the amniotic sac breaks.",umbilical,uterine,amniotic,protein,C,C,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2318,8 +2318,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,3,112,True,"What phenomenon, which is most important in small populations, occurs because the alleles in an offspring generation are a random sample of the alleles in the parent generation?","Genetic Drift Another way a population’s allele frequencies can change is genetic drift (Figure 11.7), which is simply the effect of chance. Genetic drift is most important in small populations. Drift would be completely absent in a population with infinite individuals, but, of course, no population is this large. Genetic drift occurs because the alleles in an offspring generation are a random sample of the alleles in the parent generation. Alleles may or may not make it into the next generation due to chance events including mortality of an individual, events affecting finding a mate, and even the events affecting which gametes end up in fertilizations. If one individual in a population of ten individuals happens to die before it leaves any offspring to the next generation, all of its genes—a tenth of the population’s gene pool—will be suddenly lost. In a population of 100, that 1 individual represents only 1 percent of the overall gene pool; therefore, it has much less impact on the population’s genetic structure and is unlikely to remove all copies of even a relatively rare allele. Imagine a population of ten individuals, half with allele A and half with allele a (the individuals are haploid). In a stable population, the next generation will also have ten individuals. Choose that generation randomly by flipping a coin ten times and let heads be A and tails be a. It is unlikely that the next generation will have exactly half of each allele. There might be six of one and four of the other, or some different set of frequencies. Thus, the allele frequencies have changed and evolution has occurred. A coin will no longer work to choose the next generation (because the odds are no longer one half for each allele). The frequency in each generation will drift up and down on what is known as a random walk until at one point either all A or all a are chosen and that allele is fixed from that point on. This could take a very long time for a large population. This simplification is not very biological, but it can be shown that real populations behave this way. The effect of drift on frequencies is greater the smaller a population is. Its effect is also greater on an allele with a frequency far from one half. Drift will influence every allele, even those that are being naturally selected.",genetic drift,genetic mutation,genetic code,genetic DNA,A,A,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,3,112,True,"What phenomenon, which is most important in small populations, occurs because the alleles in an offspring generation are a random sample of the alleles in the parent generation?","Genetic Drift Another way a population’s allele frequencies can change is genetic drift (Figure 11.7), which is simply the effect of chance. Genetic drift is most important in small populations. Drift would be completely absent in a population with infinite individuals, but, of course, no population is this large. Genetic drift occurs because the alleles in an offspring generation are a random sample of the alleles in the parent generation. Alleles may or may not make it into the next generation due to chance events including mortality of an individual, events affecting finding a mate, and even the events affecting which gametes end up in fertilizations. If one individual in a population of ten individuals happens to die before it leaves any offspring to the next generation, all of its genes—a tenth of the population’s gene pool—will be suddenly lost. In a population of 100, that 1 individual represents only 1 percent of the overall gene pool; therefore, it has much less impact on the population’s genetic structure and is unlikely to remove all copies of even a relatively rare allele. Imagine a population of ten individuals, half with allele A and half with allele a (the individuals are haploid). In a stable population, the next generation will also have ten individuals. Choose that generation randomly by flipping a coin ten times and let heads be A and tails be a. It is unlikely that the next generation will have exactly half of each allele. There might be six of one and four of the other, or some different set of frequencies. Thus, the allele frequencies have changed and evolution has occurred. A coin will no longer work to choose the next generation (because the odds are no longer one half for each allele). The frequency in each generation will drift up and down on what is known as a random walk until at one point either all A or all a are chosen and that allele is fixed from that point on. This could take a very long time for a large population. This simplification is not very biological, but it can be shown that real populations behave this way. The effect of drift on frequencies is greater the smaller a population is. Its effect is also greater on an allele with a frequency far from one half. Drift will influence every allele, even those that are being naturally selected.",genetic drift,genetic mutation,genetic code,genetic DNA,A,A,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2328,8 +2328,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,4,113,True,What is the term for when an embryo fixes itself to the side of the uterus?,Implantation occurs when the developing embryo fixes itself to the side of the uterus.,implantation,bacterial,exploration,parasite,A,A,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,4,113,True,What is the term for when an embryo fixes itself to the side of the uterus?,Implantation occurs when the developing embryo fixes itself to the side of the uterus.,implantation,bacterial,exploration,parasite,A,A,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2338,8 +2338,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,5,114,True,"When exposed to ultraviolet, some substances, such as minerals, glow in characteristic visible wavelengths, a process called this?","When exposed to ultraviolet, some substances, such as minerals, glow in characteristic visible wavelengths, a process called fluorescence. So-called black lights emit ultraviolet to cause posters and clothing to fluoresce in the visible. Ultraviolet is also used in special microscopes to detect details smaller than those observable with longer-wavelength visible-light microscopes. Things Great and Small: A Submicroscopic View of X-Ray Production X-rays can be created in a high-voltage discharge. They are emitted in the material struck by electrons in the discharge current. There are two mechanisms by which the electrons create X-rays. The first method is illustrated in Figure 24.18. An electron is accelerated in an evacuated tube by a high positive voltage. The electron strikes a metal plate (e. , copper) and produces X-rays. Since this is a high-voltage discharge, the electron gains sufficient energy to ionize the atom.",chemical reaction,fluorescence,plasma,pigment,B,B,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,5,114,True,"When exposed to ultraviolet, some substances, such as minerals, glow in characteristic visible wavelengths, a process called this?","When exposed to ultraviolet, some substances, such as minerals, glow in characteristic visible wavelengths, a process called fluorescence. So-called black lights emit ultraviolet to cause posters and clothing to fluoresce in the visible. Ultraviolet is also used in special microscopes to detect details smaller than those observable with longer-wavelength visible-light microscopes. Things Great and Small: A Submicroscopic View of X-Ray Production X-rays can be created in a high-voltage discharge. They are emitted in the material struck by electrons in the discharge current. There are two mechanisms by which the electrons create X-rays. The first method is illustrated in Figure 24.18. An electron is accelerated in an evacuated tube by a high positive voltage. The electron strikes a metal plate (e. , copper) and produces X-rays. Since this is a high-voltage discharge, the electron gains sufficient energy to ionize the atom.",chemical reaction,fluorescence,plasma,pigment,B,B,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2348,8 +2348,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,6,115,True,What disease occurs when the cell cycle is no longer regulated?,Cancer is a disease that occurs when the cell cycle is no longer regulated. Cancer cells grow rapidly and may form a mass of abnormal cells called a tumor.,allergy,schizophrenia,cancer,malnutrition,C,C,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,6,115,True,What disease occurs when the cell cycle is no longer regulated?,Cancer is a disease that occurs when the cell cycle is no longer regulated. Cancer cells grow rapidly and may form a mass of abnormal cells called a tumor.,allergy,schizophrenia,cancer,malnutrition,C,C,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2358,8 +2358,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,7,116,True,"If a lump of clay is dropped into water, what will occur?","Floating and Sinking Drop a lump of clay in water. It will sink. Then mold the lump of clay into the shape of a boat, and it will float. Because of its shape, the boat displaces more water than the lump and experiences a greater buoyant force. The same is true of steel ships.",Will break up,Will dissolve,it will sink,Will float,C,C,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,7,116,True,"If a lump of clay is dropped into water, what will occur?","Floating and Sinking Drop a lump of clay in water. It will sink. Then mold the lump of clay into the shape of a boat, and it will float. Because of its shape, the boat displaces more water than the lump and experiences a greater buoyant force. The same is true of steel ships.",Will break up,Will dissolve,it will sink,Will float,C,C,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2368,8 +2368,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,8,117,True,Nerve cells that sense touch are found mainly where?,"Touch is the ability to sense pain, pressure, or temperature. Nerve cells that sense touch are found mainly in the skin. The skin on the palms, soles, face, and lips has the most neurons. Neurons that sense pain are also found inside the body inside the body in the tongue, joints, muscles, and other organs.",brain,stomach,skin,lungs,C,C,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,8,117,True,Nerve cells that sense touch are found mainly where?,"Touch is the ability to sense pain, pressure, or temperature. Nerve cells that sense touch are found mainly in the skin. The skin on the palms, soles, face, and lips has the most neurons. Neurons that sense pain are also found inside the body inside the body in the tongue, joints, muscles, and other organs.",brain,stomach,skin,lungs,C,C,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2378,8 +2378,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,9,118,True,What do concentric circles on a topographic map indicate?,Courtesy of the US Geological Survey. Concentric circles on a topographic map indicate a hill . Public Domain.,a crater,a forest,a lake,a hill,D,D,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,9,118,True,What do concentric circles on a topographic map indicate?,Courtesy of the US Geological Survey. Concentric circles on a topographic map indicate a hill . Public Domain.,a crater,a forest,a lake,a hill,D,D,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2388,8 +2388,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
-11,10,119,True,"Arthropods today have two unusual hox genes, both of which influence what?",,motility,segmentation,reproduction,compression,B,B,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+11,10,119,True,"Arthropods today have two unusual hox genes, both of which influence what?",,motility,segmentation,reproduction,compression,B,B,10,0.3,"1. B
 2. C
 3. A
 4. A
@@ -2398,7 +2398,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. C
 8. C
 9. D
-10. B",CONFIDENT_COUNT: 8
+10. B",CONFIDENT_COUNT: 10
 12,1,120,False,What are the little sacs at the end of the bronchioles called?,,lung,ganglion,respiratory sacs,alveoli,D,D,8,0.3,"1. D
 2. B
 3. D
@@ -2699,7 +2699,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 8. C
 9. A
 10. D",CONFIDENT_COUNT: 8
-13,1,130,True,"The hypothalamus is actually part of the brain, but it also secretes what?","The hypothalamus is actually part of the brain, but it also secretes hormones. Some of its hormones go directly to the pituitary gland in the endocrine system. These hypothalamus hormones tell the pituitary to either secrete or stop secreting its hormones. In this way, the hypothalamus provides a link between the nervous and endocrine systems.",enzymes,electrolytes,hormones,acids,C,C,9,0.3,"1. C
+13,1,130,True,"The hypothalamus is actually part of the brain, but it also secretes what?","The hypothalamus is actually part of the brain, but it also secretes hormones. Some of its hormones go directly to the pituitary gland in the endocrine system. These hypothalamus hormones tell the pituitary to either secrete or stop secreting its hormones. In this way, the hypothalamus provides a link between the nervous and endocrine systems.",enzymes,electrolytes,hormones,acids,C,C,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2708,8 +2708,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,2,131,True,What disease characterized by the extreme swelling of the limbs is caused by infection with a type of roundworm?,"Roundworms can be free-living organisms, but they are probably best known for their role as significant plant and animal parasites. Most Nematodes are parasitic, with over 16,000 parasitic species described. Heartworms, which cause serious disease in dogs while living in the heart and blood vessels, are a type of roundworm. Roundworms can also cause disease in humans. Elephantiasis, a disease characterized by the extreme swelling of the limbs ( Figure below ), is caused by infection with a type of roundworm.",elephantiasis,fibrosis,pulmonary edema,gigantism,A,A,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,2,131,True,What disease characterized by the extreme swelling of the limbs is caused by infection with a type of roundworm?,"Roundworms can be free-living organisms, but they are probably best known for their role as significant plant and animal parasites. Most Nematodes are parasitic, with over 16,000 parasitic species described. Heartworms, which cause serious disease in dogs while living in the heart and blood vessels, are a type of roundworm. Roundworms can also cause disease in humans. Elephantiasis, a disease characterized by the extreme swelling of the limbs ( Figure below ), is caused by infection with a type of roundworm.",elephantiasis,fibrosis,pulmonary edema,gigantism,A,A,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2718,8 +2718,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,3,132,True,"What is the study of water movement, including waves and ocean currents?","There are many branches of oceanography. Physical oceanography is the study of water movement, like waves and ocean currents. Physical oceanographers ask when or if a tsunami will hit a shoreline. Marine geologists look at rocks and structures in the ocean basins. These scientists ask how new ocean crust forms. Chemical oceanographers study the natural elements in ocean water. Chemical oceanographers might be concerned with where carbon dioxide goes in the oceans. Marine biologists look at marine life. There are lots of questions to ask about marine life!.",experimental oceanography,thermal oceanography,theoretical oceanography,physical oceanography,D,D,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,3,132,True,"What is the study of water movement, including waves and ocean currents?","There are many branches of oceanography. Physical oceanography is the study of water movement, like waves and ocean currents. Physical oceanographers ask when or if a tsunami will hit a shoreline. Marine geologists look at rocks and structures in the ocean basins. These scientists ask how new ocean crust forms. Chemical oceanographers study the natural elements in ocean water. Chemical oceanographers might be concerned with where carbon dioxide goes in the oceans. Marine biologists look at marine life. There are lots of questions to ask about marine life!.",experimental oceanography,thermal oceanography,theoretical oceanography,physical oceanography,D,D,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2728,8 +2728,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,4,133,True,What part of the sperm contains the nucleus?,The head of the sperm contains the nucleus. The nucleus holds the DNA of the cell. The head also contains enzymes that help the sperm break through the cell membrane of an egg.,body,tail,head,nucleus,C,C,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,4,133,True,What part of the sperm contains the nucleus?,The head of the sperm contains the nucleus. The nucleus holds the DNA of the cell. The head also contains enzymes that help the sperm break through the cell membrane of an egg.,body,tail,head,nucleus,C,C,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2738,8 +2738,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,5,134,True,There are many types of asexual spores. conidiospores are unicellular or multicellular spores that are released directly from the tip or side of this?,There are many types of asexual spores. Conidiospores are unicellular or multicellular spores that are released directly from the tip or side of the hypha. Other asexual spores originate in the fragmentation of a hypha to form single cells that are released as spores; some of these have a thick wall surrounding the fragment. Yet others bud off the vegetative parent cell. Sporangiospores are produced in a sporangium (Figure 24.9).,ganglion,idioma,goychay,hypha,D,D,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,5,134,True,There are many types of asexual spores. conidiospores are unicellular or multicellular spores that are released directly from the tip or side of this?,There are many types of asexual spores. Conidiospores are unicellular or multicellular spores that are released directly from the tip or side of the hypha. Other asexual spores originate in the fragmentation of a hypha to form single cells that are released as spores; some of these have a thick wall surrounding the fragment. Yet others bud off the vegetative parent cell. Sporangiospores are produced in a sporangium (Figure 24.9).,ganglion,idioma,goychay,hypha,D,D,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2748,8 +2748,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,6,135,True,What forms when nitrogen and sulfur oxides in air dissolve in rain?,Acid rain forms when nitrogen and sulfur oxides in air dissolve in rain ( Figure below ). This forms nitric and sulfuric acids. Both are strong acids. Acid rain with a pH as low as 4.0 is now common in many areas. Acid fog may be even more acidic than acid rain. Fog with a pH as low as 1.7 has been recorded. That’s the same pH as toilet bowl cleaner!.,acid rain,dioxide rain,acid snow,carbon rain,A,A,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,6,135,True,What forms when nitrogen and sulfur oxides in air dissolve in rain?,Acid rain forms when nitrogen and sulfur oxides in air dissolve in rain ( Figure below ). This forms nitric and sulfuric acids. Both are strong acids. Acid rain with a pH as low as 4.0 is now common in many areas. Acid fog may be even more acidic than acid rain. Fog with a pH as low as 1.7 has been recorded. That’s the same pH as toilet bowl cleaner!.,acid rain,dioxide rain,acid snow,carbon rain,A,A,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2758,8 +2758,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,7,136,True,Where do mushrooms get their energy?,Mushrooms gain their energy from decomposing dead organisms. Explain why a mushroom is not a plant.,producing dead organisms,killing organisms,accumulating dead organisms,decomposing dead organisms,D,D,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,7,136,True,Where do mushrooms get their energy?,Mushrooms gain their energy from decomposing dead organisms. Explain why a mushroom is not a plant.,producing dead organisms,killing organisms,accumulating dead organisms,decomposing dead organisms,D,D,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2768,8 +2768,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,8,137,True,What are the hormones that cause a plant to grow?,"Gibberellins are hormones that cause the plant to grow. When gibberellins are applied to plants by scientists, the stems grow longer. Some gardeners or horticulture scientists add gibberellins to increase the growth of plants. Dwarf plants (small plants), on the other hand, have low levels of gibberellins ( Figure below ). Another function of gibberellins is to stop dormancy (resting time) of seeds and buds. Gibberellins signal that it’s time for a seed to germinate (sprout) or for a bud to open.",pistills,pores,gibberellins,sporozoans,C,C,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,8,137,True,What are the hormones that cause a plant to grow?,"Gibberellins are hormones that cause the plant to grow. When gibberellins are applied to plants by scientists, the stems grow longer. Some gardeners or horticulture scientists add gibberellins to increase the growth of plants. Dwarf plants (small plants), on the other hand, have low levels of gibberellins ( Figure below ). Another function of gibberellins is to stop dormancy (resting time) of seeds and buds. Gibberellins signal that it’s time for a seed to germinate (sprout) or for a bud to open.",pistills,pores,gibberellins,sporozoans,C,C,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2778,8 +2778,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,9,138,True,The ileum is the last part of what digestive system organ?,"The ileum is the last part of the small intestine. It is covered with villi like the jejunum. A few remaining nutrients are absorbed in the ileum. From the ileum, any remaining food waste passes into the large intestine.",large intestine,esophagus,small intestine,stomach,C,C,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,9,138,True,The ileum is the last part of what digestive system organ?,"The ileum is the last part of the small intestine. It is covered with villi like the jejunum. A few remaining nutrients are absorbed in the ileum. From the ileum, any remaining food waste passes into the large intestine.",large intestine,esophagus,small intestine,stomach,C,C,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2788,8 +2788,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
-13,10,139,True,What are the smallest structural and functional unit of all living organisms?,"If you zoom in very close on a leaf of a plant, or on the skin on your hand, or a drop of blood, you will find cells, you will find cells ( Figure below ). Cells are the smallest structural and functional unit of all living organisms. Most cells are so small that they are usually visible only through a microscope. Some organisms, like bacteria, plankton that live in the ocean, or the Paramecium, shown in Figure below , are unicellular, made of just one cell. Other organisms have millions, billions, or trillions of cells.",lipids,neutrons,proteins,cells,D,D,9,0.3,"1. C
+10. D",CONFIDENT_COUNT: 10
+13,10,139,True,What are the smallest structural and functional unit of all living organisms?,"If you zoom in very close on a leaf of a plant, or on the skin on your hand, or a drop of blood, you will find cells, you will find cells ( Figure below ). Cells are the smallest structural and functional unit of all living organisms. Most cells are so small that they are usually visible only through a microscope. Some organisms, like bacteria, plankton that live in the ocean, or the Paramecium, shown in Figure below , are unicellular, made of just one cell. Other organisms have millions, billions, or trillions of cells.",lipids,neutrons,proteins,cells,D,D,10,0.3,"1. C
 2. A
 3. D
 4. C
@@ -2798,7 +2798,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. C
 9. C
-10. D",CONFIDENT_COUNT: 9
+10. D",CONFIDENT_COUNT: 10
 14,1,140,False,"Clubfoot, also known as talipes, is a congenital (present at birth) disorder of unknown cause and is the most common deformity of what?",,genitals,lower limb,upper limb,cranium,B,B,8,0.3,"1. B
 2. D
 3. C
@@ -5702,102 +5702,102 @@ group_index,position_in_group,question_index,use_support,question,support,option
 28,1,280,True,"Most mammals are viviparous, which refers to what reproductive result?","Most mammals are viviparous. Their young are born live. They are born either as relatively large, well-developed fetuses or as tiny, immature embryos. Mammals that are viviparous are called therian mammals . Only a few mammals lay eggs instead of giving birth to an infant or embryo.",identical twins,spawning,live birth,laying eggs,C,C,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 28,2,281,True,Proteins are polymers of what kind of acids?,"Proteins are polymers of amino acids, which act as the monomers.",lactic,lipids,acetic,amino,D,D,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 28,3,282,True,What is the official name for the study of life?,"The study of biology is the study of life. Concept Biology Advanced is the CK-12 Foundation's most extensive material describing the study of life. Concept Biology Advanced presents biology as a set of 18 concepts, with each concept centered around a specific category, such as cell biology or plants. Each concept is comprised of a series of lessons, with each lesson focusing on one specific topic. The complete Concept Biology Advanced is comprised of over 550 lessons. This material has been developed to complement the most advanced secondary-level biology course.",biology,botany,geology,chemistry,A,A,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
-28,4,283,True,"What does an invertebrate, like a snail, not have?","Snails are an example of invertebrates, animals without a backbone.",a heart,backbone,eyes,reproductive organs,B,B,10,0.3,"1. C
+28,4,283,True,"What does an invertebrate, like a snail, not have?","Snails are an example of invertebrates, animals without a backbone.",a heart,backbone,eyes,reproductive organs,B,D,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 28,5,284,True,What is the dinosaur genus that's closest to modern birds?,"Deinonychus is the genus name of an extinct dinosaur that is considered to be one of the closest non-bird relatives of modern birds. It lived about 110 million years ago in what is now North America. Deinonychus was a predatory carnivore with many bird-like features. For example, it had feathers and wings. It also had strong legs with clawed feet, similar to modern raptors. Its respiratory, circulatory, and digestive systems were similar to those of birds as well. The location of fossilized eggs near Deinonychus fossils suggests that it may have brooded its eggs. This would mean that it was endothermic. (Can you explain why?) On the other hand, Deinonychus retained a number of reptile-like traits, such as jaws with teeth and hands with claws at the tips of its wings.",Rapter,diplodocus,sauropods,deinonychus,D,D,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 28,6,285,True,In what type of organisms are daughter cells individuals?,"6.4 | Prokaryotic Cell Division By the end of this section, you will be able to: • Describe the process of binary fission in prokaryotes • Explain how FtsZ and tubulin proteins are examples of homology Prokaryotes such as bacteria propagate by binary fission. For unicellular organisms, cell division is the only method to produce new individuals. In both prokaryotic and eukaryotic cells, the outcome of cell reproduction is a pair of daughter cells that are genetically identical to the parent cell. In unicellular organisms, daughter cells are individuals. To achieve the outcome of identical daughter cells, some steps are essential. The genomic DNA must be replicated and then allocated into the daughter cells; the cytoplasmic contents must also be divided to give both new cells the machinery to sustain life. In bacterial cells, the genome consists of a single, circular DNA chromosome; therefore, the process of cell division is simplified. Mitosis is unnecessary because there is no nucleus or multiple chromosomes. This type of cell division is called binary fission.",hematopoietic organisms,multicellular organisms,macroscopic organisms,unicellular organisms,D,D,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 28,7,286,True,"What group was long considered part of the plant kingdom because of obvious similarities; both are immobile, have cell walls, and grow in soil?","For a long time, scientists considered fungi to be members of the plant kingdom because they have obvious similarities with plants. Both fungi and plants are immobile, have cell walls, and grow in soil. Some fungi, such as lichens, even look like plants (see Figure below ).",fungi,bacteria,mosses,coral,A,A,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 28,8,287,True,What type of waves transmit the energy of an earthquake?,"An earthquake is sudden ground movement. This movement is caused by the sudden release of the energy stored in rocks. An earthquake happens when so much stress builds up in the rocks that the rocks break. An earthquake’s energy is transmitted by seismic waves. Each year, there are more than 150,000 earthquakes strong enough to be felt by people. An amazing 900,000 are recorded by seismometers.",seismic waves,sonic waves,tectonic waves,volcanic waves,A,A,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
-28,9,288,True,"In our bodies, the chest cavity is a clear example of a system at what?","It is interesting that the widths of the resonance curves shown in Figure 16.27 depend on damping: the less the damping, the narrower the resonance. The message is that if you want a driven oscillator to resonate at a very specific frequency, you need as little damping as possible. Little damping is the case for piano strings and many other musical instruments. Conversely, if you want small-amplitude oscillations, such as in a car’s suspension system, then you want heavy damping. Heavy damping reduces the amplitude, but the tradeoff is that the system responds at more frequencies. These features of driven harmonic oscillators apply to a huge variety of systems. When you tune a radio, for example, you are adjusting its resonant frequency so that it only oscillates to the desired station’s broadcast (driving) frequency. The more selective the radio is in discriminating between stations, the smaller its damping. Magnetic resonance imaging (MRI) is a widely used medical diagnostic tool in which atomic nuclei (mostly hydrogen nuclei) are made to resonate by incoming radio waves (on the order of 100 MHz). A child on a swing is driven by a parent at the swing’s natural frequency to achieve maximum amplitude. In all of these cases, the efficiency of energy transfer from the driving force into the oscillator is best at resonance. Speed bumps and gravel roads prove that even a car’s suspension system is not immune to resonance. In spite of finely engineered shock absorbers, which ordinarily convert mechanical energy to thermal energy almost as fast as it comes in, speed bumps still cause a large-amplitude oscillation. On gravel roads that are corrugated, you may have noticed that if you travel at the “wrong” speed, the bumps are very noticeable whereas at other speeds you may hardly feel the bumps at all. Figure 16.28 shows a photograph of a famous example (the Tacoma Narrows Bridge) of the destructive effects of a driven harmonic oscillation. The Millennium Bridge in London was closed for a short period of time for the same reason while inspections were carried out. In our bodies, the chest cavity is a clear example of a system at resonance. The diaphragm and chest wall drive the oscillations of the chest cavity which result in the lungs inflating and deflating. The system is critically damped and the muscular diaphragm oscillates at the resonant value for the system, making it highly efficient.",scale,rest,default,resonance,D,D,10,0.3,"1. C
+28,9,288,True,"In our bodies, the chest cavity is a clear example of a system at what?","It is interesting that the widths of the resonance curves shown in Figure 16.27 depend on damping: the less the damping, the narrower the resonance. The message is that if you want a driven oscillator to resonate at a very specific frequency, you need as little damping as possible. Little damping is the case for piano strings and many other musical instruments. Conversely, if you want small-amplitude oscillations, such as in a car’s suspension system, then you want heavy damping. Heavy damping reduces the amplitude, but the tradeoff is that the system responds at more frequencies. These features of driven harmonic oscillators apply to a huge variety of systems. When you tune a radio, for example, you are adjusting its resonant frequency so that it only oscillates to the desired station’s broadcast (driving) frequency. The more selective the radio is in discriminating between stations, the smaller its damping. Magnetic resonance imaging (MRI) is a widely used medical diagnostic tool in which atomic nuclei (mostly hydrogen nuclei) are made to resonate by incoming radio waves (on the order of 100 MHz). A child on a swing is driven by a parent at the swing’s natural frequency to achieve maximum amplitude. In all of these cases, the efficiency of energy transfer from the driving force into the oscillator is best at resonance. Speed bumps and gravel roads prove that even a car’s suspension system is not immune to resonance. In spite of finely engineered shock absorbers, which ordinarily convert mechanical energy to thermal energy almost as fast as it comes in, speed bumps still cause a large-amplitude oscillation. On gravel roads that are corrugated, you may have noticed that if you travel at the “wrong” speed, the bumps are very noticeable whereas at other speeds you may hardly feel the bumps at all. Figure 16.28 shows a photograph of a famous example (the Tacoma Narrows Bridge) of the destructive effects of a driven harmonic oscillation. The Millennium Bridge in London was closed for a short period of time for the same reason while inspections were carried out. In our bodies, the chest cavity is a clear example of a system at resonance. The diaphragm and chest wall drive the oscillations of the chest cavity which result in the lungs inflating and deflating. The system is critically damped and the muscular diaphragm oscillates at the resonant value for the system, making it highly efficient.",scale,rest,default,resonance,D,C,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 28,10,289,True,How do prokaryotic cells divide?,Prokaryotic cells grow to a certain size. Then they divide by binary fission. This is a type of asexual reproduction. It produces genetically identical offspring. Genetic transfer increases genetic variation in prokaryotes.,Fusion,multiple fission,binary fission,function fission,C,C,10,0.3,"1. C
 2. D
 3. A
-4. B
+4. D
 5. D
 6. D
 7. A
 8. A
-9. D
+9. C
 10. C",CONFIDENT_COUNT: 10
 29,1,290,False,What is the term for a series of biochemical reactions by which an organism converts a given reactant to a specific end product?,,metabolic pathway,hydrogen pathway,direct pathway,internal pathway,A,A,8,0.3,"1. A
 2. B
@@ -5904,7 +5904,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5914,7 +5914,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5924,7 +5924,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5934,7 +5934,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5944,17 +5944,17 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
 10. B",CONFIDENT_COUNT: 8
-29,6,295,True,What is released to lubricate the vagina to facilitate intercourse?,"The vagina is a muscular tube that serves several purposes. It allows menstrual flow to leave the body. It is the receptacle for the penis during intercourse and the vessel for the delivery of offspring. It is lined by stratified squamous epithelial cells to protect the underlying tissue. Sexual Response during Intercourse The sexual response in humans is both psychological and physiological. Both sexes experience sexual arousal through psychological and physical stimulation. There are four phases of the sexual response. During phase one, called excitement, vasodilation leads to vasocongestion in erectile tissues in both men and women. The nipples, clitoris, labia, and penis engorge with blood and become enlarged. Vaginal secretions are released to lubricate the vagina to facilitate intercourse. During the second phase, called the plateau, stimulation continues, the outer third of the vaginal wall enlarges with blood, and breathing and heart rate increase. During phase three, or orgasm, rhythmic, involuntary contractions of muscles occur in both sexes. In the male, the reproductive accessory glands and tubules constrict placing semen in the urethra, then the urethra contracts expelling the semen through the penis. In women, the uterus and vaginal muscles contract in waves that may last slightly less than a second each. During phase four, or resolution, the processes described in the first three phases reverse themselves and return to their normal state. Men experience a refractory period in which they cannot maintain an erection or ejaculate for a period of time ranging from minutes to hours.",vaginal secretions,blood,semen,urine,A,A,8,0.3,"1. A
+29,6,295,True,What is released to lubricate the vagina to facilitate intercourse?,"The vagina is a muscular tube that serves several purposes. It allows menstrual flow to leave the body. It is the receptacle for the penis during intercourse and the vessel for the delivery of offspring. It is lined by stratified squamous epithelial cells to protect the underlying tissue. Sexual Response during Intercourse The sexual response in humans is both psychological and physiological. Both sexes experience sexual arousal through psychological and physical stimulation. There are four phases of the sexual response. During phase one, called excitement, vasodilation leads to vasocongestion in erectile tissues in both men and women. The nipples, clitoris, labia, and penis engorge with blood and become enlarged. Vaginal secretions are released to lubricate the vagina to facilitate intercourse. During the second phase, called the plateau, stimulation continues, the outer third of the vaginal wall enlarges with blood, and breathing and heart rate increase. During phase three, or orgasm, rhythmic, involuntary contractions of muscles occur in both sexes. In the male, the reproductive accessory glands and tubules constrict placing semen in the urethra, then the urethra contracts expelling the semen through the penis. In women, the uterus and vaginal muscles contract in waves that may last slightly less than a second each. During phase four, or resolution, the processes described in the first three phases reverse themselves and return to their normal state. Men experience a refractory period in which they cannot maintain an erection or ejaculate for a period of time ranging from minutes to hours.",vaginal secretions,blood,semen,urine,A,B,8,0.3,"1. A
 2. B
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5964,7 +5964,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5974,7 +5974,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5984,7 +5984,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -5994,7 +5994,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. A
 4. C
 5. B
-6. A
+6. B
 7. D
 8. B
 9. B
@@ -7504,7 +7504,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7514,7 +7514,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7524,7 +7524,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7534,7 +7534,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7544,17 +7544,17 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
 10. A",CONFIDENT_COUNT: 8
-37,6,375,True,What is another word for cellular drinking?,"Pinocytosis , or cellular drinking, occurs when the plasma membrane folds inward to form a channel allowing dissolved substances to enter the cell, as shown in Figure below . When the channel is closed, the liquid is encircled within a pinocytic vesicle.",cellular hydration,hypothalamus,altostratus,pinocytosis,D,D,8,0.3,"1. B
+37,6,375,True,What is another word for cellular drinking?,"Pinocytosis , or cellular drinking, occurs when the plasma membrane folds inward to form a channel allowing dissolved substances to enter the cell, as shown in Figure below . When the channel is closed, the liquid is encircled within a pinocytic vesicle.",cellular hydration,hypothalamus,altostratus,pinocytosis,D,A,8,0.3,"1. B
 2. C
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7564,7 +7564,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7574,7 +7574,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7584,7 +7584,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -7594,7 +7594,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 3. B
 4. C
 5. D
-6. D
+6. A
 7. B
 8. C
 9. A
@@ -10602,7 +10602,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,1,530,False,A metarteriole is a type of vessel that has structural characteristics of both an arteriole and this?,,capillary,electron,layer,tendon,A,A,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10612,7 +10612,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,2,531,False,What sort of walls are helpful for keeping a slope stable?,,relocating walls,managing walls,retaining walls,diverting walls,C,C,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10622,17 +10622,17 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,3,532,False,What is the most direct way of recovering a metal from its ores?,,drilling,electrolysis,osmosis,molecules,B,B,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
 8. A
 9. C
 10. D",CONFIDENT_COUNT: 8
-53,4,533,False,What is the term used to describe the minerals and vitamins that are not needed for providing the body with energy but are still essential for good health?,,salts,micronutrients,non-energetic nutrients,pigments,B,B,8,0.3,"1. A
+53,4,533,False,What is the term used to describe the minerals and vitamins that are not needed for providing the body with energy but are still essential for good health?,,salts,micronutrients,non-energetic nutrients,pigments,B,D,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10642,7 +10642,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,5,534,False,What type of map reveals the shape of a landscape?,,meteorological,geologic,topographic,geographic,C,C,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10652,7 +10652,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,6,535,False,Does atmospheric pressure increase or decrease as the altitude increases?,,stays the same,decreases,increase,depends on other factors,B,B,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10662,7 +10662,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,7,536,False,"What term always refers to acceleration in the direction opposite to the direction of the velocity and always reduces speed, unlike negative acceleration?",,calibration,progression,deceleration,extraction,C,C,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10672,7 +10672,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,8,537,False,What do you call a quantity of motion that has both size as well as direction?,,vector,speed,wave,vibration,A,A,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10682,7 +10682,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,9,538,False,What process done by bacteria makes them important producers in aquatic ecosystems?,,reproduction,maturation,photosynthesis,infection,C,C,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -10692,7 +10692,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 53,10,539,False,"Monosaccharides, disaccharides, and polysaccharides are types of what kind of macromolecule?",,protein,glucose,nutrients,carbohydrate,D,D,8,0.3,"1. A
 2. C
 3. B
-4. B
+4. D
 5. C
 6. B
 7. C
@@ -12899,7 +12899,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 8. B
 9. A
 10. C",CONFIDENT_COUNT: 8
-64,1,640,True,What is the difference between oils and fats at room temperature?,"A lipid is a member of a class of water-insoluble compounds that includes oils, fats, and waxes. Oils and fats are based on the same general structure, but fats are solids at room temperature, while oils are liquids. Butter is an example of a fat and is derived from animals. Some oils include olive oil and canola oil, which are obtained from plants. Lipids are an essential part of a healthy diet, though excess dietary fat can be harmful. Lipids store energy in the body and are also needed to keep cell membranes healthy.",liquid and gas states,saturated and unsaturated,liquid and solid states,solid and gas states,C,C,9,0.3,"1. C
+64,1,640,True,What is the difference between oils and fats at room temperature?,"A lipid is a member of a class of water-insoluble compounds that includes oils, fats, and waxes. Oils and fats are based on the same general structure, but fats are solids at room temperature, while oils are liquids. Butter is an example of a fat and is derived from animals. Some oils include olive oil and canola oil, which are obtained from plants. Lipids are an essential part of a healthy diet, though excess dietary fat can be harmful. Lipids store energy in the body and are also needed to keep cell membranes healthy.",liquid and gas states,saturated and unsaturated,liquid and solid states,solid and gas states,C,C,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12908,8 +12908,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,2,641,True,A cochlear implant aims to restore loss of what sense?,"consists of a microphone that picks up sound. A speech processor selects sounds in the range of human speech, and a transmitter converts these sounds to electrical impulses, which are then sent to the auditory nerve. Which of the following types of hearing loss would not be restored by a cochlear implant? a. Hearing loss resulting from absence or loss of hair cells in the organ of Corti. Hearing loss resulting from an abnormal auditory nerve. Hearing loss resulting from fracture of the cochlea.",touch,vision,hearing,taste,C,C,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,2,641,True,A cochlear implant aims to restore loss of what sense?,"consists of a microphone that picks up sound. A speech processor selects sounds in the range of human speech, and a transmitter converts these sounds to electrical impulses, which are then sent to the auditory nerve. Which of the following types of hearing loss would not be restored by a cochlear implant? a. Hearing loss resulting from absence or loss of hair cells in the organ of Corti. Hearing loss resulting from an abnormal auditory nerve. Hearing loss resulting from fracture of the cochlea.",touch,vision,hearing,taste,C,C,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12918,8 +12918,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,3,642,True,In which constellation is the helix nebula located?,"The Helix nebula, located about 700 light-years away in the constellation Aquarius, belongs to a class of objects called planetary nebulae . Planetary nebulae are the remains of stars that once looked a lot like our sun. When sun-like stars die, they puff out their outer gaseous layers. These layers are heated by the hot core of the dead star, called a white dwarf, and shine with infrared and visible colors. Scientists can study the birth and death of stars by analyzing the types of light that are emitted from nebulae.",aquarius,prometheus,zodiac,gemini,A,A,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,3,642,True,In which constellation is the helix nebula located?,"The Helix nebula, located about 700 light-years away in the constellation Aquarius, belongs to a class of objects called planetary nebulae . Planetary nebulae are the remains of stars that once looked a lot like our sun. When sun-like stars die, they puff out their outer gaseous layers. These layers are heated by the hot core of the dead star, called a white dwarf, and shine with infrared and visible colors. Scientists can study the birth and death of stars by analyzing the types of light that are emitted from nebulae.",aquarius,prometheus,zodiac,gemini,A,A,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12928,8 +12928,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,4,643,True,The chains in cellulose stack in parallel rows held together by hydrogen bonds between which groups?,"that produce a coiled structure. The glucose units in cellulose, in contrast, are linked to give long, unbranched chains. The chains in cellulose stack in parallel rows held together by hydrogen bonds between hydroxyl groups. This arrangement produces a rigid structure that is insoluble in water. Figure 24.22 The Polysaccharides Starch and Cellulose.",disc groups,soda groups,hydroxl groups,carbon groups,C,C,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,4,643,True,The chains in cellulose stack in parallel rows held together by hydrogen bonds between which groups?,"that produce a coiled structure. The glucose units in cellulose, in contrast, are linked to give long, unbranched chains. The chains in cellulose stack in parallel rows held together by hydrogen bonds between hydroxyl groups. This arrangement produces a rigid structure that is insoluble in water. Figure 24.22 The Polysaccharides Starch and Cellulose.",disc groups,soda groups,hydroxl groups,carbon groups,C,C,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12938,8 +12938,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,5,644,True,"The small, rocky bodies that orbit the sun are called what?",Asteroids are small rocky bodies that orbit the Sun.,fossils,asteroids,comets,meteorites,B,B,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,5,644,True,"The small, rocky bodies that orbit the sun are called what?",Asteroids are small rocky bodies that orbit the Sun.,fossils,asteroids,comets,meteorites,B,B,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12948,8 +12948,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,6,645,True,Water is used by the plant to move materials up from the roots to make what?,,chlorophyll,light,food,fruit,C,C,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,6,645,True,Water is used by the plant to move materials up from the roots to make what?,,chlorophyll,light,food,fruit,C,C,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12958,8 +12958,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,7,646,True,"Magnets have a ""north"" and a ""south"" what?","Figure 22.3 Magnets come in various shapes, sizes, and strengths. All have both a north pole and a south pole. There is never an isolated pole (a monopole).",pole,temperature,arch,grid,A,A,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,7,646,True,"Magnets have a ""north"" and a ""south"" what?","Figure 22.3 Magnets come in various shapes, sizes, and strengths. All have both a north pole and a south pole. There is never an isolated pole (a monopole).",pole,temperature,arch,grid,A,A,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12968,8 +12968,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,8,647,True,"Exemplified by organisms that grow in geysers, hyperthermophiles ""love"" what?","Hyperthermophiles are organisms that ""love"" heat. Some archaeans can survive at very high temperatures. For example, they can grow in hot springs and geysers. One archaean species can even reproduce at 122 °C (252 °F). This is higher than the boiling point of water. It is the highest recorded temperature for any organism.",cold,heat,rainfall,humidity,B,B,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,8,647,True,"Exemplified by organisms that grow in geysers, hyperthermophiles ""love"" what?","Hyperthermophiles are organisms that ""love"" heat. Some archaeans can survive at very high temperatures. For example, they can grow in hot springs and geysers. One archaean species can even reproduce at 122 °C (252 °F). This is higher than the boiling point of water. It is the highest recorded temperature for any organism.",cold,heat,rainfall,humidity,B,B,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12978,8 +12978,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,9,648,True,What is the term for the multi-phase process in which the nucleus of the cell divides?,"The first step is mitosis , a multi-phase process in which the nucleus of the cell divides. During mitosis, the nuclear membrane breaks down and later reforms. The chromosomes are also sorted and separated to ensure that each daughter cell receives a diploid number (2 sets) of chromosomes. In humans, that number of chromosomes is 46 (23 pairs). Mitosis is described in greater detail in a subsequent concept.",mitosis,cytokinesis,epistasis,mutation,A,A,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,9,648,True,What is the term for the multi-phase process in which the nucleus of the cell divides?,"The first step is mitosis , a multi-phase process in which the nucleus of the cell divides. During mitosis, the nuclear membrane breaks down and later reforms. The chromosomes are also sorted and separated to ensure that each daughter cell receives a diploid number (2 sets) of chromosomes. In humans, that number of chromosomes is 46 (23 pairs). Mitosis is described in greater detail in a subsequent concept.",mitosis,cytokinesis,epistasis,mutation,A,A,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12988,8 +12988,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
-64,10,649,True,"Fungi often make specialized reproductive structures, such as what?","Fungi often make specialized reproductive structures, such as a mushroom.",herbs,Fungus,mushrooms,pieces,C,C,9,0.3,"1. C
+10. C",CONFIDENT_COUNT: 10
+64,10,649,True,"Fungi often make specialized reproductive structures, such as what?","Fungi often make specialized reproductive structures, such as a mushroom.",herbs,Fungus,mushrooms,pieces,C,C,10,0.3,"1. C
 2. C
 3. A
 4. C
@@ -12998,7 +12998,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. A
 8. B
 9. A
-10. C",CONFIDENT_COUNT: 9
+10. C",CONFIDENT_COUNT: 10
 65,1,650,False,Which is a more reliable trait or measure to identify minerals?,,color,weight,shape,streak,D,D,8,0.3,"1. D
 2. C
 3. B
@@ -13505,7 +13505,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13515,7 +13515,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13525,7 +13525,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13535,7 +13535,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13545,7 +13545,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13555,17 +13555,17 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
-67,7,676,True,Light travels more quickly in air than what?,"When light is refracted, it changes direction as it passes into a new medium and changes speed. The straw in the Figure below looks bent where light travels from water to air. Light travels more quickly in air than in water and changes direction. For a detailed explanation of how this happens, watch the animation at this URL:.",earth,water,metal,glass,B,C,8,0.3,"1. A
+67,7,676,True,Light travels more quickly in air than what?,"When light is refracted, it changes direction as it passes into a new medium and changes speed. The straw in the Figure below looks bent where light travels from water to air. Light travels more quickly in air than in water and changes direction. For a detailed explanation of how this happens, watch the animation at this URL:.",earth,water,metal,glass,B,D,8,0.3,"1. A
 2. B
 3. D
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13575,7 +13575,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13585,7 +13585,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -13595,7 +13595,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 4. D
 5. B
 6. B
-7. C
+7. D
 8. B
 9. C
 10. C",CONFIDENT_COUNT: 8
@@ -16702,7 +16702,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,1,830,True,"What ingredient has been used in brewing, winemaking and baking for thousands of years?",,fruit,flour,yeast,oils,C,C,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16712,7 +16712,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,2,831,True,"The tibia is the larger, weight-bearing bone located on the medial side of the leg. the fibula is the slender bone of the lateral side of the leg and does not do what?","Figure 8.18 Tibia and Fibula The tibia is the larger, weight-bearing bone located on the medial side of the leg. The fibula is the slender bone of the lateral side of the leg and does not bear weight.",bear weight,drive weight,support weight,resist weight,A,A,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16722,17 +16722,17 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,3,832,True,What are reptiles unable to absorb through their skin because of scales?,"The scales of reptiles prevent them from absorbing oxygen through their skin, as amphibians can. Instead, reptiles breathe air only through their lungs. However, their lungs are more efficient than the lungs of amphibians, with more surface area for gas exchange. This is another important reptile adaptation for life on land.",oxygen,water,carbon,food,A,C,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
 8. D
 9. D
 10. C",CONFIDENT_COUNT: 8
-83,4,833,True,All types of cells are enclosed by what?,"Regardless of the type of organism, all living cells share certain basic structures. For example, all cells are enclosed by a membrane. The cell membrane separates the cell from its environment. It also controls what enters or leaves the cell.",membrane,substrate,stoma,cell wall,A,A,8,0.3,"1. C
+83,4,833,True,All types of cells are enclosed by what?,"Regardless of the type of organism, all living cells share certain basic structures. For example, all cells are enclosed by a membrane. The cell membrane separates the cell from its environment. It also controls what enters or leaves the cell.",membrane,substrate,stoma,cell wall,A,D,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16742,7 +16742,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,5,834,True,What causes symptoms associated with sickle-cell disease?,"Metalloids are the smallest class of elements, containing just six members: boron (B), silicon (Si), germanium (Ge), arsenic (As), antimony (Sb), and tellurium (Te). Metalloids have some properties of metals (elements that can conduct electricity) and some properties of nonmetals (elements that cannot conduct electricity). For example, most metalloids can conduct electricity, but not as well as metals. Metalloids also tend to be shiny like metals, but brittle like nonmetals. Chemically, metalloids may behave like metals or nonmetals, depending on their number of valence electrons. You can learn more about specific metalloids by clicking on the element symbols in the periodic table at this URL: http://www. chemicool. com/ .",transgene effects,genetic drift,spontaneous mutation,pleiotropic effects,D,C,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16752,7 +16752,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,6,835,True,"Candida and trichophyton are examples of disease-causing types of what organisms, which become parasitic?",Some fungi cause disease when they become human parasites. Two examples are fungi in the genera Candida and Trichophyton.,bacteria,fungi,viruses,yeast,B,B,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16762,7 +16762,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,7,836,True,What type of cells detect stimuli?,"Animals can detect environmental stimuli, such as light, sound, and touch. Stimuli are detected by sensory nerve cells. The information is transmitted and processed by the nervous system. The nervous system, in turn, may direct the body to respond.",sensory nerve cells,muscle cells,expressive nerve cells,grid nerve cells,A,A,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16772,7 +16772,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,8,837,True,What 3 things do animals need to live and survive?,,"water, food, and an ecosystem","air, water, and socialization","sex, water, and sleep","air, water, and food",D,D,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16782,7 +16782,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,9,838,True,"The cultivated forms of wheat, cotton, and tobacco plants are all what?","The cultivated forms of wheat, cotton, and tobacco plants are all allopolyploids. Although polyploidy occurs occasionally in animals, it takes place most commonly in plants. (Animals with any of the types of chromosomal aberrations described here are unlikely to survive and produce normal offspring. ) Scientists have discovered more than half of all plant species studied relate back to a species evolved through polyploidy. With such a high rate of polyploidy in plants, some scientists hypothesize that this mechanism takes place more as an adaptation than as an error.",sporozoans,pores,bales,allopolyploids,D,D,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -16792,7 +16792,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 83,10,839,True,A hydrogen atom with one neutron is called what?,"Hydrogen is an example of an element that has isotopes. Three isotopes of hydrogen are modeled in the Figure below . Most hydrogen atoms have just one proton and one electron and lack a neutron. These atoms are just called hydrogen. Some hydrogen atoms have one neutron as well. These atoms are the isotope named deuterium. Other hydrogen atoms have two neutrons. These atoms are the isotope named tritium. For animated versions of these hydrogen isotopes, go to this URL: http://www. s-cool. co. uk/a-level/physics/atomic-structure/revise-it/isotopes .",ionic,covalent,deuterium,magnesium,C,C,8,0.3,"1. C
 2. A
 3. C
-4. A
+4. D
 5. C
 6. B
 7. A
@@ -17106,8 +17106,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 85,2,851,True,What system possesses a memory component that allows for an efficient and dramatic response upon reinvasion of the same pathogen?,"Immunological Memory The adaptive immune system possesses a memory component that allows for an efficient and dramatic response upon reinvasion of the same pathogen. Memory is handled by the adaptive immune system with little reliance on cues from the innate response. During the adaptive immune response to a pathogen that has not been encountered before, called a primary response, plasma cells secreting antibodies and differentiated T cells increase, then plateau over time. As B and T cells mature into effector cells, a subset of the naïve populations differentiates into B and T memory cells with the same antigen specificities, as illustrated in Figure 42.16. A memory cell is an antigen-specific B or T lymphocyte that does not differentiate into effector cells during the primary immune response, but that can immediately become effector cells upon re-exposure to the same pathogen. During the primary immune response, memory cells do not respond to antigens and do not contribute to host defenses. As the infection is cleared and pathogenic stimuli subside, the effectors are no longer needed, and they undergo apoptosis. In contrast, the memory cells persist in the circulation.",suggestive immune system,incorporate immune system,adaptive immune system,societal immune system,C,C,10,0.3,"1. B
 2. C
@@ -17116,8 +17116,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 85,3,852,True,Honeybees doing the waggle dance or spiders spinning a web are examples of what type of behavior?,Examples of innate behavior include honeybees doing the waggle dance or spiders spinning a web.,innate,genuine,intuitive,learned,A,D,10,0.3,"1. B
 2. C
@@ -17126,8 +17126,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 85,4,853,True,"What glands remove water, salts and other wastes from skin?","Skin Sweat glands remove water, salts, and other wastes. Integumentary system.",push glands,water glands,sex glands,sweat glands,D,D,10,0.3,"1. B
 2. C
@@ -17136,8 +17136,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 85,5,854,True,A series of arches that support the gills of aquatic amphibians and fish are known as what?,"The branchial arches , a series of arches that support the gills of aquatic amphibians and fishes. They lie close to the body's surface.",scythian arches,branchial arches,aquatic arches,cochlear arches,B,B,10,0.3,"1. B
 2. C
@@ -17146,8 +17146,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 85,6,855,True,"What term, calculated by multiplying heart contractions by stroke volume, means the volume of blood pumped by the heart in one minute?","Blood Pressure Regulation Cardiac output is the volume of blood pumped by the heart in one minute. It is calculated by multiplying the number of heart contractions that occur per minute (heart rate) times the stroke volume (the volume of blood pumped into the aorta per contraction of the left ventricle). Therefore, cardiac output can be increased by increasing heart rate, as when exercising. However, cardiac output can also be increased by increasing stroke volume, such as if the heart contracts with greater strength. Stroke volume can also be increased by speeding blood circulation through the body so that more blood enters the heart between contractions. During heavy exertion, the blood vessels relax and increase in diameter, offsetting the increased heart rate and ensuring adequate oxygenated blood gets to the muscles. Stress triggers a decrease in the diameter of the blood vessels, consequently increasing blood pressure. These changes can also be caused by nerve signals or hormones, and even standing up or lying down can have a great effect on blood pressure.",respiratory output,liver output,blood output,cardiac output,D,C,10,0.3,"1. B
 2. C
@@ -17156,8 +17156,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 85,7,856,True,Birds are thought to have evolved from a group of bipedal dinosaurs called what?,"Birds are thought to have evolved from a group of bipedal dinosaurs called theropods . The ancestor of birds was probably similar to the theropod called Deinonychus, which is represented by the sketch in Figure below . Fossils of Deinonychus were first identified in the 1960s. This was an extremely important discovery. It finally convinced most scientists that birds had descended from dinosaurs, which had been debated for almost a century.",pteradactyls,sporozoans,therapods,staurikosaurus,C,D,10,0.3,"1. B
 2. C
@@ -17166,28 +17166,28 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
-85,8,857,True,What is the third class of elements after metals and nonmetals?,"Elements in different groups are lumped together in one of three classes, depending on their properties. The classes are metals, nonmetals, and metalloids. Knowing the class of an element lets you predict many of its properties. The video at the URL below is a good introduction to the classes.",noble gases,synthetics,metalloids,halogens,C,C,10,0.3,"1. B
+85,8,857,True,What is the third class of elements after metals and nonmetals?,"Elements in different groups are lumped together in one of three classes, depending on their properties. The classes are metals, nonmetals, and metalloids. Knowing the class of an element lets you predict many of its properties. The video at the URL below is a good introduction to the classes.",noble gases,synthetics,metalloids,halogens,C,A,10,0.3,"1. B
 2. C
 3. D
 4. D
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
-85,9,858,True,"Proteins are categorized according to shape and what property, which correlates with it?","Each of the thousands of naturally occurring proteins has its own characteristic amino acid composition and sequence that result in a unique three-dimensional shape. Since the 1950s, scientists have determined the amino acid sequences and three-dimensional conformation of numerous proteins and thus obtained important clues on how each protein performs its specific function in the body. Proteins are compounds of high molar mass consisting largely or entirely of chains of amino acids. Because of their great complexity, protein molecules cannot be classified on the basis of specific structural similarities, as carbohydrates and lipids are categorized. The two major structural classifications of proteins are based on far more general qualities: whether the protein is (1) fiberlike and insoluble or (2) globular and soluble. Some proteins, such as those that compose hair, skin, muscles, and connective tissue, are fiberlike. These fibrous proteins are insoluble in water and usually serve structural, connective, and protective functions. Examples of fibrous proteins are keratins, collagens, myosins, and elastins. Hair and the outer layer of skin are composed of keratin. Connective tissues contain collagen. Myosins are muscle proteins and are capable of contraction and extension. Elastins are found in ligaments and the elastic tissue of artery walls. Globular proteins, the other major class, are soluble in aqueous media. In these proteins, the chains are folded so that the molecule as a whole is roughly spherical. Familiar examples include egg albumin from egg whites and serum albumin in blood. Serum albumin plays a major role in transporting fatty acids and maintaining a proper balance of osmotic pressures in the body. Hemoglobin and myoglobin, which are important for binding oxygen, are also globular proteins.",size,solubility,salinity,viscosity,B,A,10,0.3,"1. B
+85,9,858,True,"Proteins are categorized according to shape and what property, which correlates with it?","Each of the thousands of naturally occurring proteins has its own characteristic amino acid composition and sequence that result in a unique three-dimensional shape. Since the 1950s, scientists have determined the amino acid sequences and three-dimensional conformation of numerous proteins and thus obtained important clues on how each protein performs its specific function in the body. Proteins are compounds of high molar mass consisting largely or entirely of chains of amino acids. Because of their great complexity, protein molecules cannot be classified on the basis of specific structural similarities, as carbohydrates and lipids are categorized. The two major structural classifications of proteins are based on far more general qualities: whether the protein is (1) fiberlike and insoluble or (2) globular and soluble. Some proteins, such as those that compose hair, skin, muscles, and connective tissue, are fiberlike. These fibrous proteins are insoluble in water and usually serve structural, connective, and protective functions. Examples of fibrous proteins are keratins, collagens, myosins, and elastins. Hair and the outer layer of skin are composed of keratin. Connective tissues contain collagen. Myosins are muscle proteins and are capable of contraction and extension. Elastins are found in ligaments and the elastic tissue of artery walls. Globular proteins, the other major class, are soluble in aqueous media. In these proteins, the chains are folded so that the molecule as a whole is roughly spherical. Familiar examples include egg albumin from egg whites and serum albumin in blood. Serum albumin plays a major role in transporting fatty acids and maintaining a proper balance of osmotic pressures in the body. Hemoglobin and myoglobin, which are important for binding oxygen, are also globular proteins.",size,solubility,salinity,viscosity,B,B,10,0.3,"1. B
 2. C
 3. D
 4. D
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 85,10,859,True,Melting ice is drastically impacting the number of what at glacier national park?,"In Glacier National Park ( Figure below ), many glaciers have become ice sheets. In 1850, the park had 150 glaciers. There are only about 25 today. The reason that there is so much melting is that summer temperatures have risen. Scientists estimate that the park will have no active glaciers as early as 2020.",active glaciers,gaisers,trees,icebergs,A,A,10,0.3,"1. B
 2. C
@@ -17196,8 +17196,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 5. B
 6. C
 7. D
-8. C
-9. A
+8. A
+9. B
 10. A",CONFIDENT_COUNT: 10
 86,1,860,False,What element is present in all organic molecules?,,carbon,oxygen,hydrogen,sodium,A,A,8,0.3,"1. A
 2. D
@@ -18899,7 +18899,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 8. D
 9. B
 10. B",CONFIDENT_COUNT: 8
-94,1,940,True,"When present in large volumes, what color hue can water emit?","Water is truly an amazing substance. It can exist in all three states under normal pressures and temperatures. At room temperature, it is a tasteless, odorless, colorless liquid, although it exhibits a blue hue when present in large volumes. Approximately 70% of the Earth’s surface is covered in water. For a small molecule, water molecules are highly attracted to one another, due to particularly strong hydrogen bonds. This leads to a number of properties, such as a relatively high surface tension. Unlike most other substances, water expands when it freezes. Water is also able to absorb relatively large amounts of heat with only minimal changes in temperature. This can be seen on a small scale, such as the coolant in your car, or on a larger scale, such as the more moderate climates in coastal areas. The water in the oceans acts as a tremendous heat sink, which influences global weather patterns. The clouds that form above lakes and oceans originate from the evaporation of lake and ocean water. They are byproducts of water’s thermal regulating capacity. Additionally, water is not only found here on Earth; scientists have found evidence of water on a number of extraterrestrial planets. In this lesson, we are going to take a look at this unique and important substance.",pink,yellow,white,blue,D,D,8,0.3,"1. D
+94,1,940,True,"When present in large volumes, what color hue can water emit?","Water is truly an amazing substance. It can exist in all three states under normal pressures and temperatures. At room temperature, it is a tasteless, odorless, colorless liquid, although it exhibits a blue hue when present in large volumes. Approximately 70% of the Earth’s surface is covered in water. For a small molecule, water molecules are highly attracted to one another, due to particularly strong hydrogen bonds. This leads to a number of properties, such as a relatively high surface tension. Unlike most other substances, water expands when it freezes. Water is also able to absorb relatively large amounts of heat with only minimal changes in temperature. This can be seen on a small scale, such as the coolant in your car, or on a larger scale, such as the more moderate climates in coastal areas. The water in the oceans acts as a tremendous heat sink, which influences global weather patterns. The clouds that form above lakes and oceans originate from the evaporation of lake and ocean water. They are byproducts of water’s thermal regulating capacity. Additionally, water is not only found here on Earth; scientists have found evidence of water on a number of extraterrestrial planets. In this lesson, we are going to take a look at this unique and important substance.",pink,yellow,white,blue,D,D,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18908,8 +18908,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,2,941,True,What prevents new ovarian follicles from developing and suppresses uterine contractility?,"28.4 Maternal Changes During Pregnancy, Labor, and Birth Hormones (especially estrogens, progesterone, and hCG) secreted by the corpus luteum and later by the placenta are responsible for most of the changes experienced during pregnancy. Estrogen maintains the pregnancy, promotes fetal viability, and stimulates tissue growth in the mother and developing fetus. Progesterone prevents new ovarian follicles from developing and suppresses uterine contractility. Pregnancy weight gain primarily occurs in the breasts and abdominal region. Nausea, heartburn, and frequent urination are common during pregnancy. Maternal blood volume increases by 30 percent during pregnancy and respiratory minute volume increases by 50 percent. The skin may develop stretch marks and melanin production may increase.",progesterone,germination,glucose,estrogen,A,A,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,2,941,True,What prevents new ovarian follicles from developing and suppresses uterine contractility?,"28.4 Maternal Changes During Pregnancy, Labor, and Birth Hormones (especially estrogens, progesterone, and hCG) secreted by the corpus luteum and later by the placenta are responsible for most of the changes experienced during pregnancy. Estrogen maintains the pregnancy, promotes fetal viability, and stimulates tissue growth in the mother and developing fetus. Progesterone prevents new ovarian follicles from developing and suppresses uterine contractility. Pregnancy weight gain primarily occurs in the breasts and abdominal region. Nausea, heartburn, and frequent urination are common during pregnancy. Maternal blood volume increases by 30 percent during pregnancy and respiratory minute volume increases by 50 percent. The skin may develop stretch marks and melanin production may increase.",progesterone,germination,glucose,estrogen,A,A,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18918,8 +18918,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,3,942,True,What type of bombs put a much larger fraction of their output into thermal energy than do conventional bombs?,"The energy yield and the types of energy produced by nuclear bombs can be varied. Energy yields in current arsenals range from about 0.1 kT to 20 MT, although the Soviets once detonated a 67 MT device. Nuclear bombs differ from conventional explosives in more than size. Figure 32.34 shows the approximate fraction of energy output in various forms for conventional explosives and for two types of nuclear bombs. Nuclear bombs put a much larger fraction of their output into thermal energy than do conventional bombs, which tend to concentrate the energy in blast. Another difference is the immediate and residual radiation energy from nuclear weapons. This can be adjusted to put more energy into radiation (the so-called neutron bomb) so that the bomb can be used to irradiate advancing troops without killing friendly troops with blast and heat.",dirty bombs,TNT,dense bombs,nuclear,D,D,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,3,942,True,What type of bombs put a much larger fraction of their output into thermal energy than do conventional bombs?,"The energy yield and the types of energy produced by nuclear bombs can be varied. Energy yields in current arsenals range from about 0.1 kT to 20 MT, although the Soviets once detonated a 67 MT device. Nuclear bombs differ from conventional explosives in more than size. Figure 32.34 shows the approximate fraction of energy output in various forms for conventional explosives and for two types of nuclear bombs. Nuclear bombs put a much larger fraction of their output into thermal energy than do conventional bombs, which tend to concentrate the energy in blast. Another difference is the immediate and residual radiation energy from nuclear weapons. This can be adjusted to put more energy into radiation (the so-called neutron bomb) so that the bomb can be used to irradiate advancing troops without killing friendly troops with blast and heat.",dirty bombs,TNT,dense bombs,nuclear,D,D,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18928,8 +18928,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,4,943,True,"The majority of elements, including iron and copper, are of what type?","There are almost 120 known elements. As you can see from Figure below , the majority of elements are metals. Examples of metals are iron (Fe) and copper (Cu). Metals are shiny and good conductors of electricity and heat. Nonmetal elements are far fewer in number. They include hydrogen (H) and oxygen (O). They lack the properties of metals.",minerals,oils,metals,acids,C,C,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,4,943,True,"The majority of elements, including iron and copper, are of what type?","There are almost 120 known elements. As you can see from Figure below , the majority of elements are metals. Examples of metals are iron (Fe) and copper (Cu). Metals are shiny and good conductors of electricity and heat. Nonmetal elements are far fewer in number. They include hydrogen (H) and oxygen (O). They lack the properties of metals.",minerals,oils,metals,acids,C,C,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18938,8 +18938,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,5,944,True,What happens to water vapor as it rises?,"The image below shows the role of the atmosphere in the water cycle ( Figure below ). Water vapor rises from Earth’s surface into the atmosphere. As it rises, it cools. The water vapor may then condense into water droplets and form clouds. If enough water droplets collect in clouds, they may come together to form droplets. The droplets will fall as rain. This how freshwater gets from the atmosphere back to Earth's surface.",it vibrates,it warms,it disperses,it cools,D,D,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,5,944,True,What happens to water vapor as it rises?,"The image below shows the role of the atmosphere in the water cycle ( Figure below ). Water vapor rises from Earth’s surface into the atmosphere. As it rises, it cools. The water vapor may then condense into water droplets and form clouds. If enough water droplets collect in clouds, they may come together to form droplets. The droplets will fall as rain. This how freshwater gets from the atmosphere back to Earth's surface.",it vibrates,it warms,it disperses,it cools,D,D,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18948,8 +18948,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,6,945,True,Prophase is preceded by a preprophase stage in what type of cells?,"As plant cells have some structural differences compared to an animal cell, an additional stage prior to prophase is necessary. In plant cells only, prophase is preceded by a preprophase stage. Plant cells have a large central vacuole encompassing the center of the cell. Prior to the division of the nucleus, the nucleus must migrate to the center of the plant cell. To accomplish this, the cell forms a phragmosome , a sheet of cytoplasm that bisects the middle of the cell. The phragmosome suspends the cell nucleus in the center of the cell in preparation for prophase. Additionally, during this phase the plane of cell division is established. The accurate control of division planes, which establishes the placement of the future cell wall, is crucial for the correct structure of plant tissues and organs.",brain cells,hair and nail cells,egg cells,plant cells,D,D,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,6,945,True,Prophase is preceded by a preprophase stage in what type of cells?,"As plant cells have some structural differences compared to an animal cell, an additional stage prior to prophase is necessary. In plant cells only, prophase is preceded by a preprophase stage. Plant cells have a large central vacuole encompassing the center of the cell. Prior to the division of the nucleus, the nucleus must migrate to the center of the plant cell. To accomplish this, the cell forms a phragmosome , a sheet of cytoplasm that bisects the middle of the cell. The phragmosome suspends the cell nucleus in the center of the cell in preparation for prophase. Additionally, during this phase the plane of cell division is established. The accurate control of division planes, which establishes the placement of the future cell wall, is crucial for the correct structure of plant tissues and organs.",brain cells,hair and nail cells,egg cells,plant cells,D,D,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18958,8 +18958,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,7,946,True,The bilaterians are divided into deuterostomes and what else?,,protozoa,protostomes,gymnosperms,progestins,B,B,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,7,946,True,The bilaterians are divided into deuterostomes and what else?,,protozoa,protostomes,gymnosperms,progestins,B,B,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18968,8 +18968,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,8,947,True,What is it called when birds keep their eggs warm while the embryos inside develop?,"After birds lay their eggs, they generally keep the eggs warm with their body heat while the embryos inside continue to develop. This is called incubation, or brooding . In most species, parents stay together for at least the length of the breeding season. In some species, they stay together for life. By staying together, the males as well as females can incubate the eggs and later care for the hatchlings . Birds are the only nonhuman vertebrates with this level of male parental involvement.",spawning,insulation,fertilization,incubation,D,D,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,8,947,True,What is it called when birds keep their eggs warm while the embryos inside develop?,"After birds lay their eggs, they generally keep the eggs warm with their body heat while the embryos inside continue to develop. This is called incubation, or brooding . In most species, parents stay together for at least the length of the breeding season. In some species, they stay together for life. By staying together, the males as well as females can incubate the eggs and later care for the hatchlings . Birds are the only nonhuman vertebrates with this level of male parental involvement.",spawning,insulation,fertilization,incubation,D,D,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18978,8 +18978,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,9,948,True,"What leaves behind crescent-shaped scars on a hillside and  may be caused by a layer of slippery, wet clay underneath the rock and soil on a hillside?","Slump is the sudden movement of large blocks of rock and soil down a slope. You can see how it happens in Figure below . All the material moves together in big chunks. Slump may be caused by a layer of slippery, wet clay underneath the rock and soil on a hillside. Or it may occur when a river undercuts a slope. Slump leaves behind crescent-shaped scars on the hillside.",shearing,creep,slide,slump,D,D,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,9,948,True,"What leaves behind crescent-shaped scars on a hillside and  may be caused by a layer of slippery, wet clay underneath the rock and soil on a hillside?","Slump is the sudden movement of large blocks of rock and soil down a slope. You can see how it happens in Figure below . All the material moves together in big chunks. Slump may be caused by a layer of slippery, wet clay underneath the rock and soil on a hillside. Or it may occur when a river undercuts a slope. Slump leaves behind crescent-shaped scars on the hillside.",shearing,creep,slide,slump,D,D,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18988,8 +18988,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-94,10,949,True,What is the organ system that brings oxygen into the body and releases carbon dioxide?,organ system that brings oxygen into the body and releases carbon dioxide into the atmosphere.,brain,lungs,kidneys,liver,B,B,8,0.3,"1. D
+10. B",CONFIDENT_COUNT: 10
+94,10,949,True,What is the organ system that brings oxygen into the body and releases carbon dioxide?,organ system that brings oxygen into the body and releases carbon dioxide into the atmosphere.,brain,lungs,kidneys,liver,B,B,10,0.3,"1. D
 2. A
 3. D
 4. C
@@ -18998,7 +18998,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. B
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
+10. B",CONFIDENT_COUNT: 10
 95,1,950,False,What is the union of the cytoplasms of two parent mycelia known as?,,spirogyra,plasmogamy,xerophyte,plasmology,B,B,8,0.3,"1. B
 2. D
 3. A
@@ -19499,7 +19499,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 8. D
 9. D
 10. B",CONFIDENT_COUNT: 8
-97,1,970,True,What is the term for something changing from water to ice?,,evaporation,melting,freezing,boiling,C,B,8,0.3,"1. B
+97,1,970,True,What is the term for something changing from water to ice?,,evaporation,melting,freezing,boiling,C,B,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19508,8 +19508,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,2,971,True,What is an individual with more than the correct number of chromosome sets called?,"In an individual carrying an abnormal number of X chromosomes, cellular mechanisms will inactivate all but one X in each of her cells. As a result, X-chromosomal abnormalities are typically associated with mild mental and physical defects, as well as sterility. If the X chromosome is absent altogether, the individual will not develop. Several errors in sex chromosome number have been characterized. Individuals with three X chromosomes, called triplo-X, appear female but express developmental delays and reduced fertility. The XXY chromosome complement, corresponding to one type of Klinefelter syndrome, corresponds to male individuals with small testes, enlarged breasts, and reduced body hair. The extra X chromosome undergoes inactivation to compensate for the excess genetic dosage. Turner syndrome, characterized as an X0 chromosome complement (i. , only a single sex chromosome), corresponds to a female individual with short stature, webbed skin in the neck region, hearing and cardiac impairments, and sterility. An individual with more than the correct number of chromosome sets (two for diploid species) is called polyploid. For instance, fertilization of an abnormal diploid egg with a normal haploid sperm would yield a triploid zygote. Polyploid animals are extremely rare, with only a few examples among the flatworms, crustaceans, amphibians, fish, and lizards. Triploid animals are sterile because meiosis cannot proceed normally with an odd number of chromosome sets. In contrast, polyploidy is very common in the plant kingdom, and polyploid plants tend to be larger and more robust than euploids of their species.",autosome,polyploid,autotrophs,diploid,B,D,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,2,971,True,What is an individual with more than the correct number of chromosome sets called?,"In an individual carrying an abnormal number of X chromosomes, cellular mechanisms will inactivate all but one X in each of her cells. As a result, X-chromosomal abnormalities are typically associated with mild mental and physical defects, as well as sterility. If the X chromosome is absent altogether, the individual will not develop. Several errors in sex chromosome number have been characterized. Individuals with three X chromosomes, called triplo-X, appear female but express developmental delays and reduced fertility. The XXY chromosome complement, corresponding to one type of Klinefelter syndrome, corresponds to male individuals with small testes, enlarged breasts, and reduced body hair. The extra X chromosome undergoes inactivation to compensate for the excess genetic dosage. Turner syndrome, characterized as an X0 chromosome complement (i. , only a single sex chromosome), corresponds to a female individual with short stature, webbed skin in the neck region, hearing and cardiac impairments, and sterility. An individual with more than the correct number of chromosome sets (two for diploid species) is called polyploid. For instance, fertilization of an abnormal diploid egg with a normal haploid sperm would yield a triploid zygote. Polyploid animals are extremely rare, with only a few examples among the flatworms, crustaceans, amphibians, fish, and lizards. Triploid animals are sterile because meiosis cannot proceed normally with an odd number of chromosome sets. In contrast, polyploidy is very common in the plant kingdom, and polyploid plants tend to be larger and more robust than euploids of their species.",autosome,polyploid,autotrophs,diploid,B,D,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19518,8 +19518,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,3,972,True,Most of the fresh water on earth is tied up in a solid form. what are they called?,"Most of Earth’s water is salt water in the oceans. As Figure below shows, only 3 percent of Earth’s water is fresh. Freshwater is water that contains little or no dissolved salt. Most freshwater is frozen in ice caps and glaciers. Glaciers cover the peaks of some tall mountains. For example, the Cascades Mountains in North America and the Alps Mountains in Europe are capped with ice. Ice caps cover vast areas of Antarctica and Greenland. Chunks of ice frequently break off ice caps. They form icebergs that float in the oceans.",lakes,sediments,oceans,glaciers,D,A,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,3,972,True,Most of the fresh water on earth is tied up in a solid form. what are they called?,"Most of Earth’s water is salt water in the oceans. As Figure below shows, only 3 percent of Earth’s water is fresh. Freshwater is water that contains little or no dissolved salt. Most freshwater is frozen in ice caps and glaciers. Glaciers cover the peaks of some tall mountains. For example, the Cascades Mountains in North America and the Alps Mountains in Europe are capped with ice. Ice caps cover vast areas of Antarctica and Greenland. Chunks of ice frequently break off ice caps. They form icebergs that float in the oceans.",lakes,sediments,oceans,glaciers,D,A,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19528,8 +19528,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,4,973,True,What takes place where septa is found?,,forming of muscle tissue,forming of brain cells,forming of stem cells,forming of reproductive cells,D,D,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,4,973,True,What takes place where septa is found?,,forming of muscle tissue,forming of brain cells,forming of stem cells,forming of reproductive cells,D,D,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19538,8 +19538,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,5,974,True,Hertz proved that what type of waves travel at the speed of light?,"Hertz also studied the reflection, refraction, and interference patterns of the electromagnetic waves he generated, verifying their wave character. He was able to determine wavelength from the interference patterns, and knowing their frequency, he could calculate the propagation speed using the equation υ = fλ (velocity—or speed—equals frequency times wavelength). Hertz was thus able to prove that electromagnetic waves travel at the speed of light. The SI unit for frequency, the hertz ( 1 Hz = 1 cycle/sec ), is named in his honor.",electromagnetic,sound,tsunamis,seismic,A,A,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,5,974,True,Hertz proved that what type of waves travel at the speed of light?,"Hertz also studied the reflection, refraction, and interference patterns of the electromagnetic waves he generated, verifying their wave character. He was able to determine wavelength from the interference patterns, and knowing their frequency, he could calculate the propagation speed using the equation υ = fλ (velocity—or speed—equals frequency times wavelength). Hertz was thus able to prove that electromagnetic waves travel at the speed of light. The SI unit for frequency, the hertz ( 1 Hz = 1 cycle/sec ), is named in his honor.",electromagnetic,sound,tsunamis,seismic,A,A,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19548,8 +19548,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,6,975,True,"Specific antigens on the surface of red blood cells determine what, which is important in cases of transfusion?",Specific antigens on the surface of red blood cells determine blood type. The best-known blood types are ABO and Rhesus (Rh) blood types. Blood type is important in cases of blood transfusion. A patient must receive blood of his or her own blood type to avoid clumping of red blood cells.,blood type,blood count,blood amount,blood form,A,A,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,6,975,True,"Specific antigens on the surface of red blood cells determine what, which is important in cases of transfusion?",Specific antigens on the surface of red blood cells determine blood type. The best-known blood types are ABO and Rhesus (Rh) blood types. Blood type is important in cases of blood transfusion. A patient must receive blood of his or her own blood type to avoid clumping of red blood cells.,blood type,blood count,blood amount,blood form,A,A,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19558,8 +19558,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,7,976,True,Where do extrusive igneous rocks cool at?,Extrusive igneous rocks cool at the surface. Volcanoes are one type of feature that forms from extrusive rocks. Several other interesting landforms are also extrusive features. Intrusive igneous rocks cool below the surface. These rocks do not always remain hidden. Rocks that formed in the crust are exposed when the rock and sediment that covers them is eroded away.,surface,underground,in volcanoes,in water,A,D,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,7,976,True,Where do extrusive igneous rocks cool at?,Extrusive igneous rocks cool at the surface. Volcanoes are one type of feature that forms from extrusive rocks. Several other interesting landforms are also extrusive features. Intrusive igneous rocks cool below the surface. These rocks do not always remain hidden. Rocks that formed in the crust are exposed when the rock and sediment that covers them is eroded away.,surface,underground,in volcanoes,in water,A,D,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19568,8 +19568,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,8,977,True,What is citrate an ionized form of?,,protein,hydrochloric acid,carbonic acid,citric acid,D,D,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,8,977,True,What is citrate an ionized form of?,,protein,hydrochloric acid,carbonic acid,citric acid,D,D,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19578,8 +19578,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,9,978,True,What functions in removing phosphorylated amino acids from proteins?,"What is the function of a phosphatase? a. A phosphatase removes phosphorylated amino acids from proteins. A phosphatase removes the phosphate group from phosphorylated amino acid residues in a protein. A phosphatase phosphorylates serine, threonine, and tyrosine residues. A phosphatase degrades second messengers in the cell. How does NF-κB induce gene expression? a. A small, hydrophobic ligand binds to NF-κB, activating it. Phosphorylation of the inhibitor Iκ-B dissociates the complex between it and NF-κB, and allows NF-κB to enter the nucleus and stimulate transcription. NF-κB is phosphorylated and is then free to enter the nucleus and bind DNA. NF-κB is a kinase that phosphorylates a transcription factor that binds DNA and promotes protein production. Apoptosis can occur in a cell when the cell is ________________. damaged b. no longer needed c. infected by a virus d. all of the above 14. What is the effect of an inhibitor binding an enzyme? a.",carbonate,sucrose,peptide,phosphatase,D,D,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,9,978,True,What functions in removing phosphorylated amino acids from proteins?,"What is the function of a phosphatase? a. A phosphatase removes phosphorylated amino acids from proteins. A phosphatase removes the phosphate group from phosphorylated amino acid residues in a protein. A phosphatase phosphorylates serine, threonine, and tyrosine residues. A phosphatase degrades second messengers in the cell. How does NF-κB induce gene expression? a. A small, hydrophobic ligand binds to NF-κB, activating it. Phosphorylation of the inhibitor Iκ-B dissociates the complex between it and NF-κB, and allows NF-κB to enter the nucleus and stimulate transcription. NF-κB is phosphorylated and is then free to enter the nucleus and bind DNA. NF-κB is a kinase that phosphorylates a transcription factor that binds DNA and promotes protein production. Apoptosis can occur in a cell when the cell is ________________. damaged b. no longer needed c. infected by a virus d. all of the above 14. What is the effect of an inhibitor binding an enzyme? a.",carbonate,sucrose,peptide,phosphatase,D,D,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19588,8 +19588,8 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
-97,10,979,True,The hypothalamus in vertebrates integrates what two systems?,"Hypothalamic-Pituitary Axis The hypothalamus in vertebrates integrates the endocrine and nervous systems. The hypothalamus is an endocrine organ located in the diencephalon of the brain. It receives input from the body and other brain areas and initiates endocrine responses to environmental changes. The hypothalamus acts as an endocrine organ, synthesizing hormones and transporting them along axons to the posterior pituitary gland. It synthesizes and secretes regulatory hormones that control the endocrine cells in the anterior pituitary gland. The hypothalamus contains autonomic centers that control endocrine cells in the adrenal medulla via neuronal control. The pituitary gland, sometimes called the hypophysis or “master gland” is located at the base of the brain in the sella turcica, a groove of the sphenoid bone of the skull, illustrated in Figure 37.15. It is attached to the hypothalamus via a stalk called the pituitary stalk (or infundibulum). The anterior portion of the pituitary gland is regulated by releasing or release-inhibiting hormones produced by the hypothalamus, and the posterior pituitary receives signals via neurosecretory cells to release hormones produced by the hypothalamus. The pituitary has two distinct regions—the anterior pituitary and the posterior pituitary—which between them secrete nine different peptide or protein hormones. The posterior lobe of the pituitary gland contains axons of the hypothalamic neurons.",connectors and nervous,endocrine and nervous,marrow and nervous,Pathway and nervous,B,B,8,0.3,"1. B
+10. B",CONFIDENT_COUNT: 10
+97,10,979,True,The hypothalamus in vertebrates integrates what two systems?,"Hypothalamic-Pituitary Axis The hypothalamus in vertebrates integrates the endocrine and nervous systems. The hypothalamus is an endocrine organ located in the diencephalon of the brain. It receives input from the body and other brain areas and initiates endocrine responses to environmental changes. The hypothalamus acts as an endocrine organ, synthesizing hormones and transporting them along axons to the posterior pituitary gland. It synthesizes and secretes regulatory hormones that control the endocrine cells in the anterior pituitary gland. The hypothalamus contains autonomic centers that control endocrine cells in the adrenal medulla via neuronal control. The pituitary gland, sometimes called the hypophysis or “master gland” is located at the base of the brain in the sella turcica, a groove of the sphenoid bone of the skull, illustrated in Figure 37.15. It is attached to the hypothalamus via a stalk called the pituitary stalk (or infundibulum). The anterior portion of the pituitary gland is regulated by releasing or release-inhibiting hormones produced by the hypothalamus, and the posterior pituitary receives signals via neurosecretory cells to release hormones produced by the hypothalamus. The pituitary has two distinct regions—the anterior pituitary and the posterior pituitary—which between them secrete nine different peptide or protein hormones. The posterior lobe of the pituitary gland contains axons of the hypothalamic neurons.",connectors and nervous,endocrine and nervous,marrow and nervous,Pathway and nervous,B,B,10,0.3,"1. B
 2. D
 3. A
 4. D
@@ -19598,7 +19598,7 @@ group_index,position_in_group,question_index,use_support,question,support,option
 7. D
 8. D
 9. D
-10. B",CONFIDENT_COUNT: 8
+10. B",CONFIDENT_COUNT: 10
 98,1,980,False,What type of biomes have water containing little or no salt?,,freshwater biomes,aquatic biomes,marine biomes,coastal biomes,A,A,8,0.3,"1. A
 2. A
 3. D
