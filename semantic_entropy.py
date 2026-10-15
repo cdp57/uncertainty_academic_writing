@@ -3,13 +3,11 @@ import numpy as np
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSequenceClassification
 
-# ==========================================
-# 1. Load Datasets and Models
-# ==========================================
+# Load Datasets and Models
 MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
 NLI_MODEL_ID = "cross-encoder/nli-deberta-v3-base"  # Used for semantic equivalence check
 
-print("Loading Llama-3.2 model and tokenizer...")
+print(f"Loading {MODEL_ID} model and tokenizer...")
 tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_ID, 
@@ -26,19 +24,20 @@ nli_tokenizer = AutoTokenizer.from_pretrained(NLI_MODEL_ID)
 nli_model = AutoModelForSequenceClassification.from_pretrained(NLI_MODEL_ID).to("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load QASPER dataset
-qasper_ds = load_dataset("allenai/qasper", split="validation")
+qasper_ds = load_dataset("allenai/qasper", split="test")
 
-# ==========================================
-# 2. Helper Functions
-# ==========================================
-
-def prepare_qasper_prompt(paper_instance):
+# Helper Functions
+def prepare_qasper_prompt(paper_instance, full_text=True):
     """Formats a paper context and question into a prompt for Llama 3.2 Instruct."""
     title = paper_instance['title']
     abstract = paper_instance['abstract']
+    full_text = paper_instance['full_text']
     
     # Simple context truncation using Abstract (or construct full-text snippet)
-    context = f"Title: {title}\nAbstract: {abstract}"
+    if full_text:
+        context = f"Title: {title}\nFull Text: {full_text}"
+    else:
+        context = f"Title: {title}\nAbstract: {abstract}"
     
     # Grab the first available question
     qas = paper_instance['qas']
@@ -158,33 +157,35 @@ def calculate_semantic_entropy(log_probs, clusters):
     
     return se
 
-# ==========================================
-# 3. Execution Example
-# ==========================================
+# Pipeline Example
 if __name__ == "__main__":
     NUM_SAMPLES_PER_PROMPT = 5
-    
-    # Process sample instance from QASPER
-    sample_paper = qasper_ds[0]
-    prompt, question = prepare_qasper_prompt(sample_paper)
+    NUM_PROMPTS = 5
 
-    if prompt:
-        print(f"\nQuestion: {question}\n")
+    for idx in range(NUM_PROMPTS):
+        print(f"\n=== Processing Prompt {idx+1}/{NUM_PROMPTS} ===")
         
-        # Step 1: Generate multiple stochastic responses with log-probs
-        responses, log_probs = sample_responses_and_logprobs(
-            prompt, 
-            num_samples=NUM_SAMPLES_PER_PROMPT, 
-            temperature=0.7
-        )
-        
-        for i, (resp, lp) in enumerate(zip(responses, log_probs)):
-            print(f"Sample [{i+1}]: {resp} (LogProb: {lp:.4f})")
+        # Process sample instance from QASPER
+        sample_paper = qasper_ds[idx]
+        prompt, question = prepare_qasper_prompt(sample_paper)
+
+        if prompt:
+            print(f"\nQuestion: {question}\n")
             
-        # Step 2: Cluster semantic equivalents using NLI
-        clusters = cluster_semantic_equivalence(responses)
-        print(f"\nDiscovered {len(clusters)} Semantic Equivalence Cluster(s): {clusters}")
-        
-        # Step 3: Compute Semantic Entropy
-        se_score = calculate_semantic_entropy(log_probs, clusters)
-        print(f"\nCalculated Semantic Entropy: {se_score:.4f}")
+            # Generate multiple stochastic responses with log-probs
+            responses, log_probs = sample_responses_and_logprobs(
+                prompt, 
+                num_samples=NUM_SAMPLES_PER_PROMPT, 
+                temperature=0.7
+            )
+            
+            for i, (resp, lp) in enumerate(zip(responses, log_probs)):
+                print(f"Sample [{i+1}]: {resp} (LogProb: {lp:.4f})")
+                
+            # Cluster semantic equivalents using NLI
+            clusters = cluster_semantic_equivalence(responses)
+            print(f"\nDiscovered {len(clusters)} Semantic Equivalence Cluster(s): {clusters}")
+            
+            # Compute Semantic Entropy
+            se_score = calculate_semantic_entropy(log_probs, clusters)
+            print(f"\nCalculated Semantic Entropy: {se_score:.4f}")

@@ -24,7 +24,7 @@ pip install -r requirements.txt
 We used Google CoLab to run our experiments. To be specific, we used the NVIDIA T4 GPU offered by Google CoLab for free. It contains 16GB memory. A compatible NVIDIA CUDA environment is required for GPU acceleration. 
 
 For more computationally intensive experiments, we utilize Case Western's
-High Performance Computing Cluster (HPC).
+High Performance Computing Cluster (HPC). We plan to use an L40 GPU. 
 
 ## Datasets
 We used [SciQ](https://huggingface.co/datasets/allenai/sciq) and [QASPER](https://huggingface.co/datasets/allenai/qasper) datasets in our project. SciQ is a QA dataset with a short paragraph as supporting information. Each question has with 4 choices, each possible answer is 1-3 words, so we just used accuracy to measure model performance. For QASPER dataset, it is a free-form QA with given an academic article as support. We implemented semantic entropy to measure the confidence level in model's response. It is worth noting that for the SciQ dataset, we used its test split with 1000 questions, and for QASPER dataset, we used its validation split, which contains 1005 questions, so we used a similar number of questions from both datasets. They can be load with
@@ -76,7 +76,27 @@ model = AutoModelForMultimodalLM.from_pretrained(
 )
 ```
 
-##Charlie TODO
-# SLURM Script for HPC
-# Output Graphic for Demo
-# Finish updating README
+## HPC Experiment Setup
+
+To setup an environment on the CSDS 447 course space, first clone the repo
+```
+git clone https://github.com/cdp57/uncertainty_academic_writing
+```
+
+Then run our setup script to create a virtual environment, set cache directions, and install packages
+```
+chmod +x setup_env.sh
+./scripts/setup_env.sh
+source /mnt/vstor/courses/csds447/$USER/venv/bin/activate
+huggingface-cli login
+```
+
+Run a sample experiment with 
+```
+python evaluate_semantic_entropy.py --max_papers t
+```
+
+Run a full demo experiment with 
+```
+sbatch scripts/run_experiments.sh
+```
