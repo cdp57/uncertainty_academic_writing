@@ -19,6 +19,7 @@ The dependencies of our project can be installed with
 ```
 pip install -r requirements.txt
 ```
+Requirements vary slighly for the HPC implementation (see requirements_hpc.txt)
 
 ## Hardware Requirements
 We used Google CoLab to run our experiments. To be specific, we used the NVIDIA T4 GPU offered by Google CoLab for free. It contains 16GB memory. A compatible NVIDIA CUDA environment is required for GPU acceleration. 
@@ -85,10 +86,13 @@ git clone https://github.com/cdp57/uncertainty_academic_writing
 
 Then run our setup script to create a virtual environment, set cache directions, and install packages
 ```
-chmod +x setup_env.sh
+chmod +x scripts/setup_env.sh
 ./scripts/setup_env.sh
 source /mnt/vstor/courses/csds447/$USER/venv/bin/activate
-huggingface-cli login
+```
+Activate virtual environment
+```
+source /mnt/vstor/courses/csds447/$USER/venv/bin/activate
 ```
 
 Run a sample experiment with 
