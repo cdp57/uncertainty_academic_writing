@@ -38,12 +38,7 @@ if [ -n "$HF_TOKEN" ]; then
     echo "Authenticating with Hugging Face..."
     python -c "from huggingface_hub import login; login(token='$HF_TOKEN', add_to_git_credential=False)"
     
-    # Save environment variables for Slurm batch jobs
-    echo "export HF_HOME=\"$HF_CACHE_DIR\"" > "$ENV_FILE"
-    echo "export HF_TOKEN=\"$HF_TOKEN\"" >> "$ENV_FILE"
-    chmod 600 "$ENV_FILE"
-    
-    echo "Authentication successful! Variables saved to: $ENV_FILE"
+    echo "Authentication successful"
 else
     echo "Warning: No token provided. You will need to set HF_TOKEN manually to download gated models."
 fi

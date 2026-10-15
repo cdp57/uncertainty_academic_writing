@@ -41,7 +41,7 @@ for MODEL in "${MODELS[@]}"; do
         --model "$MODEL" \
         --num-samples 5 \
         --temperature 0.7 \
-        --output-dir "figures"
+        --output-dir "figures" \
         --max-papers 20
         
     echo "Finished evaluation for $MODEL"
