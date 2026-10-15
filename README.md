@@ -89,7 +89,7 @@ To setup an environment on the CSDS 447 course space, first clone the repo
 git clone https://github.com/cdp57/uncertainty_academic_writing
 ```
 
-Then run our setup script to create a virtual environment, set cache directions, and install packages
+Then run our setup script to create a virtual environment, set the HF cache, and install packages
 ```
 chmod +x scripts/setup_env.sh
 ./scripts/setup_env.sh
