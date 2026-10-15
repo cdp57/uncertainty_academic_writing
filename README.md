@@ -84,7 +84,7 @@ Our Demo 1 experiments will test a preliminary overconfidence benchmark. We will
 
 ## HPC Experiment Setup
 
-To setup an environment on the CSDS 447 course space, first clone the repo
+To setup an environment on the CSDS 447 course space, first clone the repo and enter the repo directory
 ```
 git clone https://github.com/cdp57/uncertainty_academic_writing
 ```
