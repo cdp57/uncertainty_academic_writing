@@ -26,6 +26,28 @@ echo "Installing dependencies"
 pip install --upgrade pip
 pip install -r requirements_hpc.txt
 
+# Set up HF login
+echo ""
+echo "=============================================================================="
+echo "Hugging Face Authentication"
+echo "=============================================================================="
+read -sp "Paste your Hugging Face Access Token (input hidden): " HF_TOKEN
+echo ""
+
+if [ -n "$HF_TOKEN" ]; then
+    echo "Authenticating with Hugging Face..."
+    python -c "from huggingface_hub import login; login(token='$HF_TOKEN', add_to_git_credential=False)"
+    
+    # Save environment variables for Slurm batch jobs
+    echo "export HF_HOME=\"$HF_CACHE_DIR\"" > "$ENV_FILE"
+    echo "export HF_TOKEN=\"$HF_TOKEN\"" >> "$ENV_FILE"
+    chmod 600 "$ENV_FILE"
+    
+    echo "Authentication successful! Variables saved to: $ENV_FILE"
+else
+    echo "Warning: No token provided. You will need to set HF_TOKEN manually to download gated models."
+fi
+
 echo ""
 echo "=============================================================================="
 echo "Setup Complete"

@@ -25,10 +25,10 @@ Requirements vary slighly for the HPC implementation (see requirements_hpc.txt)
 We used Google CoLab to run our experiments. To be specific, we used the NVIDIA T4 GPU offered by Google CoLab for free. It contains 16GB memory. A compatible NVIDIA CUDA environment is required for GPU acceleration. 
 
 For more computationally intensive experiments, we utilize Case Western's
-High Performance Computing Cluster (HPC). We plan to use an L40 GPU. 
+High Performance Computing Cluster (HPC). We plan to use an L40/4090 GPU, given that our models have 1-4B parameters. 
 
 ## Datasets
-We used [SciQ](https://huggingface.co/datasets/allenai/sciq) and [QASPER](https://huggingface.co/datasets/allenai/qasper) datasets in our project. SciQ is a QA dataset with a short paragraph as supporting information. Each question has with 4 choices, each possible answer is 1-3 words, so we just used accuracy to measure model performance. For QASPER dataset, it is a free-form QA with given an academic article as support. We implemented semantic entropy to measure the confidence level in model's response. It is worth noting that for the SciQ dataset, we used its test split with 1000 questions, and for QASPER dataset, we used its validation split, which contains 1005 questions, so we used a similar number of questions from both datasets. They can be load with
+We used [SciQ](https://huggingface.co/datasets/allenai/sciq) and [QASPER](https://huggingface.co/datasets/allenai/qasper) datasets in our project. SciQ is a QA dataset with a short paragraph as supporting information. Each question has with 4 choices, each possible answer is 1-3 words, so we just used accuracy to measure model performance. For QASPER dataset, it is a free-form QA with given an academic article as support. The SciQ dataset has 13.7k questions (~11.7k train/1k validation/1k test) and the QASPER dataset has 5k questions (~2.6k train/1k validation/1.2k test). It is worth noting that for the SciQ dataset, we used its test split with 1000 questions, and for QASPER dataset, we used its validation split, which contains 1005 questions, so we used a similar number of questions from both datasets. They can be loaded with
 ```
 from datasets import load_dataset
 dataset = load_dataset("allenai/sciq")
@@ -76,6 +76,11 @@ model = AutoModelForMultimodalLM.from_pretrained(
     dtype=torch.float16
 )
 ```
+The HPC scripts follow similarly with slight modifications for the environment (e.g., integration for CLI arguments).
+
+## Experiments
+
+Our Demo 1 experiments will test a preliminary overconfidence benchmark. We will assess [self-report confidence](https://aclanthology.org/2025.findings-acl.1316/) on SciQ and [semantic entropy](https://arxiv.org/abs/2302.09664) on QASPER.
 
 ## HPC Experiment Setup
 
@@ -89,14 +94,15 @@ Then run our setup script to create a virtual environment, set cache directions,
 chmod +x scripts/setup_env.sh
 ./scripts/setup_env.sh
 ```
-Activate virtual environment if necessary
+
+Make sure to input your HF token. Then activate the virtual environment if necessary
 ```
 source /mnt/vstor/courses/csds447/$USER/venv/bin/activate
 ```
 
 Run a sample experiment with 
 ```
-python evaluate_semantic_entropy.py --max-papers 5
+sbatch scripts/run_experiment_sample.sh
 ```
 
 Run a full demo experiment with 
