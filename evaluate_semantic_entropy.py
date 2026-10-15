@@ -90,7 +90,8 @@ def sample_responses_and_logprobs(prompt, model, tokenizer, device, num_samples=
             temperature=temperature,
             max_new_tokens=max_new_tokens,
             return_dict_in_generate=True,
-            output_scores=True
+            output_scores=True,
+            pad_token_id=tokenizer.pad_token_id
         )
 
     gen_tokens = outputs.sequences[:, prompt_len:]
@@ -194,7 +195,7 @@ def main():
     nli_model = AutoModelForSequenceClassification.from_pretrained(NLI_MODEL_ID).to(device)
 
     print("Loading QASPER validation split...")
-    qasper_ds = load_dataset("allenai/qasper", split="validation")
+    qasper_ds = load_dataset("allenai/qasper", revision="refs/convert/parquet", split="validation")
     
     papers_to_process = len(qasper_ds) if args.max_papers is None else min(args.max_papers, len(qasper_ds))
     se_scores = []

@@ -88,16 +88,15 @@ Then run our setup script to create a virtual environment, set cache directions,
 ```
 chmod +x scripts/setup_env.sh
 ./scripts/setup_env.sh
-source /mnt/vstor/courses/csds447/$USER/venv/bin/activate
 ```
-Activate virtual environment
+Activate virtual environment if necessary
 ```
 source /mnt/vstor/courses/csds447/$USER/venv/bin/activate
 ```
 
 Run a sample experiment with 
 ```
-python evaluate_semantic_entropy.py --max_papers 5
+python evaluate_semantic_entropy.py --max-papers 5
 ```
 
 Run a full demo experiment with 

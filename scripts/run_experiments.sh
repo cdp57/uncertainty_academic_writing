@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -A csds447                         # Course account
 #SBATCH -p markov_gpu                      # GPU partition
-#SBATCH -C gpul40s                         # Request L40S 48GB GPU
+#SBATCH -C "gpu4090|gpul40s"               # Request L40S 48GB GPU
 #SBATCH --gres=gpu:1                       # Request 1 GPU
 #SBATCH -c 4                               # Request 4 CPU cores
 #SBATCH --mem=32G                          # Request 32GB system RAM
