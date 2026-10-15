@@ -93,7 +93,7 @@ huggingface-cli login
 
 Run a sample experiment with 
 ```
-python evaluate_semantic_entropy.py --max_papers t
+python evaluate_semantic_entropy.py --max_papers 5
 ```
 
 Run a full demo experiment with 
