@@ -24,7 +24,7 @@ source "$VENV_DIR/bin/activate"
 # Upgrade pip and install required dependencies
 echo "Installing dependencies"
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements_hpc.txt
 
 echo ""
 echo "=============================================================================="
