@@ -3,16 +3,15 @@ import argparse
 import torch
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSequenceClassification
 
 # Supported model mapping
 MODEL_MAP = {
+    "qwen3-1.7b": "Qwen/Qwen3-1.7B",
+    "qwen3-4b": "Qwen/Qwen3-4B",
     "llama3.2-1b": "meta-llama/Llama-3.2-1B-Instruct",
     "llama3.2-3b": "meta-llama/Llama-3.2-3B-Instruct",
-    "gemma-e2b": "google/gemma-2-2b-it",
-    "gemma-e4b": "google/gemma-2-9b-it",
 }
 
 NLI_MODEL_ID = "cross-encoder/nli-deberta-v3-base"
@@ -23,7 +22,7 @@ def parse_args():
     parser.add_argument(
         "--model",
         type=str,
-        default="llama3.2-1b",
+        default="qwen3-1.7b",
         choices=list(MODEL_MAP.keys()) + list(MODEL_MAP.values()),
         help="Select model option or pass a custom Hugging Face ID."
     )
@@ -36,10 +35,11 @@ def parse_args():
     )
     parser.add_argument("--split", type=str, default="validation", help="Dataset split (e.g., 'validation', 'test')")
     parser.add_argument("--num-samples", type=int, default=5, help="Number of sampled outputs per prompt (M)")
+    parser.add_argument("--num-runs", type=int, default=1, help="Number of independent evaluation runs per question for variance control")
     parser.add_argument("--temperature", type=float, default=0.7, help="Sampling temperature")
     parser.add_argument("--max-new-tokens", type=int, default=64, help="Max output length per generation")
     parser.add_argument("--max-papers", type=int, default=None, help="Limit number of papers/items to evaluate (None for all)")
-    parser.add_argument("--output-dir", type=str, default="figures", help="Folder to save figures and CSV results")
+    parser.add_argument("--output-dir", type=str, default="results", help="Folder to save CSV results")
     parser.add_argument("--no-context", action="store_true", help="For QASPER: Use full text context instead of abstract")
     return parser.parse_args()
 
@@ -192,25 +192,6 @@ def calculate_semantic_entropy(log_probs, clusters):
     return -np.sum(cluster_probs * np.log(cluster_probs))
 
 
-def plot_and_save_histogram(se_values, model_alias, dataset_name, output_dir):
-    os.makedirs(output_dir, exist_ok=True)
-    
-    plt.figure(figsize=(8, 6))
-    plt.hist(se_values, bins=15, color='#4C72B0', edgecolor='black', alpha=0.8)
-    plt.title(f"Semantic Entropy Distribution ({dataset_name.upper()})\nModel: {model_alias}", fontsize=13)
-    plt.xlabel("Semantic Entropy", fontsize=11)
-    plt.ylabel("Question Count", fontsize=11)
-    plt.grid(axis='y', linestyle='--', alpha=0.6)
-
-    clean_model = model_alias.replace("/", "_").replace("-", "_")
-    output_filename = os.path.join(output_dir, f"semantic_entropy_{dataset_name}_{clean_model}.png")
-    
-    plt.tight_layout()
-    plt.savefig(output_filename, dpi=300)
-    plt.close()
-    print(f"\nHistogram saved to: {output_filename}")
-
-
 def main():
     args = parse_args()
     model_id = MODEL_MAP.get(args.model.lower(), args.model)
@@ -247,7 +228,7 @@ def main():
     ln_pe_scores = []
     results_data = []
 
-    print(f"Processing {total_items} items from {dataset_name}...")
+    print(f"Processing {total_items} items from {dataset_name} (Runs per question: {args.num_runs})...")
 
     if dataset_name == "qasper":
         for paper_idx in range(total_items):
@@ -259,6 +240,70 @@ def main():
                 if not prompt:
                     continue
 
+                se_runs, pe_runs, ln_pe_runs, clusters_runs = [], [], [], []
+                first_run_responses = None
+
+                for run_idx in range(args.num_runs):
+                    responses, unnorm_log_probs, norm_log_probs = sample_responses_and_logprobs(
+                        prompt, model, tokenizer, device,
+                        num_samples=args.num_samples,
+                        temperature=args.temperature,
+                        max_new_tokens=args.max_new_tokens
+                    )
+
+                    clusters = cluster_semantic_equivalence(responses, nli_model, nli_tokenizer, device)
+                    
+                    pe_score = calculate_predictive_entropy(unnorm_log_probs)
+                    ln_pe_score = calculate_predictive_entropy(norm_log_probs)
+                    se_score = calculate_semantic_entropy(norm_log_probs, clusters)
+
+                    se_runs.append(se_score)
+                    pe_runs.append(pe_score)
+                    ln_pe_runs.append(ln_pe_score)
+                    clusters_runs.append(len(clusters))
+
+                    if run_idx == 0:
+                        first_run_responses = responses
+
+                mean_se = float(np.mean(se_runs))
+                std_se = float(np.std(se_runs)) if len(se_runs) > 1 else 0.0
+                mean_pe = float(np.mean(pe_runs))
+                mean_ln_pe = float(np.mean(ln_pe_runs))
+
+                se_scores.append(mean_se)
+                pe_scores.append(mean_pe)
+                ln_pe_scores.append(mean_ln_pe)
+
+                results_data.append({
+                    "dataset": dataset_name,
+                    "paper_idx": paper_idx,
+                    "question_idx": q_idx,
+                    "question": question,
+                    "model_response": first_run_responses[0],
+                    "all_responses": " || ".join(first_run_responses),
+                    "semantic_entropy": mean_se,
+                    "semantic_entropy_std": std_se,
+                    "predictive_entropy": mean_pe,
+                    "length_normalized_predictive_entropy": mean_ln_pe,
+                    "num_clusters": float(np.mean(clusters_runs)),
+                    "num_runs": args.num_runs,
+                    "se_per_run": " || ".join([f"{v:.6f}" for v in se_runs]),
+                    "pe_per_run": " || ".join([f"{v:.6f}" for v in pe_runs]),
+                    "ln_pe_per_run": " || ".join([f"{v:.6f}" for v in ln_pe_runs]),
+                    "clusters_per_run": " || ".join([str(c) for c in clusters_runs]),
+                })
+
+            print(f"Progress: {paper_idx + 1}/{total_items} papers processed | Accumulated Questions: {len(se_scores)}", flush=True)
+
+    elif dataset_name == "sciq":
+        for item_idx in range(total_items):
+            item = dataset[item_idx]
+            prompt, question = prepare_sciq_prompt(item, tokenizer)
+
+            se_runs, pe_runs, ln_pe_runs, clusters_runs = [], [], [], []
+            first_run_responses = None
+
+            for run_idx in range(args.num_runs):
                 responses, unnorm_log_probs, norm_log_probs = sample_responses_and_logprobs(
                     prompt, model, tokenizer, device,
                     num_samples=args.num_samples,
@@ -271,59 +316,41 @@ def main():
                 pe_score = calculate_predictive_entropy(unnorm_log_probs)
                 ln_pe_score = calculate_predictive_entropy(norm_log_probs)
                 se_score = calculate_semantic_entropy(norm_log_probs, clusters)
-                
-                se_scores.append(se_score)
-                pe_scores.append(pe_score)
-                ln_pe_scores.append(ln_pe_score)
 
-                results_data.append({
-                    "dataset": dataset_name,
-                    "paper_idx": paper_idx,
-                    "question_idx": q_idx,
-                    "question": question,
-                    "model_response": responses[0],               # Primary generated completion
-                    "all_responses": " || ".join(responses),     # All M sampled completions
-                    "semantic_entropy": se_score,
-                    "predictive_entropy": pe_score,
-                    "length_normalized_predictive_entropy": ln_pe_score,
-                    "num_clusters": len(clusters)
-                })
+                se_runs.append(se_score)
+                pe_runs.append(pe_score)
+                ln_pe_runs.append(ln_pe_score)
+                clusters_runs.append(len(clusters))
 
-            print(f"Progress: {paper_idx + 1}/{total_items} papers processed | Accumulated Questions: {len(se_scores)}", flush=True)
+                if run_idx == 0:
+                    first_run_responses = responses
 
-    elif dataset_name == "sciq":
-        for item_idx in range(total_items):
-            item = dataset[item_idx]
-            prompt, question = prepare_sciq_prompt(item, tokenizer)
+            mean_se = float(np.mean(se_runs))
+            std_se = float(np.std(se_runs)) if len(se_runs) > 1 else 0.0
+            mean_pe = float(np.mean(pe_runs))
+            mean_ln_pe = float(np.mean(ln_pe_runs))
 
-            responses, unnorm_log_probs, norm_log_probs = sample_responses_and_logprobs(
-                prompt, model, tokenizer, device,
-                num_samples=args.num_samples,
-                temperature=args.temperature,
-                max_new_tokens=args.max_new_tokens
-            )
-
-            clusters = cluster_semantic_equivalence(responses, nli_model, nli_tokenizer, device)
-            
-            pe_score = calculate_predictive_entropy(unnorm_log_probs)
-            ln_pe_score = calculate_predictive_entropy(norm_log_probs)
-            se_score = calculate_semantic_entropy(norm_log_probs, clusters)
-            
-            se_scores.append(se_score)
-            pe_scores.append(pe_score)
-            ln_pe_scores.append(ln_pe_score)
+            se_scores.append(mean_se)
+            pe_scores.append(mean_pe)
+            ln_pe_scores.append(mean_ln_pe)
 
             results_data.append({
                 "dataset": dataset_name,
                 "item_idx": item_idx,
                 "question": question,
                 "correct_answer": item.get('correct_answer', ''),
-                "model_response": responses[0],               # Primary generated completion
-                "all_responses": " || ".join(responses),     # All M sampled completions
-                "semantic_entropy": se_score,
-                "predictive_entropy": pe_score,
-                "length_normalized_predictive_entropy": ln_pe_score,
-                "num_clusters": len(clusters)
+                "model_response": first_run_responses[0],
+                "all_responses": " || ".join(first_run_responses),
+                "semantic_entropy": mean_se,
+                "semantic_entropy_std": std_se,
+                "predictive_entropy": mean_pe,
+                "length_normalized_predictive_entropy": mean_ln_pe,
+                "num_clusters": float(np.mean(clusters_runs)),
+                "num_runs": args.num_runs,
+                "se_per_run": " || ".join([f"{v:.6f}" for v in se_runs]),
+                "pe_per_run": " || ".join([f"{v:.6f}" for v in pe_runs]),
+                "ln_pe_per_run": " || ".join([f"{v:.6f}" for v in ln_pe_runs]),
+                "clusters_per_run": " || ".join([str(c) for c in clusters_runs]),
             })
 
             print(f"Progress: {item_idx + 1}/{total_items} questions processed", flush=True)
@@ -341,8 +368,6 @@ def main():
         df = pd.DataFrame(results_data)
         df.to_csv(csv_path, index=False)
         print(f"Results saved to CSV: {csv_path}")
-
-        plot_and_save_histogram(se_scores, args.model, dataset_name, args.output_dir)
 
 
 if __name__ == "__main__":
