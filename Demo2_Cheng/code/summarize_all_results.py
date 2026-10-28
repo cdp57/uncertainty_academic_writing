@@ -17,6 +17,10 @@ Optional confirmation-bias inputs (created by summarize_bias_sciq.py):
     results/confirmation_bias/merged/*_sciq_bias_combined.csv
     results/confirmation_bias/summary/evaluation_summary.csv
     results/confirmation_bias/summary/paired_bias_effect.csv
+
+Also compares confirmation-bias results with the ORIGINAL unbiased SciQ
+results for the same model and baseline (reference scores, confidence,
+P(True), and self-judging when available).
 Optional pre-evaluation inputs:
     results/merged/across_sample_seed_mean_std.csv
     results/merged/ptrue_question_summary.csv
@@ -612,7 +616,7 @@ def bias_lookup(ev):
             for r in ev.itertuples(index=False)}
 
 
-def section_bias(r, root):
+def section_bias(r, root, original_eval, original_conf, original_ptrue):
     """Append compact presentation-ready bias findings, never seed-by-seed."""
     collection, completeness = load_bias_collection(root)
     ev, paired = load_bias_evaluation(root)
@@ -840,6 +844,217 @@ def section_bias(r, root):
              "question variant, not five full-dataset experiments.")
     r.end_bullets()
 
+    section_bias_vs_original(r, original_eval, original_conf, original_ptrue,
+                             collection, ev)
+
+
+def section_bias_vs_original(r, original_eval, original_conf, original_ptrue,
+                             collection, bias_eval):
+    """Compare biased cues to UNBIASED SciQ, keeping identical methods aligned.
+
+    The original evaluation calls caution `initial_test`; the bias evaluation
+    calls the same concept `caution`. These names are matched explicitly.
+    """
+    r.heading("7.6 Compared with original (unbiased) SciQ runs", 3)
+    r.paragraph(
+        "Here, Original means our earlier SciQ experiment using the original "
+        "question wording, without a suggested answer. Correct cue and "
+        "Incorrect cue mean the two rewritten versions of each original "
+        "question. All three conditions use SciQ support and the same gold "
+        "reference. We compare each model with the same baseline under each "
+        "condition, averaged over its five sampled answers. The 2,000 biased "
+        "variants correspond to 1,000 original questions, not 2,000 new gold answers."
+    )
+    r.paragraph(
+        "In the tables, Δ vs original = biased score − original score. "
+        "Negative accuracy/F1 changes mean worse reference matching after "
+        "rewriting the question. Changes are in percentage points (pp), not "
+        "relative percentages. Confidence changes are points on the 1–10 scale."
+    )
+
+    method_map = (
+        ("vanilla", "vanilla", "Standard"),
+        ("structured", "structured", "Structured"),
+        ("p_true", "p_true", "P(True)"),
+        ("initial_test", "caution", "Caution"),
+    )
+    original_sciq = (
+        original_eval[original_eval["dataset"] == "sciq"]
+        if not original_eval.empty else pd.DataFrame()
+    )
+    orig = eval_lookup(original_sciq)
+    bias = bias_lookup(bias_eval) if not bias_eval.empty else {}
+    change_records = []
+
+    if not orig or not bias:
+        missing = []
+        if not orig:
+            missing.append("original SciQ evaluation (`results/evaluation/summary/overall_summary.csv`)")
+        if not bias:
+            missing.append("bias evaluation (`results/confirmation_bias/summary/evaluation_summary.csv`)")
+        r.paragraph("Reference-score comparison not yet available: missing " +
+                    " and ".join(missing) + ".")
+    else:
+        for metric, title in (("accuracy_exact_match", "Reference exact-match accuracy"),
+                              ("token_f1", "Answer token F1")):
+            r.heading(title, 4)
+            rows = []
+            for model in MODEL_IDS:
+                for original_method, biased_method, label in method_map:
+                    o = orig.get((model, "sciq", original_method))
+                    c = bias.get((model + "_sciq_bias", "biased_correct", biased_method))
+                    i = bias.get((model + "_sciq_bias", "biased_incorrect", biased_method))
+                    if o is None and c is None and i is None:
+                        continue
+                    original_value = numeric(getattr(o, metric)) if o is not None else float("nan")
+                    biased_field = "exact_match_accuracy" if metric == "accuracy_exact_match" else "token_f1"
+                    correct_value = numeric(getattr(c, biased_field)) if c is not None else float("nan")
+                    incorrect_value = numeric(getattr(i, biased_field)) if i is not None else float("nan")
+                    correct_delta = correct_value-original_value
+                    incorrect_delta = incorrect_value-original_value
+                    rows.append((model_name(model), label, pct(original_value),
+                                 pct(correct_value), pp(correct_delta),
+                                 pct(incorrect_value), pp(incorrect_delta)))
+                    if metric == "accuracy_exact_match" and is_finite(incorrect_delta):
+                        change_records.append((model, label, incorrect_delta,
+                                               original_value, incorrect_value))
+            r.table(["Model", "Baseline", "Original", "Correct cue",
+                     "Δ correct vs orig", "Incorrect cue", "Δ incorrect vs orig"], rows)
+
+    r.heading("Confidence and P(True) versus original SciQ", 4)
+    r.paragraph(
+        "These are model-estimated confidence values, not accuracy. "
+        "The confidence table compares the same three self-report baselines. "
+        "P(True) assigns one estimated probability to the first of five brainstormed answers."
+    )
+    if collection.empty:
+        r.paragraph("Biased collection files are not available yet; confidence and "
+                    "P(True) comparisons will appear after collection is merged.")
+    else:
+        aggregated = collection.groupby(["model", "condition"], as_index=False).agg(
+            standard=("standard_confidence", "mean"),
+            structured=("structured_confidence", "mean"),
+            caution=("caution_confidence", "mean"),
+            ptrue=("ptrue", "mean"),
+        )
+        bi = {(row.model, row.condition): row for row in aggregated.itertuples(index=False)}
+        original_conf_lookup = {}
+        if not original_conf.empty and {"model", "dataset"} <= set(original_conf.columns):
+            original_conf_lookup = {str(row.model): row
+                                    for row in original_conf[original_conf["dataset"] == "sciq"].itertuples(index=False)}
+        orig_fields = {
+            "Standard": ("vanilla_mean_confidence_1to10_mean", "standard"),
+            "Structured": ("structured_mean_confidence_1to10_mean", "structured"),
+            "Caution": ("caution_mean_confidence_1to10_mean", "caution"),
+        }
+        conf_rows = []
+        for model in MODEL_IDS:
+            base = original_conf_lookup.get(model)
+            c = bi.get((model + "_sciq_bias", "biased_correct"))
+            i = bi.get((model + "_sciq_bias", "biased_incorrect"))
+            if base is None and c is None and i is None:
+                continue
+            for label, (old_field, new_field) in orig_fields.items():
+                v0 = numeric(getattr(base, old_field, float("nan"))) if base is not None else float("nan")
+                vc = numeric(getattr(c, new_field)) if c is not None else float("nan")
+                vi = numeric(getattr(i, new_field)) if i is not None else float("nan")
+                diff = vi-v0
+                conf_rows.append((model_name(model), label, score(v0), score(vc), score(vi),
+                                  f"{diff:+.2f}" if is_finite(diff) else "n/a"))
+        r.table(["Model", "Baseline", "Original /10", "Correct cue /10",
+                 "Incorrect cue /10", "Δ incorrect vs orig"], conf_rows)
+
+        original_ptrue_lookup = {}
+        if not original_ptrue.empty and {"model", "dataset", "ptrue_mean_prob_A"} <= set(original_ptrue.columns):
+            original_ptrue_lookup = {str(row.model): numeric(row.ptrue_mean_prob_A)
+                                     for row in original_ptrue[original_ptrue["dataset"] == "sciq"].itertuples(index=False)}
+        p_rows = []
+        for model in MODEL_IDS:
+            v0 = original_ptrue_lookup.get(model, float("nan"))
+            c = bi.get((model + "_sciq_bias", "biased_correct"))
+            i = bi.get((model + "_sciq_bias", "biased_incorrect"))
+            if not is_finite(v0) and c is None and i is None:
+                continue
+            vc = numeric(c.ptrue) if c is not None else float("nan")
+            vi = numeric(i.ptrue) if i is not None else float("nan")
+            p_rows.append((model_name(model), decimal(v0), decimal(vc), decimal(vi),
+                           f"{vi-v0:+.3f}" if is_finite(vi-v0) else "n/a"))
+        r.table(["Model", "Original P(True)", "Correct cue", "Incorrect cue",
+                 "Δ incorrect vs orig"], p_rows)
+        if not original_conf_lookup or not original_ptrue_lookup:
+            r.paragraph("Some original pre-evaluation summary files are missing; 'n/a' "
+                        "indicates values that could not be compared, not zero.")
+
+    r.heading("Self-judgment versus original SciQ (standard baseline)", 4)
+    r.paragraph(
+        "The same model judges its own answers in all three conditions. "
+        "TRUE rate uses only successfully parsed verdicts; parse coverage "
+        "may differ by condition. Unlike accuracy, a TRUE verdict is not "
+        "independent evidence that an answer is correct."
+    )
+    judge_rows = []
+    for model in MODEL_IDS:
+        old = orig.get((model, "sciq", "vanilla"))
+        good = bias.get((model + "_sciq_bias", "biased_correct", "vanilla"))
+        bad = bias.get((model + "_sciq_bias", "biased_incorrect", "vanilla"))
+        if old is None and good is None and bad is None:
+            continue
+        judge_rows.append((
+            model_name(model),
+            pct(getattr(old, "judge_true_rate", None)),
+            pct(getattr(good, "self_judge_true_rate_valid_only", None)),
+            pct(getattr(bad, "self_judge_true_rate_valid_only", None)),
+            pct(getattr(old, "judge_parse_rate", None)),
+            pct(getattr(good, "judge_parse_rate", None)),
+            pct(getattr(bad, "judge_parse_rate", None)),
+        ))
+    r.table(["Model", "Original TRUE", "Correct TRUE", "Incorrect TRUE",
+             "Original parsed", "Correct parsed", "Incorrect parsed"], judge_rows)
+
+    r.heading("Demo talking points: what changed from the original questions?", 4)
+    points = []
+    valid_changes = [row for row in change_records if is_finite(row[2])]
+    if valid_changes:
+        for model in MODEL_IDS:
+            matched = [v for v in valid_changes if v[0] == model and v[1] == "Standard"]
+            if matched:
+                _, _, delta, original_value, incorrect_value = matched[0]
+                points.append(f"{model_name(model)}, standard baseline: exact-match accuracy "
+                              f"changed from {pct(original_value)} on original SciQ "
+                              f"to {pct(incorrect_value)} with the incorrect cue "
+                              f"({pp(delta)}).")
+        biggest_drop = min(valid_changes, key=lambda x: x[2])
+        if biggest_drop[2] < 0:
+            points.append(f"Across all model/baseline combinations, the largest "
+                          f"original-to-incorrect-cue accuracy decrease was "
+                          f"{model_name(biggest_drop[0])} / {biggest_drop[1]} "
+                          f"({pp(biggest_drop[2])}).")
+        else:
+            points.append("The incorrect-cue condition did not reduce original "
+                          "exact-match accuracy in any comparable model/baseline setting.")
+        improved = sum(x[2] > 1e-12 for x in valid_changes)
+        declined = sum(x[2] < -1e-12 for x in valid_changes)
+        tied = len(valid_changes) - improved - declined
+        points.append(f"Across {len(valid_changes)} comparable model/baseline settings, "
+                      f"incorrect-cue accuracy was lower than original in {declined}, "
+                      f"higher in {improved}, and approximately unchanged in {tied}.")
+    else:
+        points.append("Original-versus-biased reference-score comparisons are not "
+                      "available until both evaluation summaries are present.")
+    if judge_rows:
+        points.append("Interpret self-judgment changes alongside valid-output "
+                      "coverage; an increase in TRUE rate is not automatically "
+                      "an increase in correctness.")
+    points.append("Original, correct-cue, and incorrect-cue questions share the "
+                  "same SciQ references, but the biased versions have different "
+                  "wording and explicit suggestions. Differences from original are "
+                  "descriptive prompt effects, not a clean causal estimate of "
+                  "confirmation bias. The matched correct-versus-incorrect comparison "
+                  "in Section 7.2 more directly isolates the suggestion direction.")
+    for point in points:
+        r.bullet(point)
+    r.end_bullets()
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--results-dir", type=Path, default=Path(__file__).resolve().parent / "results")
@@ -872,7 +1087,7 @@ def main():
         section_judging(r, evaluation)
         section_observations(r, evaluation, confidence, ptrue, consistency)
     section_notes(r)
-    section_bias(r, directory)
+    section_bias(r, directory, evaluation, confidence, ptrue)
 
     plain, md = r.output()
     (root / "demo2_results_summary.txt").write_text(plain, encoding="utf-8")

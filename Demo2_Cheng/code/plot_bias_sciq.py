@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create six presentation plots for the SciQ confirmation-bias experiment.
+"""Create eight presentation plots for the SciQ confirmation-bias experiment.
 
 Reads ONLY existing saved experiment results. No model/GPU is needed.
 
@@ -14,7 +14,7 @@ Run after evaluation merging:
 Or, once both are complete:
     python plot_bias_sciq.py --phase all --results-dir results --pdf
 
-Produces three collection and three evaluation plots under:
+Produces three collection and five evaluation plots under:
     results/confirmation_bias/plots/
 
 Methodological notes:
@@ -25,6 +25,10 @@ Methodological notes:
   full-denominator exact-match rates. Parse coverage is reported and visualized.
 - Lexical answer agreement and copying a wrong suggested word do not by
   themselves establish semantic correctness, bias endorsement, or calibration.
+- The two additional evaluation figures compare biased SciQ with the original,
+  unbiased SciQ evaluation for the SAME model and baseline. The three sets
+  share SciQ references, but the question wording differs, so the change
+  from original also includes rewriting effects.
 """
 from __future__ import annotations
 
@@ -59,6 +63,17 @@ CONDITION_LABELS = {"biased_correct": "Correct suggestion",
 CONDITION_COLORS = {"biased_correct": "#35866F", "biased_incorrect": "#C25A53"}
 MODEL_COLORS = dict(zip(MODELS, plt.get_cmap("tab10").colors[:4]))
 METHOD_MARKERS = {"vanilla": "o", "structured": "s", "p_true": "^", "caution": "D"}
+# Exact original evaluation IDs and baseline names (different from biased summaries).
+ORIGINAL_MODEL_IDS = {
+    "llama_1b_sciq_bias": "meta-llama/Llama-3.2-1B-Instruct",
+    "llama_3b_sciq_bias": "meta-llama/Llama-3.2-3B-Instruct",
+    "qwen_1p7b_sciq_bias": "Qwen/Qwen3-1.7B",
+    "qwen_4b_sciq_bias": "Qwen/Qwen3-4B",
+}
+ORIGINAL_METHOD_IDS = {
+    "vanilla": "vanilla", "structured": "structured",
+    "p_true": "p_true", "caution": "initial_test",
+}
 ANSWER_JSON_COLUMNS = {
     "vanilla": "vanilla_answers_json",
     "structured": "structured_answers_json",
@@ -317,6 +332,99 @@ def load_evaluation(root):
     return e, p
 
 
+def load_original_sciq(results_dir: Path):
+    """Read the unbiased SciQ evaluation used by summarize_all_results.py."""
+    file = require_file(
+        results_dir / "evaluation" / "summary" / "overall_summary.csv",
+        "Run: python summarize_evaluation.py --results-dir results "
+        "after completing the ORIGINAL (unbiased) SciQ evaluation"
+    )
+    original = pd.read_csv(file)
+    required = {"model", "dataset", "baseline", "accuracy_exact_match", "token_f1"}
+    missing = required - set(original.columns)
+    if missing:
+        raise ValueError(f"{file}: missing columns {sorted(missing)}")
+
+    # Compare only SciQ, not QASPER. Use the actual original checkpoint model IDs.
+    original = original[
+        original["dataset"].astype(str).str.casefold().eq("sciq")
+    ].copy()
+    lookup = {}
+    for tag in MODELS:
+        for method in METHODS:
+            match = original[
+                original["model"].eq(ORIGINAL_MODEL_IDS[tag]) &
+                original["baseline"].eq(ORIGINAL_METHOD_IDS[method])
+            ]
+            if len(match) != 1:
+                raise ValueError(
+                    f"{file}: expected exactly one original SciQ row for "
+                    f"{MODEL_LABELS[tag]} / {METHOD_LABELS[method]}, got {len(match)}"
+                )
+            row = match.iloc[0]
+            acc = clean_number(row["accuracy_exact_match"], 0, 1)
+            f1 = clean_number(row["token_f1"], 0, 1)
+            if not (math.isfinite(acc) and math.isfinite(f1)):
+                raise ValueError(f"{file}: invalid original metric for {tag}/{method}")
+            lookup[(tag, method)] = (acc, f1)
+    return lookup
+
+
+def plot_vs_original(e, original, dest, pdf, metric):
+    """One plot per metric: original rate, and two cue-related changes in pp."""
+    options = {
+        "accuracy": (
+            "exact_match_accuracy", 0,
+            "Normalized exact-match accuracy", "bias_vs_original_accuracy"
+        ),
+        "token_f1": (
+            "token_f1", 1,
+            "Answer token F1", "bias_vs_original_token_f1"
+        ),
+    }
+    col, metric_index, metric_label, filename = options[metric]
+    biased_values = {
+        (r.model, r.condition, r.baseline): clean_number(getattr(r, col), 0, 1)
+        for r in e.itertuples(index=False)
+    }
+    original_mat = np.zeros((len(MODELS), len(METHODS)))
+    good_delta = np.zeros_like(original_mat)
+    bad_delta = np.zeros_like(original_mat)
+    for mi, tag in enumerate(MODELS):
+        for bi, method in enumerate(METHODS):
+            reference = original[(tag, method)][metric_index]
+            correct = biased_values.get((tag, "biased_correct", method), float("nan"))
+            incorrect = biased_values.get((tag, "biased_incorrect", method), float("nan"))
+            if not (math.isfinite(correct) and math.isfinite(incorrect)):
+                raise ValueError(f"Missing valid biased metric: {tag} / {method} / {col}")
+            original_mat[mi, bi] = reference * 100
+            good_delta[mi, bi] = (correct - reference) * 100
+            bad_delta[mi, bi] = (incorrect - reference) * 100
+
+    max_abs = max(float(np.max(np.abs(good_delta))), float(np.max(np.abs(bad_delta))))
+    limit = min(100, 5 * math.ceil(max(5, max_abs * 1.08) / 5))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6.5), layout="constrained")
+    a0 = heatmap(axes[0], original_mat, "Original question: score", 0, 100,
+                 "YlGnBu", "%", ".1f")
+    a1 = heatmap(axes[1], good_delta, "Correct cue − original", -limit, limit,
+                 "RdBu", " pp", "+.1f")
+    a2 = heatmap(axes[2], bad_delta, "Incorrect cue − original", -limit, limit,
+                 "RdBu", " pp", "+.1f")
+    fig.colorbar(a0, ax=axes[0], orientation="horizontal", shrink=.84,
+                 pad=.09, label="Unbiased SciQ baseline (%)")
+    fig.colorbar(a2, ax=axes[1:], orientation="horizontal", shrink=.62,
+                 pad=.09, label="Change from original (percentage points)")
+    fig.suptitle(f"Confirmation-bias prompts vs original SciQ — {metric_label}",
+                 fontsize=15, weight="bold")
+    fig.text(.5, -.035,
+             "Blue positive = higher than original; red negative = lower. "
+             "Each cell is averaged over five answers/question. Changes may include wording effects.",
+             ha="center", fontsize=10)
+    save_figure(fig, dest, filename, pdf)
+    print(f"  Largest incorrect-cue shift in {metric_label}: "
+          f"{float(np.min(bad_delta)):+.1f} to {float(np.max(bad_delta)):+.1f} pp")
+
+
 def plot_accuracy(e, dest, pdf):
     fig, axes = plt.subplots(2, 2, figsize=(12.5, 8.3), sharey=True)
     x = np.arange(len(METHODS))
@@ -442,6 +550,10 @@ def main():
         plot_accuracy(e,out,args.pdf)
         plot_paired_deltas(p,e,out,args.pdf)
         plot_judge(e,out,args.pdf)
+        # Compare exactly matched model/baseline scores to the original SciQ run.
+        original = load_original_sciq(args.results_dir)
+        plot_vs_original(e, original, out, args.pdf, "accuracy")
+        plot_vs_original(e, original, out, args.pdf, "token_f1")
     print("COMPLETE. Plot folder:",out)
 
 if __name__=="__main__":

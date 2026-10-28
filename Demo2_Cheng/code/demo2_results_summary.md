@@ -1,6 +1,6 @@
 # CSDS 447 Demo 2 — Results Summary
 
-Generated 2026-10-28 11:30 EDT | Results: /home/cxg438/447_demo2/results
+Generated 2026-10-28 12:37 EDT | Results: /home/cxg438/447_demo2/results
 
 Models: Llama 3.2 1B/3B and Qwen3 1.7B/4B. Datasets: SciQ test and QASPER validation. All questions include supporting context.
 
@@ -256,3 +256,99 @@ Each model judges its own generated answers with support, without seeing the gol
 - Confidence, P(True), and self-judge TRUE rate are model-produced estimates or decisions, not independent correctness measurements.
 - Reference exact match may reject correct synonyms, while token F1 measures word overlap rather than meaning; compare both.
 - Judge TRUE rates exclude unparsed responses, so low parsing coverage can distort comparisons. Each baseline still produces five samples per question variant, not five full-dataset experiments.
+
+### 7.6 Compared with original (unbiased) SciQ runs
+
+Here, Original means our earlier SciQ experiment using the original question wording, without a suggested answer. Correct cue and Incorrect cue mean the two rewritten versions of each original question. All three conditions use SciQ support and the same gold reference. We compare each model with the same baseline under each condition, averaged over its five sampled answers. The 2,000 biased variants correspond to 1,000 original questions, not 2,000 new gold answers.
+
+In the tables, Δ vs original = biased score − original score. Negative accuracy/F1 changes mean worse reference matching after rewriting the question. Changes are in percentage points (pp), not relative percentages. Confidence changes are points on the 1–10 scale.
+
+#### Reference exact-match accuracy
+
+| Model | Baseline | Original | Correct cue | Δ correct vs orig | Incorrect cue | Δ incorrect vs orig |
+| --- | --- | --- | --- | --- | --- | --- |
+| Llama 1B | Standard | 29.8% | 32.0% | +2.2 pp | 7.5% | -22.3 pp |
+| Llama 1B | Structured | 23.3% | 6.2% | -17.1 pp | 3.7% | -19.7 pp |
+| Llama 1B | P(True) | 19.5% | 6.1% | -13.4 pp | 3.1% | -16.4 pp |
+| Llama 1B | Caution | 17.6% | 21.8% | +4.1 pp | 7.2% | -10.5 pp |
+| Llama 3B | Standard | 57.8% | 5.1% | -52.7 pp | 11.7% | -46.1 pp |
+| Llama 3B | Structured | 63.5% | 8.8% | -54.7 pp | 13.4% | -50.1 pp |
+| Llama 3B | P(True) | 62.2% | 11.3% | -50.9 pp | 16.4% | -45.8 pp |
+| Llama 3B | Caution | 56.5% | 6.5% | -50.0 pp | 13.3% | -43.2 pp |
+| Qwen 1.7B | Standard | 44.8% | 39.5% | -5.3 pp | 3.8% | -41.0 pp |
+| Qwen 1.7B | Structured | 10.9% | 0.4% | -10.5 pp | 0.2% | -10.7 pp |
+| Qwen 1.7B | P(True) | 7.4% | 0.1% | -7.2 pp | 0.1% | -7.3 pp |
+| Qwen 1.7B | Caution | 42.4% | 33.0% | -9.4 pp | 4.1% | -38.3 pp |
+| Qwen 4B | Standard | 70.6% | 28.9% | -41.7 pp | 11.2% | -59.5 pp |
+| Qwen 4B | Structured | 68.2% | 4.2% | -64.0 pp | 6.1% | -62.0 pp |
+| Qwen 4B | P(True) | 67.8% | 4.0% | -63.8 pp | 6.2% | -61.6 pp |
+| Qwen 4B | Caution | 70.9% | 26.4% | -44.5 pp | 8.0% | -62.9 pp |
+
+#### Answer token F1
+
+| Model | Baseline | Original | Correct cue | Δ correct vs orig | Incorrect cue | Δ incorrect vs orig |
+| --- | --- | --- | --- | --- | --- | --- |
+| Llama 1B | Standard | 36.8% | 38.1% | +1.4 pp | 12.4% | -24.4 pp |
+| Llama 1B | Structured | 31.6% | 12.4% | -19.1 pp | 7.1% | -24.5 pp |
+| Llama 1B | P(True) | 26.8% | 12.3% | -14.5 pp | 6.2% | -20.6 pp |
+| Llama 1B | Caution | 22.4% | 28.1% | +5.7 pp | 11.2% | -11.2 pp |
+| Llama 3B | Standard | 68.5% | 15.4% | -53.1 pp | 15.9% | -52.5 pp |
+| Llama 3B | Structured | 73.5% | 16.3% | -57.2 pp | 18.6% | -54.9 pp |
+| Llama 3B | P(True) | 72.5% | 18.5% | -53.9 pp | 20.8% | -51.7 pp |
+| Llama 3B | Caution | 67.1% | 17.5% | -49.6 pp | 17.6% | -49.6 pp |
+| Qwen 1.7B | Standard | 59.4% | 42.0% | -17.4 pp | 6.3% | -53.1 pp |
+| Qwen 1.7B | Structured | 21.4% | 6.0% | -15.4 pp | 3.7% | -17.7 pp |
+| Qwen 1.7B | P(True) | 16.7% | 4.4% | -12.3 pp | 3.0% | -13.7 pp |
+| Qwen 1.7B | Caution | 57.7% | 36.3% | -21.4 pp | 6.6% | -51.1 pp |
+| Qwen 4B | Standard | 81.1% | 40.8% | -40.3 pp | 19.7% | -61.4 pp |
+| Qwen 4B | Structured | 79.3% | 17.8% | -61.4 pp | 15.2% | -64.1 pp |
+| Qwen 4B | P(True) | 79.1% | 17.8% | -61.3 pp | 15.6% | -63.5 pp |
+| Qwen 4B | Caution | 81.1% | 38.3% | -42.8 pp | 16.4% | -64.7 pp |
+
+#### Confidence and P(True) versus original SciQ
+
+These are model-estimated confidence values, not accuracy. The confidence table compares the same three self-report baselines. P(True) assigns one estimated probability to the first of five brainstormed answers.
+
+| Model | Baseline | Original /10 | Correct cue /10 | Incorrect cue /10 | Δ incorrect vs orig |
+| --- | --- | --- | --- | --- | --- |
+| Llama 1B | Standard | 7.00 | 6.36 | 5.50 | -1.51 |
+| Llama 1B | Structured | 6.31 | 4.58 | 4.18 | -2.13 |
+| Llama 1B | Caution | 5.32 | 5.17 | 4.58 | -0.74 |
+| Llama 3B | Standard | 9.55 | 8.89 | 7.51 | -2.04 |
+| Llama 3B | Structured | 8.46 | 8.38 | 7.78 | -0.68 |
+| Llama 3B | Caution | 9.28 | 8.55 | 7.77 | -1.51 |
+| Qwen 1.7B | Standard | 9.64 | 8.84 | 2.66 | -6.98 |
+| Qwen 1.7B | Structured | 8.99 | 8.04 | 3.78 | -5.21 |
+| Qwen 1.7B | Caution | 9.35 | 8.80 | 3.18 | -6.17 |
+| Qwen 4B | Standard | 9.26 | 9.31 | 8.69 | -0.57 |
+| Qwen 4B | Structured | 7.33 | 9.47 | 8.81 | +1.48 |
+| Qwen 4B | Caution | 9.07 | 9.22 | 8.29 | -0.79 |
+
+| Model | Original P(True) | Correct cue | Incorrect cue | Δ incorrect vs orig |
+| --- | --- | --- | --- | --- |
+| Llama 1B | 0.061 | 0.128 | 0.140 | +0.078 |
+| Llama 3B | 0.654 | 0.583 | 0.524 | -0.131 |
+| Qwen 1.7B | 0.948 | 0.417 | 0.110 | -0.838 |
+| Qwen 4B | 0.984 | 0.776 | 0.143 | -0.841 |
+
+#### Self-judgment versus original SciQ (standard baseline)
+
+The same model judges its own answers in all three conditions. TRUE rate uses only successfully parsed verdicts; parse coverage may differ by condition. Unlike accuracy, a TRUE verdict is not independent evidence that an answer is correct.
+
+| Model | Original TRUE | Correct TRUE | Incorrect TRUE | Original parsed | Correct parsed | Incorrect parsed |
+| --- | --- | --- | --- | --- | --- | --- |
+| Llama 1B | 53.0% | 2.6% | 2.1% | 77.8% | 97.5% | 96.1% |
+| Llama 3B | 85.6% | 84.0% | 65.4% | 99.7% | 100.0% | 100.0% |
+| Qwen 1.7B | 13.9% | 19.4% | 2.8% | 97.0% | 100.0% | 99.7% |
+| Qwen 4B | 94.5% | 72.2% | 69.6% | 100.0% | 100.0% | 100.0% |
+
+#### Demo talking points: what changed from the original questions?
+
+- Llama 1B, standard baseline: exact-match accuracy changed from 29.8% on original SciQ to 7.5% with the incorrect cue (-22.3 pp).
+- Llama 3B, standard baseline: exact-match accuracy changed from 57.8% on original SciQ to 11.7% with the incorrect cue (-46.1 pp).
+- Qwen 1.7B, standard baseline: exact-match accuracy changed from 44.8% on original SciQ to 3.8% with the incorrect cue (-41.0 pp).
+- Qwen 4B, standard baseline: exact-match accuracy changed from 70.6% on original SciQ to 11.2% with the incorrect cue (-59.5 pp).
+- Across all model/baseline combinations, the largest original-to-incorrect-cue accuracy decrease was Qwen 4B / Caution (-62.9 pp).
+- Across 16 comparable model/baseline settings, incorrect-cue accuracy was lower than original in 16, higher in 0, and approximately unchanged in 0.
+- Interpret self-judgment changes alongside valid-output coverage; an increase in TRUE rate is not automatically an increase in correctness.
+- Original, correct-cue, and incorrect-cue questions share the same SciQ references, but the biased versions have different wording and explicit suggestions. Differences from original are descriptive prompt effects, not a clean causal estimate of confirmation bias. The matched correct-versus-incorrect comparison in Section 7.2 more directly isolates the suggestion direction.
