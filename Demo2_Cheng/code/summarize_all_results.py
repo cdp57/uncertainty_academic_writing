@@ -13,6 +13,10 @@ Outputs in the SAME DIRECTORY AS THIS SCRIPT:
 
 Required for evaluation sections:
     results/evaluation/summary/overall_summary.csv
+Optional confirmation-bias inputs (created by summarize_bias_sciq.py):
+    results/confirmation_bias/merged/*_sciq_bias_combined.csv
+    results/confirmation_bias/summary/evaluation_summary.csv
+    results/confirmation_bias/summary/paired_bias_effect.csv
 Optional pre-evaluation inputs:
     results/merged/across_sample_seed_mean_std.csv
     results/merged/ptrue_question_summary.csv
@@ -20,6 +24,8 @@ Optional pre-evaluation inputs:
 
 This script intentionally does not report individual sample-seed comparisons,
 seed-by-seed statistics, or standard deviations across sample positions.
+Confirmation-bias sections work after collection merging, evaluation merging,
+or both. Missing stages are explicitly identified rather than invented.
 """
 from __future__ import annotations
 
@@ -484,6 +490,356 @@ def section_notes(r):
     r.end_bullets()
 
 
+
+# ---------------------------------------------------------------------------
+# Confirmation-bias results (2,000 SciQ variants per model)
+# ---------------------------------------------------------------------------
+BIAS_MODELS = {model + "_sciq_bias": label for model, label in MODEL_LABELS.items()}
+BIAS_CONDITIONS = ("biased_correct", "biased_incorrect")
+BIAS_COLLECTION_COLUMNS = {
+    "global_question_idx", "bias_condition", "p_true_probability_A",
+    "vanilla_answers_json", "vanilla_confidence_json",
+    "structured_confidence_json", "initial_confidence_json",
+}
+BIAS_CONFIDENCE_FIELDS = {
+    "Standard": "vanilla_confidence_json",
+    "Structured": "structured_confidence_json",
+    "Caution": "initial_confidence_json",
+}
+
+
+def bias_name(model):
+    return BIAS_MODELS.get(str(model), str(model))
+
+
+def bias_read_file(path, required):
+    if not path.is_file():
+        return pd.DataFrame()
+    frame = pd.read_csv(path, usecols=lambda c: c in required,
+                        keep_default_na=False, encoding="utf-8-sig")
+    missing = set(required) - set(frame.columns)
+    if missing:
+        raise ValueError(f"{path}: missing required columns {sorted(missing)}")
+    return frame
+
+
+def parsed_five(cell):
+    """Return exactly five decoded values, or None for invalid input."""
+    try:
+        value = json.loads(cell) if isinstance(cell, str) else cell
+    except (ValueError, TypeError):
+        return None
+    return value if isinstance(value, list) and len(value) == 5 else None
+
+
+def valid_range(value, low, high):
+    n = numeric(value)
+    return n if math.isfinite(n) and low <= n <= high else None
+
+
+def load_bias_collection(root):
+    """Read only short pre-eval fields; never include long support/raw prompts."""
+    records = []
+    present = []
+    merged = root / "confirmation_bias" / "merged"
+    for model in MODEL_IDS:
+        tag = model + "_sciq_bias"
+        file = merged / f"{tag}_combined.csv"
+        if not file.is_file():
+            continue
+        frame = bias_read_file(file, BIAS_COLLECTION_COLUMNS)
+        expected = {"biased_correct", "biased_incorrect"}
+        if set(frame["bias_condition"]) - expected:
+            raise ValueError(f"Unexpected bias_condition in {file}")
+        if frame.duplicated(["global_question_idx", "bias_condition"]).any():
+            raise ValueError(f"Duplicate question/condition pairs in {file}")
+        present.append((tag, len(frame), frame["global_question_idx"].nunique()))
+        for row in frame.to_dict("records"):
+            cond = row["bias_condition"]
+            answers = parsed_five(row["vanilla_answers_json"])
+            answers = [canonical_answer(a) for a in answers] if answers else []
+            valid_all = len(answers) == 5 and all(answers)
+            unanimous = int(len(set(answers)) == 1) if valid_all else None
+            ptrue = valid_range(row["p_true_probability_A"], 0, 1)
+            base = {"model": tag, "condition": cond,
+                    "ptrue": ptrue, "unanimous": unanimous,
+                    "answers_complete": int(valid_all)}
+            for label, col in BIAS_CONFIDENCE_FIELDS.items():
+                vals = parsed_five(row[col])
+                clean = [x for val in (vals or [])
+                         if (x := valid_range(val, 1, 10)) is not None]
+                base[label.lower() + "_confidence"] = (sum(clean) / len(clean)) if clean else None
+            records.append(base)
+    return pd.DataFrame(records), present
+
+
+def load_bias_evaluation(root):
+    summ = root / "confirmation_bias" / "summary"
+    ev_file = summ / "evaluation_summary.csv"
+    pair_file = summ / "paired_bias_effect.csv"
+    # Deliberately avoid mixing a partial pair file with a full evaluation summary.
+    if ev_file.exists() != pair_file.exists():
+        raise ValueError("Confirmation-bias evaluation summaries are incomplete: "
+                         "expected BOTH evaluation_summary.csv and paired_bias_effect.csv. "
+                         "Run summarize_bias_sciq.py --phase evaluation after all shards finish.")
+    ev = pd.read_csv(ev_file) if ev_file.is_file() else pd.DataFrame()
+    pair = pd.read_csv(pair_file) if pair_file.is_file() else pd.DataFrame()
+    if not ev.empty:
+        columns = {"model", "condition", "baseline", "n_answers",
+                   "exact_match_accuracy", "token_f1", "self_judge_true_rate_valid_only",
+                   "judge_parse_rate", "mean_judge_confidence_valid_only",
+                   "mentions_incorrect_suggestion_rate"}
+        missing = columns - set(ev.columns)
+        if missing:
+            raise ValueError(f"{ev_file} missing columns: {sorted(missing)}")
+        if ev.duplicated(["model", "condition", "baseline"]).any():
+            raise ValueError(f"Duplicate model/condition/baseline in {ev_file}")
+    if not pair.empty:
+        columns = {"model", "baseline", "paired_samples", "correct_cue_exact_match",
+                   "incorrect_cue_exact_match", "accuracy_drop_incorrect_minus_correct",
+                   "f1_drop_incorrect_minus_correct",
+                   "incorrect_cue_wrong_suggestion_mention_rate"}
+        missing = columns - set(pair.columns)
+        if missing:
+            raise ValueError(f"{pair_file} missing columns: {sorted(missing)}")
+        if pair.duplicated(["model", "baseline"]).any():
+            raise ValueError(f"Duplicate model/baseline in {pair_file}")
+    return ev, pair
+
+
+def bias_lookup(ev):
+    return {(str(r.model), str(r.condition), str(r.baseline)): r
+            for r in ev.itertuples(index=False)}
+
+
+def section_bias(r, root):
+    """Append compact presentation-ready bias findings, never seed-by-seed."""
+    collection, completeness = load_bias_collection(root)
+    ev, paired = load_bias_evaluation(root)
+
+    r.heading("7. Confirmation-bias experiment — SciQ", 2)
+    r.paragraph("The same 1,000 original SciQ test questions were each rewritten in "
+                "two ways: one suggests the correct answer and one suggests an incorrect "
+                "answer (2,000 question variants per model). The original SciQ reference "
+                "answer and support passage stay unchanged. Four baselines generate five "
+                "sampled answers per variant. These are paired variants, not independent "
+                "question sets. The model is asked for the scientific term, not just yes/no.")
+
+    r.heading("7.1 Collection: confidence, P(True), and answer consistency", 3)
+    if collection.empty:
+        r.paragraph("Collection summaries are not available yet. After collection finishes, run: "
+                    "`python summarize_bias_sciq.py --phase collection --results-dir results`. "
+                    "This section updates automatically when merged collection files are present.")
+    else:
+        if completeness:
+            counts = ", ".join(f"{bias_name(tag)}: {rows:,} variants / {questions:,} originals"
+                                for tag, rows, questions in completeness)
+            r.paragraph("Collection coverage: " + counts + ".")
+            partial = [(tag, rows, qs) for tag, rows, qs in completeness if rows != 2000 or qs != 1000]
+            if partial:
+                r.paragraph("WARNING: at least one model does not have the expected "
+                            "2,000 variants from 1,000 original questions; interpret partial results carefully.")
+        grouped = collection.groupby(["model", "condition"], as_index=False).agg(
+            confidence=("standard_confidence", "mean"),
+            structured_confidence=("structured_confidence", "mean"),
+            caution_confidence=("caution_confidence", "mean"),
+            ptrue=("ptrue", "mean"),
+            unanimous=("unanimous", "mean"),
+            complete=("answers_complete", "mean"),
+            n=("model", "size"),
+        )
+        by = {(r.model, r.condition): r for r in grouped.itertuples(index=False)}
+        r.heading("Self-reported confidence by baseline", 4)
+        r.paragraph("Mean confidence is on a 1–10 scale. Change = incorrect-cue minus "
+                    "correct-cue confidence; negative values mean confidence fell "
+                    "with the incorrect suggestion.")
+        rows = []
+        for model in MODEL_IDS:
+            tag = model + "_sciq_bias"
+            a, b = by.get((tag, "biased_correct")), by.get((tag, "biased_incorrect"))
+            if not a or not b:
+                continue
+            for method, field in (("Standard", "confidence"),
+                                  ("Structured", "structured_confidence"),
+                                  ("Caution", "caution_confidence")):
+                correct = numeric(getattr(a, field))
+                incorrect = numeric(getattr(b, field))
+                delta = incorrect - correct
+                rows.append((bias_name(tag), method, score(correct), score(incorrect),
+                             f"{delta:+.2f}" if math.isfinite(delta) else "n/a"))
+        r.table(["Model", "Baseline", "Correct cue", "Incorrect cue", "Change (1–10)"], rows)
+
+        r.heading("P(True) and five-answer consistency", 4)
+        r.paragraph("P(True) is the model's probability assigned to the first "
+                    "brainstormed answer being TRUE (one score per question variant). "
+                    "Unanimity is the share of valid standard-baseline five-answer "
+                    "sets in which all normalized answers agree; it does not measure correctness.")
+        rows = []
+        for model in MODEL_IDS:
+            tag = model + "_sciq_bias"
+            a, b = by.get((tag, "biased_correct")), by.get((tag, "biased_incorrect"))
+            if not a or not b:
+                continue
+            rows.append((bias_name(tag), decimal(a.ptrue), decimal(b.ptrue),
+                         pct(a.unanimous), pct(b.unanimous)))
+        r.table(["Model", "P(True) correct", "P(True) incorrect", "Unanimous correct",
+                 "Unanimous incorrect"], rows)
+
+    r.heading("7.2 Evaluation: reference accuracy and F1", 3)
+    if ev.empty or paired.empty:
+        r.paragraph("Evaluation summary files are not available yet. Once all self-judging "
+                    "jobs complete, run `python summarize_bias_sciq.py --phase evaluation "
+                    "--results-dir results`, then rerun this reporting script. No results "
+                    "are inferred from missing files.")
+    else:
+        look = bias_lookup(ev)
+        r.paragraph("Standard baseline, with the original SciQ answer used for both cues. "
+                    "Accuracy is normalized exact match; token F1 measures word overlap.")
+        rows = []
+        for model in MODEL_IDS:
+            tag = model + "_sciq_bias"
+            a, b = look.get((tag, "biased_correct", "vanilla")), look.get((tag, "biased_incorrect", "vanilla"))
+            if not a or not b:
+                continue
+            rows.append((bias_name(tag), pct(a.exact_match_accuracy), pct(b.exact_match_accuracy),
+                         pp(numeric(b.exact_match_accuracy) - numeric(a.exact_match_accuracy)),
+                         pct(a.token_f1), pct(b.token_f1)))
+        r.table(["Model", "Correct cue accuracy", "Incorrect cue accuracy", "Change",
+                 "Correct cue F1", "Incorrect cue F1"], rows)
+
+        r.heading("Paired effects for all four baselines", 3)
+        r.paragraph("Changes are incorrect-cue minus correct-cue for the same original "
+                    "question and sample position. Negative values mean lower reference "
+                    "scores with an incorrect suggestion. The wrong-suggestion rate is "
+                    "literal mention of the suggested term, not proof that the model endorsed it.")
+        rows = []
+        for model in MODEL_IDS:
+            tag = model + "_sciq_bias"
+            for method in ("vanilla", "structured", "p_true", "caution"):
+                found = paired[(paired["model"] == tag) & (paired["baseline"] == method)]
+                if found.empty:
+                    continue
+                x = found.iloc[0]
+                rows.append((bias_name(tag), BASELINE_LABELS.get(method, method.title()),
+                             pp(x["accuracy_drop_incorrect_minus_correct"]),
+                             pp(x["f1_drop_incorrect_minus_correct"]),
+                             pct(x["incorrect_cue_wrong_suggestion_mention_rate"])))
+        r.table(["Model", "Baseline", "Accuracy change", "F1 change", "Wrong term mentioned"], rows)
+
+        r.heading("7.3 Self-judgment: standard baseline", 3)
+        r.paragraph("Each model judges its own generated answers with support, without "
+                    "seeing the gold answer. A TRUE rate is calculated only among valid "
+                    "parsed verdicts, whereas exact-match accuracy uses the full "
+                    "answer set. Always check parse coverage before comparing them.")
+        rows = []
+        for model in MODEL_IDS:
+            tag = model + "_sciq_bias"
+            for cond, label in (("biased_correct", "Correct"), ("biased_incorrect", "Incorrect")):
+                entry = look.get((tag, cond, "vanilla"))
+                if not entry:
+                    continue
+                rows.append((bias_name(tag), label, pct(entry.exact_match_accuracy),
+                             pct(entry.self_judge_true_rate_valid_only),
+                             pct(entry.judge_parse_rate),
+                             score(entry.mean_judge_confidence_valid_only)))
+        r.table(["Model", "Suggestion", "Exact match", "Judge TRUE", "Judge parsed", "Judge confidence"], rows)
+
+    r.heading("7.4 Main observations — demo talking points", 3)
+    bullets = []
+    if not collection.empty:
+        group = collection.groupby(["model", "condition"], as_index=False).agg(
+            confidence=("standard_confidence", "mean"), ptrue=("ptrue", "mean"),
+            unanimous=("unanimous", "mean"))
+        pairs_c = {(x.model, x.condition): x for x in group.itertuples(index=False)}
+        changes = []
+        for model in MODEL_IDS:
+            tag = model + "_sciq_bias"
+            a,b = pairs_c.get((tag,"biased_correct")),pairs_c.get((tag,"biased_incorrect"))
+            if a and b and is_finite(a.confidence) and is_finite(b.confidence):
+                changes.append((tag, numeric(b.confidence)-numeric(a.confidence)))
+        if changes:
+            tag,diff = max(changes, key=lambda x: abs(x[1]))
+            direction = "increased" if diff > 0 else "decreased"
+            bullets.append(f"For {bias_name(tag)}, the incorrect suggestion {direction} standard "
+                           f"self-reported confidence by {abs(diff):.2f} points on the 1–10 scale "
+                           "relative to the correct suggestion. This is a confidence shift, not an accuracy change.")
+        p_changes = []
+        for model in MODEL_IDS:
+            tag = model + "_sciq_bias"
+            a,b = pairs_c.get((tag,"biased_correct")),pairs_c.get((tag,"biased_incorrect"))
+            if a and b and is_finite(a.ptrue) and is_finite(b.ptrue):
+                p_changes.append((tag, a.ptrue, b.ptrue))
+        if p_changes:
+            tag, a, b = max(p_changes, key=lambda x: abs(x[2]-x[1]))
+            bullets.append(f"The largest average P(True) shift was for {bias_name(tag)}: "
+                           f"{decimal(a)} with a correct suggestion versus {decimal(b)} with "
+                           "an incorrect suggestion. The estimate is not ground-truth accuracy.")
+    if not paired.empty:
+        effects = paired.copy()
+        effects["delta"] = pd.to_numeric(effects["accuracy_drop_incorrect_minus_correct"], errors="coerce")
+        effects = effects[effects["delta"].notna()]
+        if not effects.empty:
+            worst = effects.loc[effects.delta.idxmin()]
+            best = effects.loc[effects.delta.idxmax()]
+            bullets.append(f"Largest drop in exact-match accuracy under an incorrect cue: "
+                           f"{bias_name(worst['model'])} / {BASELINE_LABELS.get(worst['baseline'],worst['baseline'])}, "
+                           f"{pp(worst['delta'])} compared with the correct cue.")
+            if numeric(best.delta) > 0:
+                bullets.append(f"An incorrect cue did not lower accuracy in every setting: "
+                               f"{bias_name(best['model'])} / {BASELINE_LABELS.get(best['baseline'],best['baseline'])} "
+                               f"changed by {pp(best['delta'])}.")
+        normal = paired[paired.baseline == "vanilla"]
+        if not normal.empty:
+            nneg = (pd.to_numeric(normal.accuracy_drop_incorrect_minus_correct, errors="coerce") < 0).sum()
+            bullets.append(f"Under the standard baseline, incorrect suggestions reduced exact-match "
+                           f"accuracy for {int(nneg)}/{len(normal)} models. This is a paired "
+                           "comparison of the same original SciQ questions.")
+    if not ev.empty:
+        valid = ev[(ev["condition"] == "biased_incorrect") & (ev["baseline"] == "vanilla")].copy()
+        if not valid.empty:
+            coverage = pd.to_numeric(valid.judge_parse_rate,errors="coerce")
+            gap = pd.to_numeric(valid.self_judge_true_rate_valid_only,errors="coerce") - pd.to_numeric(valid.exact_match_accuracy, errors="coerce")
+            valid = valid[(coverage >= 0.9) & gap.notna()].copy()
+            if not valid.empty:
+                valid["gap"] = gap.loc[valid.index]
+                peak = valid.loc[valid.gap.idxmax()]
+                bullets.append(f"For {bias_name(peak['model'])} with an incorrect cue, "
+                               f"the standard self-judge TRUE rate was {pct(peak['self_judge_true_rate_valid_only'])} "
+                               f"versus {pct(peak['exact_match_accuracy'])} exact match "
+                               f"(judge parse rate {pct(peak['judge_parse_rate'])}). "
+                               "This gap alone does not establish judging errors.")
+            low = ev[pd.to_numeric(ev.judge_parse_rate,errors="coerce") < .8]
+            if not low.empty:
+                rmin = low.loc[pd.to_numeric(low.judge_parse_rate).idxmin()]
+                bullets.append(f"Judge verdict parsing is incomplete for some conditions; "
+                               f"the lowest observed coverage was {pct(rmin['judge_parse_rate'])} "
+                               f"for {bias_name(rmin['model'])} / {rmin['bias_condition']} / "
+                               f"{BASELINE_LABELS.get(rmin['baseline'],rmin['baseline'])}.")
+    if not bullets:
+        bullets.append("Confirmation-bias result files are not available yet; populate "
+                       "collection/merged and evaluation/summary before interpreting effects.")
+    for statement in bullets:
+        r.bullet(statement)
+    r.end_bullets()
+
+    r.heading("7.5 Interpretation notes", 3)
+    r.bullet("Correct versus incorrect suggestion: the question wording changes, "
+             "but the original gold answer and support do not. A difference in scores "
+             "is associated with the cue, not necessarily proof of a specific cognitive mechanism.")
+    r.bullet("Negative paired accuracy/F1 change: the answer matched the gold reference "
+             "less often after an incorrect cue. A positive change means the opposite.")
+    r.bullet("Wrong-suggestion mention rate: checks whether output contains a suggested "
+             "term. Mentioning it can also be a rejection, so this is NOT a direct "
+             "measure of accepting false information.")
+    r.bullet("Confidence, P(True), and self-judge TRUE rate are model-produced estimates "
+             "or decisions, not independent correctness measurements.")
+    r.bullet("Reference exact match may reject correct synonyms, while token F1 measures "
+             "word overlap rather than meaning; compare both.")
+    r.bullet("Judge TRUE rates exclude unparsed responses, so low parsing coverage can "
+             "distort comparisons. Each baseline still produces five samples per "
+             "question variant, not five full-dataset experiments.")
+    r.end_bullets()
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--results-dir", type=Path, default=Path(__file__).resolve().parent / "results")
@@ -494,7 +850,10 @@ def main():
     evaluation, confidence, ptrue = load_data(directory)
     evaluation = validated_eval(evaluation)
     consistency = load_consistency(directory)
-    if evaluation.empty and confidence.empty and ptrue.empty and consistency.empty:
+    has_bias_data = (directory / "confirmation_bias" / "summary" / "evaluation_summary.csv").exists() or any(
+        (directory / "confirmation_bias" / "merged").glob("*_sciq_bias_combined.csv")
+    )
+    if evaluation.empty and confidence.empty and ptrue.empty and consistency.empty and not has_bias_data:
         parser.error(f"No compatible result files found in {directory}")
 
     r = Report()
@@ -513,6 +872,7 @@ def main():
         section_judging(r, evaluation)
         section_observations(r, evaluation, confidence, ptrue, consistency)
     section_notes(r)
+    section_bias(r, directory)
 
     plain, md = r.output()
     (root / "demo2_results_summary.txt").write_text(plain, encoding="utf-8")
