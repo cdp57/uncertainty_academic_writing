@@ -11,7 +11,7 @@ The environment can be setup on the HPC in the same manner as Demo1. The scripts
 
 ## AI Use Disclosure
 
-An AI model, CWRU Gemini, was used for basic coding assistance (e.g., assistance parsing CLI inputs) and debugging (e.g., understanding why predictive entropy was lower than semantic entropy when this is theoretically impossible")
+An AI model, CWRU Gemini, was used for basic coding assistance (e.g., assistance parsing CLI inputs) and debugging (e.g., understanding why predictive entropy was lower than semantic entropy when this is theoretically impossible)
 
 An example prompt would be: "Review this code and identify if there are any methodological errors in the computation of predictive and semantic entropy?"
 
