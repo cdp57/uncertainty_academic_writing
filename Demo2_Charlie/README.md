@@ -7,7 +7,7 @@
 
 ## Scripts
 
-The environment can be setup on the HPC in the same manner as Demo1. The scripts folders provides a set of scripts needed to run the experiments.
+The environment can be setup on the HPC in the same manner as Demo1. The scripts folders provides a set of scripts needed to run the experiments. Also experiments can be run on a single L40 or 4090 GPU, although high-performance nodes are not requested for basic computational functions (e.g., plotting).
 
 ## AI Use Disclosure
 
