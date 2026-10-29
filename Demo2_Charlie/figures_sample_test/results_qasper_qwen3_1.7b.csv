@@ -1,0 +1,227 @@
+dataset,paper_idx,question_idx,question,model_response,all_responses,semantic_entropy,semantic_entropy_std,predictive_entropy,length_normalized_predictive_entropy,num_clusters,num_runs,se_per_run,pe_per_run,ln_pe_per_run,clusters_per_run
+qasper,0,0,which multilingual approaches do they compare with?,"<think>
+Okay, let's see. The question is asking which multilingual approaches the paper compares with. The context mentions that the authors propose a cross-lingual pre-training method for zero-shot NMT. They mention that their approach outperforms ""strong pivot-based baseline"" and ""various multilingual NMT","<think>
+Okay, let's see. The question is asking which multilingual approaches the paper compares with. The context mentions that the authors propose a cross-lingual pre-training method for zero-shot NMT. They mention that their approach outperforms ""strong pivot-based baseline"" and ""various multilingual NMT || <think>
+Okay, let's see. The user is asking which multilingual approaches the paper compares with. The context mentions that the authors compare their approach with ""various multilingual NMT approaches."" So the answer should be those approaches. But I need to make sure I don't miss any specifics. The abstract says || <think>
+Okay, let's see. The question is asking which multilingual approaches the researchers compared their method with.
+
+From the context provided, the abstract mentions that their approach is compared with ""various multilingual NMT approaches."" The key sentence is: ""Experiments on two public datasets show that our approach significantly out || <think>
+Okay, let's see. The question is asking which multilingual approaches the paper compares with. The context mentions that the authors propose a cross-lingual pre-training method for zero-shot NMT. They mention that their approach outperforms ""strong pivot-based baseline"" and ""various multilingual NMT || <think>
+Okay, let's see. The question is asking which multilingual approaches the research compared with. The context mentions that the paper compares their approach with ""various multilingual NMT approaches."" So the answer should be those approaches. But I need to make sure I'm not missing anything. The abstract says they",0.5110334206391209,0.0,1.008411138735349,1.608601750645303,2.0,1,0.511033,1.008411,1.608602,2
+qasper,0,1,what are the pivot-based baselines?,"<think>
+Okay, let's see. The user is asking about the pivot-based baselines mentioned in the context. The abstract talks about comparing the proposed method with strong pivot-based baselines and various multilingual NMT approaches.
+
+So, pivot-based baselines are methods that use a pivot language (like English) as a","<think>
+Okay, let's see. The user is asking about the pivot-based baselines mentioned in the context. The abstract talks about comparing the proposed method with strong pivot-based baselines and various multilingual NMT approaches.
+
+So, pivot-based baselines are methods that use a pivot language (like English) as a || <think>
+Okay, so the user is asking about the pivot-based baselines mentioned in the context. Let me recall the abstract.
+
+The abstract mentions that the proposed method outperforms strong pivot-based baseline and various multilingual NMT approaches. The term ""pivot-based"" here refers to methods that use a common intermediate language || <think>
+Okay, let me try to figure out what the pivot-based baselines are based on the context provided. The question is asking about the pivot-based baselines mentioned in the abstract.
+
+First, I remember that the abstract talks about comparing the proposed method with some baselines. The key part here is when it says || <think>
+Okay, let's tackle this question. The user is asking about the pivot-based baselines mentioned in the context. First, I need to recall what the context says.
+
+The abstract mentions that the proposed method outperforms ""strong pivot-based baseline"" and various multilingual NMT approaches. So, the pivot || <think>
+Okay, let's see. The user is asking about the pivot-based baselines mentioned in the context. The context talks about a paper that compares their approach with strong pivot-based baseline and various multilingual NMT approaches.
+
+So, pivot-based baselines are methods that use a pivot language (like English) as",0.5043384808179731,0.0,1.0718415954560185,1.6090374873768787,2.0,1,0.504338,1.071842,1.609037,2
+qasper,0,2,which datasets did they experiment with?,"<think>
+Okay, let me try to figure out which datasets the research assistant used in their experiments. The context mentions that the experiments were conducted on two public datasets. The abstract talks about testing their approach on these datasets to show improvement over baseline methods.
+
+I need to recall if the specific names of the datasets are mentioned.","<think>
+Okay, let me try to figure out which datasets the research assistant used in their experiments. The context mentions that the experiments were conducted on two public datasets. The abstract talks about testing their approach on these datasets to show improvement over baseline methods.
+
+I need to recall if the specific names of the datasets are mentioned. || <think>
+Okay, let's see. The user is asking which datasets the research team experimented with in their study. The context provided mentions two public datasets. The abstract says ""Experiments on two public datasets show that our approach..."" but it doesn't specify the names. Wait, the original context might have had specific dataset || <think>
+Okay, let's see. The user is asking which datasets the researchers experimented with in their study. The context provided mentions two public datasets. The abstract says ""Experiments on two public datasets show that our approach..."" but it doesn't specify the names. Wait, maybe I need to check the original context again || <think>
+Okay, let's see. The user is asking which datasets the research team experimented with in their study.
+
+Looking at the context provided, the abstract mentions ""experiments on two public datasets."" But the specific names of the datasets aren't given. The title is about cross-lingual pre-training for zero-shot || <think>
+Okay, let's see. The user is asking which datasets the researchers experimented with in their study. The context provided mentions two public datasets. The abstract says ""Experiments on two public datasets show that our approach..."" but it doesn't specify the names. Wait, the original context might have the actual names,",0.0,0.0,1.2246750656851848,1.608760128012898,1.0,1,-0.000000,1.224675,1.608760,1
+qasper,0,3,what language pairs are explored?,"<think>
+Okay, let's see. The user is asking about the language pairs explored in the context provided. The title is ""Cross-lingual Pre-training Based Transfer for Zero-shot Neural Machine Translation."" The abstract mentions transfer learning between different language pairs, especially in low-resource scenarios. However, the problem arises in zero","<think>
+Okay, let's see. The user is asking about the language pairs explored in the context provided. The title is ""Cross-lingual Pre-training Based Transfer for Zero-shot Neural Machine Translation."" The abstract mentions transfer learning between different language pairs, especially in low-resource scenarios. However, the problem arises in zero || <think>
+Okay, let's see. The user is asking about the language pairs explored in the context provided. The title is ""Cross-lingual Pre-training Based Transfer for Zero-shot Neural Machine Translation."" The abstract mentions transfer learning between different language pairs, especially in low-resource scenarios. However, the challenge is with zero || <think>
+Okay, let's see. The user is asking which language pairs are explored in the context provided.
+
+The abstract mentions that the study is about cross-lingual pre-training for zero-shot NMT. The key point here is that the approach involves transferring learning between different language pairs. The title says ""Cross- || <think>
+Okay, let's see. The user is asking about the language pairs explored in the context provided. The title is ""Cross-lingual Pre-training Based Transfer for Zero-shot Neural Machine Translation."" The abstract mentions transfer learning between different language pairs, especially in low-resource scenarios. However, the main challenge is zero || <think>
+Okay, let's see. The user is asking which language pairs are explored in the context provided. The title is ""Cross-lingual Pre-training Based Transfer for Zero-shot Neural Machine Translation."" The abstract mentions transfer learning between different language pairs, but specifically talks about zero-shot translation.
+
+The key part here is",1.3406278553247755,0.0,0.8281763161536962,1.60901806593751,4.0,1,1.340628,0.828176,1.609018,4
+qasper,1,0,what ner models were evaluated?,"<think>
+Okay, let's see. The user is asking which NER models were evaluated in the context provided.
+
+The context mentions that the paper presents silver and gold-standard datasets and evaluates several popular models. The key part here is ""we train and evaluate several popular named entity recognition models."" The specific models aren't named","<think>
+Okay, let's see. The user is asking which NER models were evaluated in the context provided.
+
+The context mentions that the paper presents silver and gold-standard datasets and evaluates several popular models. The key part here is ""we train and evaluate several popular named entity recognition models."" The specific models aren't named || <think>
+Okay, let's see. The user is asking which NER models were evaluated in the context provided. The context mentions that the authors used several popular models to train and evaluate. The abstract says they ""train and evaluate several popular named entity recognition models."" But the question is specifically about which ones were evaluated. || <think>
+Okay, let's see. The user is asking which NER models were evaluated in the context provided. The context talks about using popular models to train and evaluate the corpora. The abstract mentions that they used several popular models for training and evaluation.
+
+First, I need to recall what the context says. It || <think>
+Okay, let's see. The user is asking which NER models were evaluated in the context provided.
+
+The context mentions that the work presents silver- and gold-standard datasets and evaluates several popular models. The key part here is ""we train and evaluate several popular named entity recognition models."" The question is asking specifically || <think>
+Okay, let's see. The user is asking which NER models were evaluated in the context provided. The context mentions that the authors used several popular models to train and evaluate. The abstract says they ""trained and evaluate several popular named entity recognition models."" But the specific models aren't listed.
+
+Wait, the",1.3229470156351855,0.0,0.6838619183485843,1.6090603309330542,4.0,1,1.322947,0.683862,1.609060,4
+qasper,1,1,what is the source of the news sentences?,"<think>
+Okay, let's see. The user is asking about the source of the news sentences in the context provided.
+
+Looking back at the context, the abstract mentions that there's a 53400-token corpus of news sentences with manual annotation of named entities. The sentence says ""another 534","<think>
+Okay, let's see. The user is asking about the source of the news sentences in the context provided.
+
+Looking back at the context, the abstract mentions that there's a 53400-token corpus of news sentences with manual annotation of named entities. The sentence says ""another 534 || <think>
+Okay, let's see. The user is asking about the source of the news sentences in the context provided.
+
+Looking at the context, the abstract mentions that there's a 53,400-token corpus of news sentences with manual annotation of named entities. The sentence says ""another 534 || <think>
+Okay, let's see. The user is asking about the source of the news sentences in the context provided.
+
+Looking at the context, the abstract mentions that there's a 53400-token corpus of news sentences with manual annotation of named entities. The sentence says ""another 5340 || <think>
+Okay, let's see. The user is asking about the source of the news sentences in the context provided.
+
+Looking at the context, the abstract mentions that there are two corpora. The first is a 163,000-token corpus generated and annotated from Wikipedia. The second is a || <think>
+Okay, let me try to figure out where the news sentences come from. The context says that the researchers created a 163,000-token corpus from Wikipedia and another 53,400-token corpus of news sentences with manual annotation. So the news sentences are part of the second",1.3356527117378485,0.0,1.3329929101933677,1.6092286525418729,4.0,1,1.335653,1.332993,1.609229,4
+qasper,1,2,did they use a crowdsourcing platform for manual annotations?,"<think>
+Okay, let's see. The user is asking if they used a crowdsourcing platform for manual annotations. The context provided talks about two corpora: one generated from Wikipedia and another from news sentences with manual annotation of people, organizations, and locations.
+
+The key part here is the mention of ""manual annotation of","<think>
+Okay, let's see. The user is asking if they used a crowdsourcing platform for manual annotations. The context provided talks about two corpora: one generated from Wikipedia and another from news sentences with manual annotation of people, organizations, and locations.
+
+The key part here is the mention of ""manual annotation of || <think>
+Okay, let's see. The user is asking whether the researchers used a crowdsourcing platform for manual annotations. The context provided talks about two corpora: one generated from Wikipedia and another from news sentences with manual annotation of people, organizations, and locations.
+
+The abstract mentions that the second corpus was ""manually || <think>
+Okay, let me try to figure this out. The question is whether they used a crowdsourcing platform for manual annotations.
+
+Looking at the context provided, the abstract mentions that they created a 163,000-token corpus from Wikipedia and another 53,400-token corpus of news || <think>
+Okay, let's see. The user is asking if they used a crowdsourcing platform for manual annotations. The context provided is about the pioNER paper, which mentions two corpora: one generated from Wikipedia and another from news sentences with manual annotation of people, organizations, and locations.
+
+The key part here || <think>
+Okay, let's see. The user is asking whether the study used a crowdsourcing platform for manual annotations.
+
+Looking at the context provided, the abstract mentions that they created a 163,000-token corpus from Wikipedia and another 53,400-token corpus of news sentences with",0.5010565906308236,0.0,1.2735918657076197,1.609025873761527,2.0,1,0.501057,1.273592,1.609026,2
+qasper,2,0,what are the topics pulled from Reddit?,"<think>
+Okay, let's see. The user is asking about the topics pulled from Reddit in the context provided.
+
+The context mentions that the corpus of Reddit posts was collected across a diverse set of conversational topics. So, the answer should specify that the topics are diverse and varied. The exact list isn't given,","<think>
+Okay, let's see. The user is asking about the topics pulled from Reddit in the context provided.
+
+The context mentions that the corpus of Reddit posts was collected across a diverse set of conversational topics. So, the answer should specify that the topics are diverse and varied. The exact list isn't given, || <think>
+Okay, let's see. The user is asking about the topics pulled from Reddit in the context provided.
+
+The context mentions that the corpus of Reddit posts was collected across a diverse set of conversational topics. So, the answer should specify that the topics are diverse and varied. The key part here is ""div || <think>
+Okay, the user is asking about the topics pulled from Reddit in the context provided. Let me check the context again.
+
+The context mentions a corpus of Reddit posts collected across a diverse set of conversational topics. The key part here is ""diverse set of conversational topics."" So the answer should specify || <think>
+Okay, let's see. The user is asking about the topics pulled from Reddit in the context provided.
+
+The context mentions that the corpus of Reddit posts was collected across a diverse set of conversational topics. So, the answer should specify that the topics were diverse and varied. The exact wording is ""collected || <think>
+Okay, let's see. The user is asking about the topics pulled from Reddit in the context provided.
+
+The context mentions that the corpus of Reddit posts was collected across a diverse set of conversational topics. So the answer should mention that the topics were diverse and varied. The exact wording is ""collected across",0.49915518470866915,0.0,1.2572110347586942,1.6093252598116614,2.0,1,0.499155,1.257211,1.609325,2
+qasper,2,1,What predictive model do they build?,"<think>
+Okay, let's see. The user is asking about the predictive model the researchers built in the context provided.
+
+The abstract mentions they construct statistical models to identify dogmatic comments. The model is based on a corpus of Reddit posts, which were collected across various topics and annotated through crowdsourcing. They operationalize aspects","<think>
+Okay, let's see. The user is asking about the predictive model the researchers built in the context provided.
+
+The abstract mentions they construct statistical models to identify dogmatic comments. The model is based on a corpus of Reddit posts, which were collected across various topics and annotated through crowdsourcing. They operationalize aspects || <think>
+Okay, let me try to figure out the answer. The question is asking what predictive model they built in the context provided.
+
+Looking at the context, the abstract mentions that they construct statistical models to identify dogmatic comments. The model is based on a corpus of Reddit posts. They mention using a diverse set of || <think>
+Okay, let me try to figure out what predictive model the researchers built based on the context provided. The title is ""Identifying Dogmatism in Social Media: Signals and Models,"" so they're talking about models to identify dogmatism in social media, specifically on Reddit.
+
+The abstract mentions they construct a || <think>
+Okay, let's see. The user is asking about the predictive model the researchers built in the context provided.
+
+The context mentions that they construct statistical models to identify dogmatic comments. The model is based on a corpus of Reddit posts, which were collected across various topics and annotated via crowdsourcing. They operationalize || <think>
+Okay, let me try to figure out the answer to the question. The user is asking what predictive model the researchers built based on the context provided.
+
+Looking at the context, the abstract mentions that they construct statistical models to identify dogmatic comments. The model is based on a corpus of Reddit posts. They mention",0.9610945900564689,0.0,0.6834071396328577,1.6085521841311512,3.0,1,0.961095,0.683407,1.608552,3
+qasper,3,0,What accuracy does the proposed system achieve?,"<think>
+Okay, let's see. The user is asking about the accuracy of the proposed system in the context provided. The abstract mentions that the system uses adversarial learning for Chinese NER from crowd annotations. They mention creating two datasets and that the results show better scores than strong baseline systems.
+
+But wait, the question","<think>
+Okay, let's see. The user is asking about the accuracy of the proposed system in the context provided. The abstract mentions that the system uses adversarial learning for Chinese NER from crowd annotations. They mention creating two datasets and that the results show better scores than strong baseline systems.
+
+But wait, the question || <think>
+Okay, let's see. The user is asking about the accuracy achieved by the proposed system in the context provided.
+
+Looking at the abstract, the key points are that the system uses adversarial learning for Chinese NER from crowd annotations. They mention that they create two datasets and their experiments show better scores than strong || <think>
+Okay, let me try to figure out the answer to the question ""What accuracy does the proposed system achieve?"" based on the provided context.
+
+First, I need to look at the abstract of the paper. The abstract mentions that the authors propose an approach using adversarial learning for Chinese NER from crowd annotations. || <think>
+Okay, let's see. The user is asking about the accuracy achieved by the proposed system in the context provided.
+
+The abstract mentions that the system uses adversarial learning for Chinese NER from crowd annotations. They mention creating two datasets from two domains and that the experimental results show better scores than strong baseline systems. || <think>
+Okay, let's see. The user is asking about the accuracy achieved by the proposed system in the context provided.
+
+The abstract mentions that the system uses adversarial learning for Chinese NER from crowd annotations. They mention building a LSTM-CRF model based on the approach. The key part here is the experimental results",0.944768032113888,0.0,0.21155016886675124,1.6088791916341847,3.0,1,0.944768,0.211550,1.608879,3
+qasper,3,1,What crowdsourcing platform is used?,"<think>
+Okay, let's see. The user is asking about the crowdsourcing platform used in the context provided. The title mentions ""Adversarial Learning for Chinese NER from Crowd Annotations,"" so the focus is on the method of using crowd annotations.
+
+The abstract talks about using crowdsourcing to get labeled data at a","<think>
+Okay, let's see. The user is asking about the crowdsourcing platform used in the context provided. The title mentions ""Adversarial Learning for Chinese NER from Crowd Annotations,"" so the focus is on the method of using crowd annotations.
+
+The abstract talks about using crowdsourcing to get labeled data at a || <think>
+Okay, let's see. The user is asking about the crowdsourcing platform used in the context provided. The context is about a paper titled ""Adversarial Learning for Chinese NER from Crowd Annotations."" The abstract mentions using crowd annotations but doesn't specify which platform. 
+
+Hmm, the question is straightforward, || <think>
+Okay, let's see. The user is asking about the crowdsourcing platform used in the context provided. The context is about a paper titled ""Adversarial Learning for Chinese NER from Crowd Annotations."" The abstract mentions using crowd annotations but doesn't specify which platform.
+
+Hmm, the question is straightforward. The || <think>
+Okay, let's see. The user is asking about the crowdsourcing platform used in the context provided. The abstract mentions that they used crowd annotations from non-experts, but the question is specifically about which platform was used.
+
+Wait, the context doesn't mention any specific platform. The title talks about crowdsourcing || <think>
+Okay, let's see. The user is asking about the crowdsourcing platform used in the context provided. The title is ""Adversarial Learning for Chinese NER from Crowd Annotations,"" so the focus is on crowd annotations.
+
+Looking at the abstract, it mentions using crowd annotations but doesn't specify which platform.",0.5115279303864239,0.0,1.1048755690230316,1.6075964993147216,2.0,1,0.511528,1.104876,1.607596,2
+qasper,4,0,How do they match words before reordering them?,"<think>
+Okay, let's see. The user is asking how they match words before reordering them in the context provided.
+
+The abstract mentions that they pre-order the assisting language sentence to match the source language's word order. So the process is probably aligning the sentences so that the structure of the assisting language (which","<think>
+Okay, let's see. The user is asking how they match words before reordering them in the context provided.
+
+The abstract mentions that they pre-order the assisting language sentence to match the source language's word order. So the process is probably aligning the sentences so that the structure of the assisting language (which || <think>
+Okay, let's see. The user is asking how they match words before reordering them in the context provided. The abstract mentions that they pre-order the assisting language sentence to match the source language's word order. So the process is probably aligning the sentences so that the structure of the assisting language (which || <think>
+Okay, let's see. The user is asking how they match words before reordering them in the context provided.
+
+The abstract mentions that they pre-order the assisting language sentence to match the source language's word order. So the process is: take the assisting language sentence, reorder it to match the source's word || <think>
+Okay, let's see. The user is asking how they match words before reordering them in the context provided.
+
+The abstract mentions that they pre-order the assisting language sentence to match the source language's word order. So the process involves taking the assisting language sentence and rearranging it to fit the source language's || <think>
+Okay, let's see. The user is asking how they match words before reordering them in the context provided.
+
+The abstract mentions that they pre-order the assisting language sentence to match the source language's word order. So the process is probably converting the assisting language's sentences into a structure similar to the source language",0.9447234525382744,0.0,1.2017705582051388,1.6093505570663138,3.0,1,0.944723,1.201771,1.609351,3
+qasper,4,1,On how many language pairs do they show that preordering assisting language sentences helps translation quality?,"<think>
+Okay, let's see. The user is asking how many language pairs they mention where preordering the assisting language sentences helps translation quality.
+
+Looking at the context, the abstract says, ""Our experiments on many language pairs show that bridging the word order gap leads to significant improvement in the translation quality."" The word","<think>
+Okay, let's see. The user is asking how many language pairs they mention where preordering the assisting language sentences helps translation quality.
+
+Looking at the context, the abstract says, ""Our experiments on many language pairs show that bridging the word order gap leads to significant improvement in the translation quality."" The word || <think>
+Okay, let's see. The user is asking how many language pairs they tested where preordering the assisting language sentences helped translation quality.
+
+Looking at the context, the abstract mentions that they conducted experiments on ""many language pairs"" and that bridging the word order gap led to significant improvement. But the exact number || <think>
+Okay, let's see. The question is asking how many language pairs they tested where preordering the assisting language sentences helps translation quality.
+
+Looking at the context, the abstract mentions that they did experiments on ""many language pairs"" and that bridging the word order gap led to significant improvement. But the exact number || <think>
+Okay, let's see. The question is asking how many language pairs they tested where preordering the assisting language sentences helps translation quality.
+
+Looking at the context, the abstract mentions that they did experiments on many language pairs. The key sentence is ""Our experiments on many language pairs show that bridging the word order || <think>
+Okay, let's see. The question is asking how many language pairs they tested where preordering the assisting language sentences helped translation quality.
+
+Looking at the context, the abstract mentions that they conducted experiments on ""many language pairs."" The key part here is the phrase ""many language pairs."" The answer is probably """,1.0528351344437026,0.0,1.220195300937304,1.609007798442939,3.0,1,1.052835,1.220195,1.609008,3
+qasper,4,2,Which dataset(s) do they experiment with?,"<think>
+Okay, let's see. The question is asking which dataset(s) they experimented with in the study mentioned. The context provided is about a paper titled ""Addressing word-order Divergence in Multilingual Neural Machine Translation for extremely Low Resource Languages."" The abstract talks about transfer learning approaches where a parent model is","<think>
+Okay, let's see. The question is asking which dataset(s) they experimented with in the study mentioned. The context provided is about a paper titled ""Addressing word-order Divergence in Multilingual Neural Machine Translation for extremely Low Resource Languages."" The abstract talks about transfer learning approaches where a parent model is || <think>
+Okay, let's see. The user is asking which dataset(s) the researchers experimented with in their study. The context provided is about a paper titled ""Addressing word-order Divergence in Multilingual Neural Machine Translation for extremely Low Resource Languages."" The abstract mentions that they used transfer learning approaches, where a || <think>
+Okay, let's see. The user is asking which dataset(s) the researchers experimented with in their study. The context provided is about a paper titled ""Addressing word-order Divergence in Multilingual Neural Machine Translation for extremely Low Resource Languages."" The abstract mentions that they used transfer learning approaches, where a || <think>
+Okay, let's see. The user is asking which dataset(s) the researchers experimented with in their study. The context provided is about a paper titled ""Addressing word-order Divergence in Multilingual Neural Machine Translation for extremely Low Resource Languages."" The abstract mentions that they use transfer learning approaches where a parent || <think>
+Okay, let's see. The question is asking which dataset(s) they experimented with in the study mentioned.
+
+The context provided is about a paper titled ""Addressing word-order Divergence in Multilingual Neural Machine Translation for extremely Low Resource Languages."" The abstract talks about transfer learning approaches where a parent model is",1.6090702596506163,0.0,1.1775553451538412,1.6090702596506163,5.0,1,1.609070,1.177555,1.609070,5

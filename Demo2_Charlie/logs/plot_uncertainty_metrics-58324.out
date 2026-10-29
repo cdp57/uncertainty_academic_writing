@@ -1,0 +1,20 @@
+========================================================
+Starting AUROC & AURC Plot Generation
+========================================================
+0.331
+0.005291005291005291
+0.01798941798941799
+0.311
+0.012698412698412698
+0.447
+0.523
+0.0021164021164021165
+Saved Accuracy Comparison Bar Chart (with SEM error bars) to: figures/accuracy_judge_vs_rouge.png
+Saved Entropy Grouped Bar Chart (with SEM error bars) to: figures/entropy_bars_std.png
+Saved Kuhn et al. style AUROC plot (JUDGE Target) to: figures/kuhn_auroc_judge_target.png
+Saved Kuhn et al. style AURC plot (JUDGE Target) to: figures/kuhn_aurc_judge_target.png
+Saved Kuhn et al. style AUROC plot (ROUGE Target) to: figures/kuhn_auroc_rouge_target.png
+Saved Kuhn et al. style AURC plot (ROUGE Target) to: figures/kuhn_aurc_rouge_target.png
+========================================================
+Plotting completed! Figures saved to figures/
+========================================================

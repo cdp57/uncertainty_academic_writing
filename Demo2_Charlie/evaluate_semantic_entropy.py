@@ -41,25 +41,52 @@ def parse_args():
     parser.add_argument("--max-papers", type=int, default=None, help="Limit number of papers/items to evaluate (None for all)")
     parser.add_argument("--output-dir", type=str, default="results", help="Folder to save CSV results")
     parser.add_argument("--no-context", action="store_true", help="For QASPER: Use full text context instead of abstract")
+    parser.add_argument("--only-answerable", action="store_true", default=True, help="Skip unanswerable questions (default: True)")
     return parser.parse_args()
 
 
 def get_device_and_dtype():
     if torch.cuda.is_available():
-        return torch.device("cuda"), torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+        return torch.device("cuda"), torch.float16
     elif torch.backends.mps.is_available():
         return torch.device("mps"), torch.float16
     else:
         return torch.device("cpu"), torch.float32
 
 
+def is_qasper_answerable(paper_instance, question_idx):
+    """
+    Determines if a QASPER question is answerable.
+    In QASPER, each question has answer annotations from practitioners.
+    A question is deemed answerable if at least one annotation has 'unanswerable' set to False.
+    """
+    try:
+        answers_container = paper_instance['qas']['answers'][question_idx]
+        answer_annotations = answers_container.get('answer', [])
+        for ann in answer_annotations:
+            if not ann.get('unanswerable', False):
+                return True
+        return False
+    except (KeyError, IndexError, TypeError):
+        return False
+
+
+def is_sciq_answerable(item):
+    """Determines if a SciQ item has a non-empty correct answer."""
+    correct_ans = item.get('correct_answer', '')
+    return bool(correct_ans and str(correct_ans).strip())
+
+
+# ==============================================================================
+# [UPDATED]: Preamble Suppression for QASPER
+# ==============================================================================
 def prepare_qasper_prompt(paper_instance, question_idx, tokenizer, full_text=True):
     title = paper_instance.get('title', '')
     abstract = paper_instance.get('abstract', '')
 
     if full_text:
-        full_text = paper_instance.get('full_text', '')
-        context = f"Title: {title}\nFull Text: {full_text}"
+        full_text_val = paper_instance.get('full_text', '')
+        context = f"Title: {title}\nFull Text: {full_text_val}"
     else:
         context = f"Title: {title}\nAbstract: {abstract}"
     
@@ -69,29 +96,42 @@ def prepare_qasper_prompt(paper_instance, question_idx, tokenizer, full_text=Tru
 
     question = questions[question_idx]
 
-    messages = [
-        {
-            "role": "user",
-            "content": f"You are a helpful research assistant. Answer the question succinctly based on the context provided.\n\nContext:\n{context}\n\nQuestion: {question}"
-        }
-    ]
+    content = (
+        "Answer the research question concisely using only information from the provided context. "
+        "Do NOT include introductory filler, conversational preambles (e.g., 'Based on the paper...'), "
+        "or explanations of your reasoning. State only the direct answer.\n\n"
+        f"Context:\n{context}\n\nQuestion: {question}"
+    )
+
+    messages = [{"role": "user", "content": content}]
     
     try:
         prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     except Exception:
-        prompt = f"Context:\n{context}\n\nQuestion: {question}\n\nAnswer:"
+        prompt = f"{content}\n\nAnswer:"
     
     return prompt, question
 
 
+# ==============================================================================
+# [UPDATED]: Preamble Suppression & Short Direct Format for SciQ
+# ==============================================================================
 def prepare_sciq_prompt(instance, tokenizer):
     support = instance.get('support', '').strip()
     question = instance.get('question', '').strip()
 
     if support:
-        content = f"You are a helpful research assistant. Answer the science question succinctly based on the context provided.\n\nContext:\n{support}\n\nQuestion: {question}"
+        content = (
+            "Answer the science question directly in as few words as possible (1-5 words). "
+            "Do NOT include introductory phrases, explanation, or context repetition.\n\n"
+            f"Context:\n{support}\n\nQuestion: {question}"
+        )
     else:
-        content = f"You are a helpful research assistant. Answer the science question succinctly.\n\nQuestion: {question}"
+        content = (
+            "Answer the science question directly in as few words as possible (1-5 words). "
+            "Do NOT include introductory phrases, explanation, or context repetition.\n\n"
+            f"Question: {question}"
+        )
 
     messages = [{"role": "user", "content": content}]
 
@@ -129,32 +169,45 @@ def sample_responses_and_logprobs(prompt, model, tokenizer, device, num_samples=
     target_log_probs = torch.gather(log_probs, 2, gen_tokens.unsqueeze(-1)).squeeze(-1)
 
     unnorm_seq_log_probs = []
-    norm_seq_log_probs = []
+    gen_lengths = []
     text_responses = []
 
     for i in range(num_samples):
         eos_indices = (gen_tokens[i] == tokenizer.eos_token_id).nonzero()
-        length = eos_indices[0].item() if len(eos_indices) > 0 else gen_tokens.shape[1]
+        
+        # Include <eos> token in valid slice length
+        if len(eos_indices) > 0:
+            length = eos_indices[0].item() + 1
+        else:
+            length = gen_tokens.shape[1]
         
         valid_log_probs = target_log_probs[i, :length]
         unnorm_log_prob = valid_log_probs.sum().item()
-        norm_log_prob = unnorm_log_prob / max(length, 1)
         
         unnorm_seq_log_probs.append(unnorm_log_prob)
-        norm_seq_log_probs.append(norm_log_prob)
+        gen_lengths.append(length)
 
         text = tokenizer.decode(gen_tokens[i, :length], skip_special_tokens=True).strip()
+        if not text:
+            text = "<empty>"
         text_responses.append(text)
 
-    return text_responses, np.array(unnorm_seq_log_probs), np.array(norm_seq_log_probs)
+    return text_responses, np.array(unnorm_seq_log_probs), np.array(gen_lengths)
 
 
 def check_entailment(premise, hypothesis, nli_model, nli_tokenizer, device):
+    """Checks NLI entailment with fast-path string matching."""
+    # Fast path for identical strings
+    if premise.strip().lower() == hypothesis.strip().lower():
+        return True
+
     inputs = nli_tokenizer(premise, hypothesis, return_tensors="pt", truncation=True).to(device)
     with torch.no_grad():
         logits = nli_model(**inputs).logits
     probs = torch.softmax(logits, dim=-1)
-    return probs[0, 2].item() > 0.5  # Label 2 corresponds to entailment
+    
+    # Label 1 = entailment for cross-encoder/nli-deberta-v3-base
+    return probs[0, 1].item() > 0.5
 
 
 def cluster_semantic_equivalence(responses, nli_model, nli_tokenizer, device):
@@ -176,15 +229,20 @@ def cluster_semantic_equivalence(responses, nli_model, nli_tokenizer, device):
     return clusters
 
 
-def calculate_predictive_entropy(log_probs):
-    probs = np.exp(log_probs - np.max(log_probs))
+def calculate_predictive_entropy(unnorm_log_probs):
+    """Computes standard Predictive Entropy over sequence log-probabilities."""
+    probs = np.exp(unnorm_log_probs - np.max(unnorm_log_probs))
     probs = probs / np.sum(probs)
     probs = probs[probs > 0]
     return -np.sum(probs * np.log(probs))
 
 
-def calculate_semantic_entropy(log_probs, clusters):
-    probs = np.exp(log_probs - np.max(log_probs))
+def calculate_semantic_entropy(unnorm_log_probs, clusters):
+    """
+    Computes Semantic Entropy by summing probabilities of sequences within the same cluster.
+    Uses unnormalized sequence log-probabilities P(s) to guarantee SE <= PE.
+    """
+    probs = np.exp(unnorm_log_probs - np.max(unnorm_log_probs))
     probs = probs / np.sum(probs)
 
     cluster_probs = np.array([np.sum(probs[c]) for c in clusters])
@@ -208,12 +266,19 @@ def main():
 
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
-        torch_dtype=torch_dtype
-    ).to(device)
+        torch_dtype=torch_dtype,
+        device_map="auto" if torch.cuda.device_count() > 1 else None
+    )
+ 
+    if torch.cuda.device_count() == 1:
+        model = model.to(device)
 
     print(f"Loading NLI model: {NLI_MODEL_ID}...")
     nli_tokenizer = AutoTokenizer.from_pretrained(NLI_MODEL_ID)
-    nli_model = AutoModelForSequenceClassification.from_pretrained(NLI_MODEL_ID).to(device)
+    nli_model = AutoModelForSequenceClassification.from_pretrained(
+        NLI_MODEL_ID,
+        torch_dtype=torch_dtype
+    ).to(device)
 
     print(f"Loading dataset: {dataset_name} ({args.split} split)...")
     if dataset_name == "qasper":
@@ -228,14 +293,20 @@ def main():
     ln_pe_scores = []
     results_data = []
 
-    print(f"Processing {total_items} items from {dataset_name} (Runs per question: {args.num_runs})...")
+    print(f"Processing {total_items} items from {dataset_name} (Only Answerable: {args.only_answerable} | Runs: {args.num_runs})...")
 
     if dataset_name == "qasper":
+        skipped_unanswerable = 0
         for paper_idx in range(total_items):
             paper = dataset[paper_idx]
             questions = paper['qas']['question']
             
             for q_idx in range(len(questions)):
+                # Filter out unanswerable QASPER questions
+                if args.only_answerable and not is_qasper_answerable(paper, q_idx):
+                    skipped_unanswerable += 1
+                    continue
+
                 prompt, question = prepare_qasper_prompt(paper, q_idx, tokenizer, full_text=args.no_context)
                 if not prompt:
                     continue
@@ -244,7 +315,7 @@ def main():
                 first_run_responses = None
 
                 for run_idx in range(args.num_runs):
-                    responses, unnorm_log_probs, norm_log_probs = sample_responses_and_logprobs(
+                    responses, unnorm_log_probs, gen_lengths = sample_responses_and_logprobs(
                         prompt, model, tokenizer, device,
                         num_samples=args.num_samples,
                         temperature=args.temperature,
@@ -254,8 +325,10 @@ def main():
                     clusters = cluster_semantic_equivalence(responses, nli_model, nli_tokenizer, device)
                     
                     pe_score = calculate_predictive_entropy(unnorm_log_probs)
-                    ln_pe_score = calculate_predictive_entropy(norm_log_probs)
-                    se_score = calculate_semantic_entropy(norm_log_probs, clusters)
+                    se_score = calculate_semantic_entropy(unnorm_log_probs, clusters)
+                    
+                    mean_len = float(np.mean(gen_lengths))
+                    ln_pe_score = pe_score / max(mean_len, 1.0)
 
                     se_runs.append(se_score)
                     pe_runs.append(pe_score)
@@ -293,18 +366,25 @@ def main():
                     "clusters_per_run": " || ".join([str(c) for c in clusters_runs]),
                 })
 
-            print(f"Progress: {paper_idx + 1}/{total_items} papers processed | Accumulated Questions: {len(se_scores)}", flush=True)
+            print(f"Progress: {paper_idx + 1}/{total_items} papers processed | Evaluated: {len(se_scores)} | Skipped Unanswerable: {skipped_unanswerable}", flush=True)
 
     elif dataset_name == "sciq":
+        skipped_unanswerable = 0
         for item_idx in range(total_items):
             item = dataset[item_idx]
+
+            # Filter out invalid SciQ items
+            if args.only_answerable and not is_sciq_answerable(item):
+                skipped_unanswerable += 1
+                continue
+
             prompt, question = prepare_sciq_prompt(item, tokenizer)
 
             se_runs, pe_runs, ln_pe_runs, clusters_runs = [], [], [], []
             first_run_responses = None
 
             for run_idx in range(args.num_runs):
-                responses, unnorm_log_probs, norm_log_probs = sample_responses_and_logprobs(
+                responses, unnorm_log_probs, gen_lengths = sample_responses_and_logprobs(
                     prompt, model, tokenizer, device,
                     num_samples=args.num_samples,
                     temperature=args.temperature,
@@ -314,8 +394,10 @@ def main():
                 clusters = cluster_semantic_equivalence(responses, nli_model, nli_tokenizer, device)
                 
                 pe_score = calculate_predictive_entropy(unnorm_log_probs)
-                ln_pe_score = calculate_predictive_entropy(norm_log_probs)
-                se_score = calculate_semantic_entropy(norm_log_probs, clusters)
+                se_score = calculate_semantic_entropy(unnorm_log_probs, clusters)
+                
+                mean_len = float(np.mean(gen_lengths))
+                ln_pe_score = pe_score / max(mean_len, 1.0)
 
                 se_runs.append(se_score)
                 pe_runs.append(pe_score)
@@ -353,12 +435,12 @@ def main():
                 "clusters_per_run": " || ".join([str(c) for c in clusters_runs]),
             })
 
-            print(f"Progress: {item_idx + 1}/{total_items} questions processed", flush=True)
+            print(f"Progress: {item_idx + 1}/{total_items} questions processed | Evaluated: {len(se_scores)} | Skipped Invalid: {skipped_unanswerable}", flush=True)
 
-    print(f"\nCompleted evaluation over {len(se_scores)} total questions.")
+    print(f"\nCompleted evaluation over {len(se_scores)} answerable questions.")
     
     if se_scores:
-        print(f"Mean Semantic Entropy:                      {np.mean(se_scores):.4f} (Std: {np.std(se_scores):.4f})")
+        print(f"Mean Semantic Entropy:                     {np.mean(se_scores):.4f} (Std: {np.std(se_scores):.4f})")
         print(f"Mean Predictive Entropy:                    {np.mean(pe_scores):.4f} (Std: {np.std(pe_scores):.4f})")
         print(f"Mean Length-Normalized Predictive Entropy:  {np.mean(ln_pe_scores):.4f} (Std: {np.std(ln_pe_scores):.4f})")
         

@@ -1,0 +1,38 @@
+========================================================
+Starting SciQ End-to-End Uncertainty & Accuracy Pipeline
+========================================================
+Thu Oct 29 03:35:36 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    Off |   00000000:61:00.0 Off |                    0 |
+| N/A   34C    P8             34W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+========================================================
+--> [Stage 3] Generating AUROC and AURC Comparison Plots
+========================================================
+Saved Accuracy Comparison Bar Chart (Biased) to: figures/biased/accuracy_judge_vs_rouge_biased.png
+Saved Entropy Grouped Bar Chart (Biased) to: figures/biased/entropy_bars_sem_biased.png
+Saved Kuhn et al. style AUROC plot (JUDGE Target - Biased) to: figures/biased/kuhn_auroc_judge_target_biased.png
+Saved Kuhn et al. style AURC plot (JUDGE Target - Biased) to: figures/biased/kuhn_aurc_judge_target_biased.png
+Saved Kuhn et al. style AUROC plot (ROUGE Target - Biased) to: figures/biased/kuhn_auroc_rouge_target_biased.png
+Saved Kuhn et al. style AURC plot (ROUGE Target - Biased) to: figures/biased/kuhn_aurc_rouge_target_biased.png
+
+========================================================
+SciQ End-to-End Pipeline Execution Complete!
+Plots saved to: figures/biased/
+========================================================
