@@ -49,7 +49,7 @@ def parse_args():
     )
     parser.add_argument("--split", type=str, default="validation", help="Dataset split ('validation', 'test')")
     parser.add_argument("--max-samples", type=int, default=None, help="Limit number of rows to judge for fast testing")
-    parser.add_argument("--output-dir", type=str, default="figures", help="Folder to save judgment CSV files")
+    parser.add_argument("--output-dir", type=str, default="results", help="Folder to save judgment CSV files")
     return parser.parse_args()
 
 
@@ -64,19 +64,50 @@ def get_device_and_dtype():
 
 def extract_qasper_references(q_answers_list):
     """Extracts and formats human ground-truth answers from QASPER structure."""
+    if not q_answers_list:
+        return "No reference answer available."
+
+    if isinstance(q_answers_list, dict):
+        q_answers_list = [q_answers_list]
+
     refs = []
     for ans_item in q_answers_list:
-        ans = ans_item.get('answer', {})
+        if not isinstance(ans_item, dict):
+            continue
+
+        # Handle both flat worker dicts and nested wrapper dicts
+        ans = ans_item.get('answer', ans_item) if ('answer' in ans_item and isinstance(ans_item['answer'], dict)) else ans_item
+
+        # 1. Unanswerable check
         if ans.get('unanswerable', False):
             refs.append("Unanswerable")
-        elif ans.get('yes_no') is not None:
-            refs.append("Yes" if ans.get('yes_no') else "No")
+        
+        # 2. Free Response check
         elif ans.get('free_response'):
-            refs.append(ans['free_response'])
+            fr = str(ans['free_response']).strip()
+            if fr:
+                refs.append(fr)
+            
+        # 3. Yes/No check
+        elif ans.get('yes_no') is not None and ans.get('yes_no') != "":
+            yn = ans.get('yes_no')
+            if isinstance(yn, bool):
+                refs.append("Yes" if yn else "No")
+            elif str(yn).strip().lower() in ['true', 'yes', '1']:
+                refs.append("Yes")
+            elif str(yn).strip().lower() in ['false', 'no', '0']:
+                refs.append("No")
+                
+        # 4. Extractive Spans check
         elif ans.get('extractive_spans'):
-            spans = [s.strip() for s in ans['extractive_spans'] if s.strip()]
-            if spans:
-                refs.append(", ".join(spans))
+            spans = ans['extractive_spans']
+            if isinstance(spans, list):
+                clean_spans = [str(s).strip() for s in spans if str(s).strip()]
+                if clean_spans:
+                    refs.append(", ".join(clean_spans))
+            elif isinstance(spans, str) and spans.strip():
+                refs.append(spans.strip())
+
     return " | ".join(refs) if refs else "No reference answer available."
 
 
@@ -197,7 +228,7 @@ def main():
 
     # Attach judge results to DataFrame
     results_df["ground_truth"] = ground_truths
-    results_df["judge_correctness"] = judge_scores
+    results_df["judge_verdict"] = judge_scores
     results_df["judge_reasoning"] = judge_reasonings
 
     # Compute overall metrics
@@ -208,18 +239,17 @@ def main():
 
     # Compute uncertainty correlations if entropy metrics are present
     if "semantic_entropy" in results_df.columns:
-        corr_se = results_df["semantic_entropy"].corr(results_df["judge_correctness"])
+        corr_se = results_df["semantic_entropy"].corr(results_df["judge_verdict"])
         print(f"Correlation (Semantic Entropy vs. Correctness): {corr_se:.4f}")
 
     if "predictive_entropy" in results_df.columns:
-        corr_pe = results_df["predictive_entropy"].corr(results_df["judge_correctness"])
+        corr_pe = results_df["predictive_entropy"].corr(results_df["judge_verdict"])
         print(f"Correlation (Predictive Entropy vs. Correctness): {corr_pe:.4f}")
     print("=" * 60)
 
     # Save merged output
-    os.makedirs(args.output_dir, exist_ok=True)
     input_filename = os.path.basename(args.results_csv).replace(".csv", "")
-    output_csv = os.path.join(args.output_dir, f"judge_{input_filename}.csv")
+    output_csv = os.path.join(args.output_dir, f"evaluated_{input_filename}.csv")
     results_df.to_csv(output_csv, index=False)
     print(f"Judged evaluation results saved to: {output_csv}")
 

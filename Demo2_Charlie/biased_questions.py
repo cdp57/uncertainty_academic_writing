@@ -9,26 +9,91 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 MODEL_ID = "meta-llama/Llama-3.2-3B-Instruct"
 
-BIAS_PROMPT_TEMPLATE = """You are an expert in cognitive bias and survey design.
-Your task is to rewrite a question into two leading variants that exhibit confirmation bias.
+PROMPT_SCIQ = """You are an expert in cognitive bias and question design.
+Your task is to reframe a scientific question into two verification-style questions that test confirmation bias using target candidate concepts.
+
+CRITICAL INSTRUCTIONS:
+- Reframe both target candidate answers into the strict format: "Does 'target' refer to <adapted concept description>? If not, what does?"
+- Preserve the exact scientific concept described in the original question.
+- Do NOT alter the underlying concept being tested.
+
+---
+EXAMPLE 1:
+Original Question: What term in biotechnology means a genetically exact copy of an organism?
+Target A (Correct Answer): clone
+Target B (Incorrect Answer): adult
+
+JSON Output:
+{{
+  "biased_correct": "Does 'clone' refer to a genetically exact copy of an organism? If not, what does?",
+  "biased_incorrect": "Does 'adult' refer to a genetically exact copy of an organism? If not, what does?"
+}}
+
+EXAMPLE 2:
+Original Question: Compounds that are capable of accepting electrons, such as O2 or F2, are called what?
+Target A (Correct Answer): oxidants
+Target B (Incorrect Answer): antioxidants
+
+JSON Output:
+{{
+  "biased_correct": "Does 'oxidants' refer to compounds that are capable of accepting electrons, such as O2 or F2? If not, what does?",
+  "biased_incorrect": "Does 'antioxidants' refer to compounds that are capable of accepting electrons, such as O2 or F2? If not, what does?"
+}}
+---
+
+Now perform the task for this question:
 
 Original Question: {question}
-Correct Answer: {correct_answer}
-Incorrect Answer: {incorrect_answer}
+Target A (Correct Answer): {correct_answer}
+Target B (Incorrect Answer): {incorrect_answer}
 
-Instructions:
-1. Write "biased_correct": Rewrite the question so it strongly leads/nudges the respondent toward assuming "{correct_answer}" is correct.
-2. Write "biased_incorrect": Rewrite the question so it strongly leads/nudges the respondent toward assuming "{incorrect_answer}" is correct.
+Return ONLY a valid JSON object with keys "biased_correct" and "biased_incorrect". No explanations or extra text."""
 
-Return ONLY a valid JSON object with no markdown surrounding it:
-{{"biased_correct": "<biased question leaning toward correct answer>", "biased_incorrect": "<biased question leaning toward incorrect answer>"}}"""
 
+PROMPT_QASPER = """You are an expert in cognitive bias and research question design.
+Your task is to rewrite an academic research question into two OPEN-ENDED biased variants by adding a leading premise or presupposition.
+
+CRITICAL INSTRUCTIONS:
+- The question MUST remain open-ended (e.g., keeping "How...", "What...", "Why...", "Which...", or similar open question structures).
+- Do NOT convert the question into a Yes/No, true/false, or binary verification query.
+- Add an introductory context clause or presupposition ("Given that...", "Considering that...", "Assuming...") before the main question.
+- "biased_correct": Presuppose context aligning with the ground-truth finding.
+- "biased_incorrect": Presuppose context aligning with a plausible but false finding.
+
+---
+EXAMPLE 1:
+Original Question: Which multilingual approaches do they compare with?
+Ground-Truth Finding: Pivot-based translation and direct zero-shot transfer
+
+JSON Output:
+{{
+  "biased_correct": "Given that the study prioritizes translation-based baselines, which multilingual approaches do they compare with?",
+  "biased_incorrect": "Given that the study prioritizes fully unsupervised non-translation baselines, which multilingual approaches do they compare with?"
+}}
+
+EXAMPLE 2:
+Original Question: How do the authors compute context representations?
+Ground-Truth Finding: Using a pre-trained RoBERTa encoder across passage segments
+
+JSON Output:
+{{
+  "biased_correct": "Considering the model relies on transformer-based segment encoding, how do the authors compute context representations?",
+  "biased_incorrect": "Considering the model relies on static recurrent word embeddings, how do the authors compute context representations?"
+}}
+---
+
+Now perform the task for this question:
+
+Original Question: {question}
+Ground-Truth Finding: {correct_answer}
+
+Return ONLY a valid JSON object with keys "biased_correct" and "biased_incorrect". No explanations or extra text."""
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Generate Biased Question Variants for QASPER and SciQ")
+    parser = argparse.ArgumentParser(description="Generate Subtly Biased Question Variants for QASPER and SciQ")
     parser.add_argument("--model-id", type=str, default=MODEL_ID, help="Hugging Face model ID")
-    parser.add_argument("--output-dir", type=str, default="data", help="Directory to save CSV outputs")
-    parser.add_argument("--max-samples", type=int, default=None, help="Limit samples to process per dataset (None for all)")
+    parser.add_argument("--output-dir", type=str, default="figures", help="Directory to save CSV outputs")
+    parser.add_argument("--max-samples", type=int, default=None, help="Limit samples to process per dataset")
     parser.add_argument("--max-new-tokens", type=int, default=128, help="Max output tokens for generation")
     return parser.parse_args()
 
@@ -43,20 +108,23 @@ def get_device_and_dtype():
 
 
 def extract_qasper_references(q_answers_list):
+    """Returns formatted ground truth text, or None if the question is unanswerable."""
     refs = []
     for ans_item in q_answers_list:
         ans = ans_item.get('answer', {})
         if ans.get('unanswerable', False):
-            refs.append("Unanswerable")
+            continue
         elif ans.get('yes_no') is not None:
             refs.append("Yes" if ans.get('yes_no') else "No")
         elif ans.get('free_response'):
-            refs.append(ans['free_response'])
+            refs.append(ans['free_response'].strip())
         elif ans.get('extractive_spans'):
             spans = [s.strip() for s in ans['extractive_spans'] if s.strip()]
             if spans:
                 refs.append(", ".join(spans))
-    return " | ".join(refs) if refs else "No answer"
+    
+    valid_refs = [r for r in refs if r and r.lower() not in ["no answer", "unanswerable"]]
+    return " | ".join(valid_refs) if valid_refs else None
 
 
 def parse_json_response(raw_text):
@@ -84,7 +152,7 @@ def generate_bias_pair(prompt, model, tokenizer, device, max_new_tokens=128):
         outputs = model.generate(
             **inputs,
             max_new_tokens=max_new_tokens,
-            do_sample=False,  # Deterministic framing
+            do_sample=False,
             pad_token_id=tokenizer.pad_token_id
         )
 
@@ -102,9 +170,9 @@ def process_sciq(dataset, model, tokenizer, device, max_samples=None, max_new_to
         item = dataset[idx]
         question = item['question']
         correct_ans = item['correct_answer']
-        incorrect_ans = item.get('distractor1', 'an incorrect alternative answer')
+        incorrect_ans = item.get('distractor1', 'an alternative scientific mechanism')
 
-        prompt = BIAS_PROMPT_TEMPLATE.format(
+        prompt = PROMPT_SCIQ.format(
             question=question,
             correct_answer=correct_ans,
             incorrect_answer=incorrect_ans
@@ -140,12 +208,13 @@ def process_qasper(dataset, model, tokenizer, device, max_samples=None, max_new_
 
         for q_idx, question in enumerate(questions):
             correct_ans = extract_qasper_references(answers[q_idx]['answer'])
-            incorrect_ans = f"an opposing or incorrect claim to: {correct_ans[:50]}"
+            
+            if not correct_ans:
+                continue
 
-            prompt = BIAS_PROMPT_TEMPLATE.format(
+            prompt = PROMPT_QASPER.format(
                 question=question,
-                correct_answer=correct_ans,
-                incorrect_answer=incorrect_ans
+                correct_answer=correct_ans
             )
 
             b_correct, b_incorrect = generate_bias_pair(prompt, model, tokenizer, device, max_new_tokens)
@@ -156,14 +225,18 @@ def process_qasper(dataset, model, tokenizer, device, max_samples=None, max_new_
                 "question_idx": q_idx,
                 "original_question": question,
                 "correct_answer": correct_ans,
-                "incorrect_answer": incorrect_ans,
                 "biased_correct_question": b_correct,
                 "biased_incorrect_question": b_incorrect
             })
 
             processed_count += 1
+            if max_samples and processed_count >= max_samples:
+                break
 
-        print(f"QASPER Paper [{paper_idx + 1}/{papers_to_run}] | Total Questions: {processed_count}", flush=True)
+        if max_samples and processed_count >= max_samples:
+            break
+
+        print(f"QASPER Paper [{paper_idx + 1}/{papers_to_run}] | Total Valid Questions: {processed_count}", flush=True)
 
     return pd.DataFrame(results)
 
@@ -183,6 +256,13 @@ def main():
         args.model_id,
         torch_dtype=torch_dtype
     ).to(device)
+    
+    # for 2080
+#    model = AutoModelForCausalLM.from_pretrained(
+ #       model_id,
+  #      torch_dtype=torch.float16,
+   #     device_map="auto"
+ #   )
 
     os.makedirs(args.output_dir, exist_ok=True)
 

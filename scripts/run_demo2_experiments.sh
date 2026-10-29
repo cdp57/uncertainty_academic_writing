@@ -41,22 +41,10 @@ DATASET_DIR="data"
 RESULTS_DIR="results"
 FIGURES_DIR="figures"
 
-mkdir -p "$DATASET_DIR"
-mkdir -p "$RESULTS_DIR"
-mkdir -p "$FIGURES_DIR"
-
 # Models and Datasets matrix
 MODELS=("llama3.2-1b" "llama3.2-3b" "qwen3-1.7b" "qwen3-4b")
 DATASETS=("qasper" "sciq")
 JUDGE_MODEL="meta-llama/Llama-3.2-3B-Instruct"
-
-echo ""
-echo "========================================================"
-echo "STAGE 1: Generating Biased Questions (Confirmation Bias)"
-echo "========================================================"
-python generate_biased_questions.py \
-    --model-id "$JUDGE_MODEL" \
-    --output-dir "$DATASET_DIR"
 
 echo ""
 echo "========================================================"
@@ -74,19 +62,17 @@ for MODEL in "${MODELS[@]}"; do
         echo ""
         echo "--> Running uncertainty evaluation: Model=$MODEL | Dataset=$DATASET ($SPLIT)"
         
-        python evaluate_semantic_entropy_2.py \
+        python evaluate_semantic_entropy.py \
             --model "$MODEL" \
             --dataset "$DATASET" \
             --split "$SPLIT" \
-            --num-samples 5 \
-            --num-runs 3 \
+            --num-samples 10 \
+            --num-runs 1 \
             --temperature 0.7 \
             --output-dir "$RESULTS_DIR"
             
     done
 done
-
-
 
 echo ""
 echo "========================================================"
