@@ -1,0 +1,24 @@
+========================================================
+Starting AUROC & AURC Plot Generation
+========================================================
+Saved 80 rows to: figures/meta_entropy_results.csv
+
+qasper/llama3.2_1b/judge (n=944, accuracy 0.597): best single = discrete_semantic_entropy AUROC 0.535 | combined AUROC 0.514 (fold SD 0.031), AURC 0.620
+qasper/llama3.2_1b/rouge (n=945, accuracy 0.330): best single = predictive_entropy AUROC 0.688 | combined AUROC 0.686 (fold SD 0.034), AURC 0.481
+qasper/qwen3_1.7b/judge (n=944, accuracy 0.679): best single = predictive_entropy AUROC 0.563 | combined AUROC 0.563 (fold SD 0.026), AURC 0.729
+qasper/qwen3_1.7b/rouge (n=945, accuracy 0.366): best single = predictive_entropy AUROC 0.673 | combined AUROC 0.673 (fold SD 0.060), AURC 0.484
+qasper/llama3.2_3b/judge (n=945, accuracy 0.658): best single = length_normalized_predictive_entropy AUROC 0.555 | combined AUROC 0.558 (fold SD 0.070), AURC 0.703
+qasper/llama3.2_3b/rouge (n=945, accuracy 0.437): best single = predictive_entropy AUROC 0.727 | combined AUROC 0.728 (fold SD 0.030), AURC 0.630
+qasper/qwen3_4b/judge (n=945, accuracy 0.717): best single = predictive_entropy AUROC 0.532 | combined AUROC 0.486 (fold SD 0.020), AURC 0.721
+qasper/qwen3_4b/rouge (n=945, accuracy 0.435): best single = predictive_entropy AUROC 0.682 | combined AUROC 0.684 (fold SD 0.032), AURC 0.560
+sciq/llama3.2_1b/judge (n=1000, accuracy 0.839): best single = length_normalized_predictive_entropy AUROC 0.747 | combined AUROC 0.764 (fold SD 0.038), AURC 0.935
+sciq/llama3.2_1b/rouge (n=1000, accuracy 0.755): best single = length_normalized_predictive_entropy AUROC 0.758 | combined AUROC 0.778 (fold SD 0.043), AURC 0.893
+sciq/qwen3_1.7b/judge (n=1000, accuracy 0.908): best single = predictive_entropy AUROC 0.659 | combined AUROC 0.663 (fold SD 0.083), AURC 0.928
+sciq/qwen3_1.7b/rouge (n=1000, accuracy 0.861): best single = predictive_entropy AUROC 0.712 | combined AUROC 0.711 (fold SD 0.040), AURC 0.924
+sciq/llama3.2_3b/judge (n=1000, accuracy 0.909): best single = length_normalized_predictive_entropy AUROC 0.783 | combined AUROC 0.797 (fold SD 0.062), AURC 0.965
+sciq/llama3.2_3b/rouge (n=1000, accuracy 0.867): best single = predictive_entropy AUROC 0.781 | combined AUROC 0.798 (fold SD 0.074), AURC 0.947
+sciq/qwen3_4b/judge (n=1000, accuracy 0.945): best single = predictive_entropy AUROC 0.709 | combined AUROC 0.697 (fold SD 0.081), AURC 0.967
+sciq/qwen3_4b/rouge (n=1000, accuracy 0.894): best single = predictive_entropy AUROC 0.764 | combined AUROC 0.748 (fold SD 0.028), AURC 0.946
+========================================================
+Plotting completed! Figures saved to figures/
+========================================================

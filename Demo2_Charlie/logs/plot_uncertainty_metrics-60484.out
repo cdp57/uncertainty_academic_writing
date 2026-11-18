@@ -1,0 +1,43 @@
+========================================================
+Starting AUROC & AURC Plot Generation
+========================================================
+[qasper/llama3.2_1b/judge] n=811 of 944 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 272 groups
+[qasper/llama3.2_1b/rouge] n=812 of 945 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 272 groups
+[qasper/qwen3_1.7b/judge] n=939 of 944 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 278 groups
+[qasper/qwen3_1.7b/rouge] n=940 of 945 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 278 groups
+[qasper/llama3.2_3b/judge] n=913 of 945 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 276 groups
+[qasper/llama3.2_3b/rouge] n=913 of 945 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 276 groups
+[qasper/qwen3_4b] excluded for low coverage: structured_self_report(3%)
+[qasper/qwen3_4b/judge] n=944 of 945 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 279 groups
+[qasper/qwen3_4b/rouge] n=944 of 945 rows with a label (rest missing a metric) | CV: StratifiedGroupKFold(paper_idx), 279 groups
+[sciq/llama3.2_1b/judge] n=973 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/llama3.2_1b/rouge] n=973 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_1.7b/judge] n=999 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_1.7b/rouge] n=999 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/llama3.2_3b/judge] n=994 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/llama3.2_3b/rouge] n=994 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_4b] excluded for low coverage: structured_self_report(4%)
+[sciq/qwen3_4b/judge] n=997 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_4b/rouge] n=997 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+
+Saved 156 rows to: figures/meta_entropy_results.csv
+
+qasper/llama3.2_1b/judge (n=811, acc 0.609): best single discrete_semantic_entropy 0.532 | all_entropy 0.505 (fold SD 0.007) | all_confidence 0.505 (fold SD 0.025) | all_metrics 0.510 (fold SD 0.014)
+qasper/llama3.2_1b/rouge (n=812, acc 0.326): best single predictive_entropy 0.684 | all_entropy 0.687 (fold SD 0.057) | all_confidence 0.556 (fold SD 0.031) | all_metrics 0.688 (fold SD 0.060)
+qasper/qwen3_1.7b/judge (n=939, acc 0.679): best single predictive_entropy 0.552 | all_entropy 0.545 (fold SD 0.041) | all_confidence 0.543 (fold SD 0.051) | all_metrics 0.575 (fold SD 0.075)
+qasper/qwen3_1.7b/rouge (n=940, acc 0.366): best single predictive_entropy 0.678 | all_entropy 0.679 (fold SD 0.035) | all_confidence 0.629 (fold SD 0.050) | all_metrics 0.702 (fold SD 0.036)
+qasper/llama3.2_3b/judge (n=913, acc 0.656): best single length_normalized_predictive_entropy 0.554 | all_entropy 0.548 (fold SD 0.049) | all_confidence 0.535 (fold SD 0.048) | all_metrics 0.553 (fold SD 0.053)
+qasper/llama3.2_3b/rouge (n=913, acc 0.435): best single predictive_entropy 0.729 | all_entropy 0.724 (fold SD 0.055) | all_confidence 0.566 (fold SD 0.045) | all_metrics 0.718 (fold SD 0.055)
+qasper/qwen3_4b/judge (n=944, acc 0.718): best single predictive_entropy 0.504 | all_entropy 0.499 (fold SD 0.052) | all_confidence 0.457 (fold SD 0.060) | all_metrics 0.509 (fold SD 0.058)
+qasper/qwen3_4b/rouge (n=944, acc 0.434): best single predictive_entropy 0.682 | all_entropy 0.685 (fold SD 0.027) | all_confidence 0.640 (fold SD 0.049) | all_metrics 0.719 (fold SD 0.039)
+sciq/llama3.2_1b/judge (n=973, acc 0.841): best single length_normalized_predictive_entropy 0.747 | all_entropy 0.767 (fold SD 0.029) | all_confidence 0.602 (fold SD 0.058) | all_metrics 0.768 (fold SD 0.018)
+sciq/llama3.2_1b/rouge (n=973, acc 0.761): best single length_normalized_predictive_entropy 0.756 | all_entropy 0.778 (fold SD 0.044) | all_confidence 0.636 (fold SD 0.041) | all_metrics 0.783 (fold SD 0.045)
+sciq/qwen3_1.7b/judge (n=999, acc 0.908): best single structured_self_report 0.732 | all_entropy 0.660 (fold SD 0.067) | all_confidence 0.741 (fold SD 0.076) | all_metrics 0.731 (fold SD 0.059)
+sciq/qwen3_1.7b/rouge (n=999, acc 0.861): best single predictive_entropy 0.725 | all_entropy 0.724 (fold SD 0.016) | all_confidence 0.688 (fold SD 0.050) | all_metrics 0.752 (fold SD 0.026)
+sciq/llama3.2_3b/judge (n=994, acc 0.911): best single p_true_probability 0.798 | all_entropy 0.799 (fold SD 0.055) | all_confidence 0.824 (fold SD 0.023) | all_metrics 0.851 (fold SD 0.025)
+sciq/llama3.2_3b/rouge (n=994, acc 0.868): best single predictive_entropy 0.789 | all_entropy 0.807 (fold SD 0.021) | all_confidence 0.742 (fold SD 0.040) | all_metrics 0.806 (fold SD 0.035)
+sciq/qwen3_4b/judge (n=997, acc 0.945): best single length_normalized_predictive_entropy 0.728 | all_entropy 0.723 (fold SD 0.044) | all_confidence 0.669 (fold SD 0.071) | all_metrics 0.745 (fold SD 0.064)
+sciq/qwen3_4b/rouge (n=997, acc 0.896): best single predictive_entropy 0.772 | all_entropy 0.772 (fold SD 0.027) | all_confidence 0.708 (fold SD 0.018) | all_metrics 0.803 (fold SD 0.034)
+========================================================
+Plotting completed! Figures saved to figures/
+========================================================

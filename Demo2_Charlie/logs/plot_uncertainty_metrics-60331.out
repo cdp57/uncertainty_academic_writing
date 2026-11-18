@@ -1,0 +1,101 @@
+========================================================
+Starting AUROC & AURC Plot Generation
+========================================================
+  WARNING: judged_results_qasper_llama3.2_1b.csv has no 'greedy_response' column; using 'model_response' instead.
+[qasper/llama3.2_1b] entropy rows: 945 | judged rows: 945 | joined: 945
+[qasper/llama3.2_1b] vanilla confidence parsed (of 1005 questions): run 0 only 564 -> any run 877 -> +raw-text rescue 906 (none: 99)
+[qasper/llama3.2_1b] structured confidence parsed (of 1005 questions): run 0 only 321 -> any run 916 -> +raw-text rescue 960 (none: 45)
+[qasper/llama3.2_1b] confidence rows matched: 945/945
+  WARNING: judged_results_qasper_llama3.2_3b.csv has no 'greedy_response' column; using 'model_response' instead.
+[qasper/llama3.2_3b] entropy rows: 945 | judged rows: 945 | joined: 945
+[qasper/llama3.2_3b] vanilla confidence parsed (of 1005 questions): run 0 only 971 -> any run 990 -> +raw-text rescue 990 (none: 15)
+[qasper/llama3.2_3b] structured confidence parsed (of 1005 questions): run 0 only 724 -> any run 961 -> +raw-text rescue 981 (none: 24)
+[qasper/llama3.2_3b] confidence rows matched: 945/945
+  WARNING: judged_results_qasper_qwen3_1.7b.csv has no 'greedy_response' column; using 'model_response' instead.
+[qasper/qwen3_1.7b] entropy rows: 945 | judged rows: 945 | joined: 945
+[qasper/qwen3_1.7b] vanilla confidence parsed (of 1005 questions): run 0 only 410 -> any run 488 -> +raw-text rescue 1004 (none: 1)
+[qasper/qwen3_1.7b] structured confidence parsed (of 1005 questions): run 0 only 936 -> any run 998 -> +raw-text rescue 1000 (none: 5)
+[qasper/qwen3_1.7b] confidence rows matched: 945/945
+  WARNING: judged_results_qasper_qwen3_4b.csv has no 'greedy_response' column; using 'model_response' instead.
+[qasper/qwen3_4b] entropy rows: 945 | judged rows: 945 | joined: 945
+[qasper/qwen3_4b] vanilla confidence parsed (of 1005 questions): run 0 only 1004 -> any run 1004 -> +raw-text rescue 1004 (none: 1)
+[qasper/qwen3_4b] structured confidence parsed (of 1005 questions): run 0 only 21 -> any run 36 -> +raw-text rescue 36 (none: 969)
+[qasper/qwen3_4b] confidence rows matched: 945/945
+  WARNING: judged_results_sciq_llama3.2_1b.csv has no 'greedy_response' column; using 'model_response' instead.
+[sciq/llama3.2_1b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+[sciq/llama3.2_1b] vanilla confidence parsed (of 1000 questions): run 0 only 922 -> any run 981 -> +raw-text rescue 983 (none: 17)
+[sciq/llama3.2_1b] structured confidence parsed (of 1000 questions): run 0 only 419 -> any run 981 -> +raw-text rescue 987 (none: 13)
+[sciq/llama3.2_1b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq/llama3.2_1b] confidence rows matched: 1000/1000
+  WARNING: judged_results_sciq_llama3.2_3b.csv has no 'greedy_response' column; using 'model_response' instead.
+[sciq/llama3.2_3b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+[sciq/llama3.2_3b] vanilla confidence parsed (of 1000 questions): run 0 only 996 -> any run 997 -> +raw-text rescue 997 (none: 3)
+[sciq/llama3.2_3b] structured confidence parsed (of 1000 questions): run 0 only 967 -> any run 997 -> +raw-text rescue 997 (none: 3)
+[sciq/llama3.2_3b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq/llama3.2_3b] confidence rows matched: 1000/1000
+  WARNING: judged_results_sciq_qwen3_1.7b.csv has no 'greedy_response' column; using 'model_response' instead.
+[sciq/qwen3_1.7b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+[sciq/qwen3_1.7b] vanilla confidence parsed (of 1000 questions): run 0 only 967 -> any run 980 -> +raw-text rescue 999 (none: 1)
+[sciq/qwen3_1.7b] structured confidence parsed (of 1000 questions): run 0 only 997 -> any run 1000 -> +raw-text rescue 1000 (none: 0)
+[sciq/qwen3_1.7b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq/qwen3_1.7b] confidence rows matched: 1000/1000
+  WARNING: judged_results_sciq_qwen3_4b.csv has no 'greedy_response' column; using 'model_response' instead.
+[sciq/qwen3_4b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+[sciq/qwen3_4b] vanilla confidence parsed (of 1000 questions): run 0 only 996 -> any run 997 -> +raw-text rescue 997 (none: 3)
+[sciq/qwen3_4b] structured confidence parsed (of 1000 questions): run 0 only 29 -> any run 35 -> +raw-text rescue 36 (none: 964)
+[sciq/qwen3_4b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq/qwen3_4b] confidence rows matched: 1000/1000
+Saved confidence parse coverage to: figures/confidence_parse_coverage.csv
+Saved per-example results (7780 rows) to: figures/per_example_results.csv
+Saved per-metric AUROC/AURC summary with example counts to: figures/metric_summary.csv
+Saved Accuracy Comparison Bar Chart (with SEM error bars) to: figures/accuracy_judge_vs_rouge.png
+Saved Entropy Grouped Bar Chart (with SEM error bars) to: figures/entropy_bars_sem.png
+Saved Kuhn et al. style AUROC plot (JUDGE Target) to: figures/kuhn_auroc_judge_target.png
+Saved Kuhn et al. style AURC plot (JUDGE Target) to: figures/kuhn_aurc_judge_target.png
+Saved Kuhn et al. style AUROC plot (ROUGE Target) to: figures/kuhn_auroc_rouge_target.png
+Saved Kuhn et al. style AURC plot (ROUGE Target) to: figures/kuhn_aurc_rouge_target.png
+
+==============================================================================
+Examples behind each AUROC/AURC point (JUDGE target)
+==============================================================================
+
+SCIQ:
+measure      Semantic Entropy  Discrete SE  LN-PE  Predictive Entropy  Vanilla Self-Report  Structured Self-Report  P(True)
+model                                                                                                                      
+llama3.2_1b              1000         1000   1000                1000                  983                     987     1000
+qwen3_1.7b               1000         1000   1000                1000                  999                    1000     1000
+llama3.2_3b              1000         1000   1000                1000                  997                     997     1000
+qwen3_4b                 1000         1000   1000                1000                  997                      36     1000
+
+QASPER:
+measure      Semantic Entropy  Discrete SE  LN-PE  Predictive Entropy  Vanilla Self-Report  Structured Self-Report  P(True)
+model                                                                                                                      
+llama3.2_1b               945          945    945                 945                  848                     902      945
+qwen3_1.7b                945          945    945                 945                  944                     941      945
+llama3.2_3b               945          945    945                 945                  934                     923      945
+qwen3_4b                  945          945    945                 945                  944                      33      945
+
+==============================================================================
+Examples behind each AUROC/AURC point (ROUGE target)
+==============================================================================
+
+SCIQ:
+measure      Semantic Entropy  Discrete SE  LN-PE  Predictive Entropy  Vanilla Self-Report  Structured Self-Report  P(True)
+model                                                                                                                      
+llama3.2_1b              1000         1000   1000                1000                  983                     987     1000
+qwen3_1.7b               1000         1000   1000                1000                  999                    1000     1000
+llama3.2_3b              1000         1000   1000                1000                  997                     997     1000
+qwen3_4b                 1000         1000   1000                1000                  997                      36     1000
+
+QASPER:
+measure      Semantic Entropy  Discrete SE  LN-PE  Predictive Entropy  Vanilla Self-Report  Structured Self-Report  P(True)
+model                                                                                                                      
+llama3.2_1b               945          945    945                 945                  848                     902      945
+qwen3_1.7b                945          945    945                 945                  944                     941      945
+llama3.2_3b               945          945    945                 945                  934                     923      945
+qwen3_4b                  945          945    945                 945                  944                      33      945
+
+A smaller n for the self-report measures means only rows with a parsed confidence are used.
+========================================================
+Plotting completed! Figures saved to figures/
+========================================================

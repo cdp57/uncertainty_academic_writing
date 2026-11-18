@@ -1,0 +1,14 @@
+usage: evaluate_biased_semantic_entropy.py [-h] [--model MODEL]
+                                           [--bias-type {biased_correct,biased_incorrect,unbiased}]
+                                           [--biased-input-csv BIASED_INPUT_CSV]
+                                           [--split SPLIT]
+                                           [--num-samples NUM_SAMPLES]
+                                           [--num-runs NUM_RUNS]
+                                           [--temperature TEMPERATURE]
+                                           [--max-new-tokens MAX_NEW_TOKENS]
+                                           [--max-papers MAX_PAPERS]
+                                           [--output-dir OUTPUT_DIR]
+                                           [--only-answerable | --no-only-answerable]
+                                           [--seed SEED]
+evaluate_biased_semantic_entropy.py: error: unrecognized arguments: --dataset sciq
+[2026-11-17T11:54:40.715] error: *** JOB 60727 ON class25t CANCELLED AT 2026-11-17T11:54:40 DUE to SIGNAL Terminated ***

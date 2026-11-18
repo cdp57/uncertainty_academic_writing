@@ -1,0 +1,17 @@
+dataset,model,baseline,n_rows,parsed_run0_only,parsed_any_run,with_raw_text_rescue,none_after
+qasper,llama3.2_1b,vanilla,1005,564,877,906,99
+qasper,llama3.2_1b,structured,1005,321,916,960,45
+qasper,llama3.2_3b,vanilla,1005,971,990,990,15
+qasper,llama3.2_3b,structured,1005,724,961,981,24
+qasper,qwen3_1.7b,vanilla,1005,410,488,1004,1
+qasper,qwen3_1.7b,structured,1005,936,998,1000,5
+qasper,qwen3_4b,vanilla,1005,1004,1004,1004,1
+qasper,qwen3_4b,structured,1005,21,36,36,969
+sciq,llama3.2_1b,vanilla,1000,922,981,983,17
+sciq,llama3.2_1b,structured,1000,419,981,987,13
+sciq,llama3.2_3b,vanilla,1000,996,997,997,3
+sciq,llama3.2_3b,structured,1000,967,997,997,3
+sciq,qwen3_1.7b,vanilla,1000,967,980,999,1
+sciq,qwen3_1.7b,structured,1000,997,1000,1000,0
+sciq,qwen3_4b,vanilla,1000,996,997,997,3
+sciq,qwen3_4b,structured,1000,29,35,36,964

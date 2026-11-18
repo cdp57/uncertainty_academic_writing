@@ -1,0 +1,7 @@
+  File "/home/cdp57/uncertainty_academic_writing/Demo2_Charlie/evaluate_biased_semantic_entropy.py", line 466
+    f"Evaluated: {len(se_scores)} | Skipped: {skipped} | Result: {result["greedy_response"]}", flush=True)
+                                                                          ^
+SyntaxError: f-string: unmatched '['
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 85.00it/s]
+[2026-11-17T14:12:37.638] error: *** JOB 60747 ON class25t CANCELLED AT 2026-11-17T14:12:37 DUE to SIGNAL Terminated ***

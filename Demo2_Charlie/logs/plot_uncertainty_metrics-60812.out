@@ -1,0 +1,26 @@
+========================================================
+Starting AUROC & AURC Plot Generation
+========================================================
+[sciq/llama3.2_1b/judge] n=781 of 999 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/llama3.2_1b/rouge] n=782 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_1.7b/judge] n=775 of 998 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_1.7b/rouge] n=777 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/llama3.2_3b/judge] n=596 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/llama3.2_3b/rouge] n=596 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_4b] excluded for low coverage: structured_self_report(17%)
+[sciq/qwen3_4b/judge] n=798 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+[sciq/qwen3_4b/rouge] n=798 of 1000 rows with a label (rest missing a metric) | CV: StratifiedKFold
+
+Saved 78 rows to: figures/biased/meta_entropy_results.csv
+
+sciq/llama3.2_1b/judge (n=781, acc 0.243): best single semantic_entropy 0.627 | all_entropy 0.633 (fold SD 0.083) | all_confidence 0.533 (fold SD 0.028) | all_metrics 0.639 (fold SD 0.075)
+sciq/llama3.2_1b/rouge (n=782, acc 0.249): best single semantic_entropy 0.663 | all_entropy 0.669 (fold SD 0.047) | all_confidence 0.497 (fold SD 0.054) | all_metrics 0.658 (fold SD 0.029)
+sciq/qwen3_1.7b/judge (n=775, acc 0.209): best single structured_self_report 0.585 | all_entropy 0.582 (fold SD 0.086) | all_confidence 0.580 (fold SD 0.039) | all_metrics 0.630 (fold SD 0.056)
+sciq/qwen3_1.7b/rouge (n=777, acc 0.187): best single structured_self_report 0.612 | all_entropy 0.527 (fold SD 0.053) | all_confidence 0.606 (fold SD 0.030) | all_metrics 0.613 (fold SD 0.045)
+sciq/llama3.2_3b/judge (n=596, acc 0.518): best single discrete_semantic_entropy 0.749 | all_entropy 0.753 (fold SD 0.053) | all_confidence 0.511 (fold SD 0.029) | all_metrics 0.748 (fold SD 0.051)
+sciq/llama3.2_3b/rouge (n=596, acc 0.525): best single predictive_entropy 0.790 | all_entropy 0.795 (fold SD 0.045) | all_confidence 0.545 (fold SD 0.014) | all_metrics 0.796 (fold SD 0.042)
+sciq/qwen3_4b/judge (n=798, acc 0.560): best single length_normalized_predictive_entropy 0.555 | all_entropy 0.613 (fold SD 0.069) | all_confidence 0.566 (fold SD 0.044) | all_metrics 0.638 (fold SD 0.061)
+sciq/qwen3_4b/rouge (n=798, acc 0.555): best single length_normalized_predictive_entropy 0.629 | all_entropy 0.620 (fold SD 0.012) | all_confidence 0.555 (fold SD 0.056) | all_metrics 0.622 (fold SD 0.024)
+========================================================
+Plotting completed! Figures saved to figures/
+========================================================
