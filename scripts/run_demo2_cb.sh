@@ -33,7 +33,7 @@ EVALUATED_DIR="results/biased/evaluation"
 FIGURES_DIR="figures/biased"
 DATA_DIR="data"
 
-MODELS=("llama3.2_1b" "llama3.2_3b" "qwen3_1.7b" "qwen3_4b")
+MODELS=("llama3.2-1b" "llama3.2-3b" "qwen3-1.7b" "qwen3-4b")
 JUDGE_MODEL="meta-llama/Llama-3.2-3B-Instruct"
 DATASET="sciq"
 SPLIT="test"  # Standard SciQ split
@@ -48,7 +48,7 @@ nvidia-smi
 # ==============================================================================
 for MODEL in "${MODELS[@]}"; do
     CLEAN_MODEL=$(echo "$MODEL" | tr '/' '_' | tr '-' '_')
-    ENTROPY_CSV="${ENTROPY_DIR}/results_${DATASET}_${CLEAN_MODEL}.csv"
+    ENTROPY_CSV="${ENTROPY_DIR}/results_${DATASET}_biased_incorrect_${CLEAN_MODEL}.csv"
 
     echo ""
     echo "--------------------------------------------------------"
@@ -57,7 +57,6 @@ for MODEL in "${MODELS[@]}"; do
     
     python evaluate_biased_semantic_entropy.py \
         --model "$MODEL" \
-        --dataset "$DATASET" \
         --split "$SPLIT" \
         --num-samples 10 \
         --temperature 0.7 \
@@ -77,7 +76,6 @@ for MODEL in "${MODELS[@]}"; do
     python LLM_judge_biased.py \
         --results-csv "$ENTROPY_CSV" \
         --judge-model "$JUDGE_MODEL" \
-        --dataset "$DATASET" \
         --split "$SPLIT" \
         --output-dir "$EVALUATED_DIR"
 

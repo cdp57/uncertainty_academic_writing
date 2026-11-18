@@ -1,0 +1,63 @@
+========================================================
+Starting SciQ End-to-End Uncertainty & Accuracy Pipeline
+========================================================
+Tue Nov 17 11:56:14 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4090        Off |   00000000:4A:00.0 Off |                  Off |
+| 30%   29C    P8             13W /  450W |       1MiB /  24564MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+--------------------------------------------------------
+--> [Stage 1] Generating Entropy: Model=llama3.2_1b | Dataset=sciq
+--------------------------------------------------------
+Reading biased questions from: data/sciq_biased_questions.csv
+Using compute device: cuda
+Loading generator model: llama3.2_1b...
+
+--------------------------------------------------------
+--> [Stage 2] Running LLM Judge: Model=llama3.2_1b | File=results/biased/entropy/results_sciq_llama3.2_1b.csv
+--------------------------------------------------------
+Reading evaluation pipeline outputs from: results/biased/entropy/results_sciq_llama3.2_1b.csv
+
+--------------------------------------------------------
+--> [Stage 1] Generating Entropy: Model=llama3.2_3b | Dataset=sciq
+--------------------------------------------------------
+Reading biased questions from: data/sciq_biased_questions.csv
+Using compute device: cuda
+Loading generator model: llama3.2_3b...
+
+--------------------------------------------------------
+--> [Stage 2] Running LLM Judge: Model=llama3.2_3b | File=results/biased/entropy/results_sciq_llama3.2_3b.csv
+--------------------------------------------------------
+Reading evaluation pipeline outputs from: results/biased/entropy/results_sciq_llama3.2_3b.csv
+
+--------------------------------------------------------
+--> [Stage 1] Generating Entropy: Model=qwen3_1.7b | Dataset=sciq
+--------------------------------------------------------
+Reading biased questions from: data/sciq_biased_questions.csv
+Using compute device: cuda
+Loading generator model: qwen3_1.7b...
+
+--------------------------------------------------------
+--> [Stage 2] Running LLM Judge: Model=qwen3_1.7b | File=results/biased/entropy/results_sciq_qwen3_1.7b.csv
+--------------------------------------------------------
+Reading evaluation pipeline outputs from: results/biased/entropy/results_sciq_qwen3_1.7b.csv
+
+--------------------------------------------------------
+--> [Stage 1] Generating Entropy: Model=qwen3_4b | Dataset=sciq
+--------------------------------------------------------

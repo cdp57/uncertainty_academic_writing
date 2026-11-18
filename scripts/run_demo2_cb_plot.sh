@@ -2,7 +2,6 @@
 #SBATCH -A csds447                          # Course account
 #SBATCH -p markov_gpu                       # GPU partition
 #SBATCH -C "gpu4090|gpul40s"                # GPU request
-#SBATCH -x class21t                         # Exclude faulty node
 #SBATCH --gres=gpu:1                        # 1 GPU
 #SBATCH -c 4                                # 4 CPU cores
 #SBATCH --mem=48G                           # 48GB system RAM

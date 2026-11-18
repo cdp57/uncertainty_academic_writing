@@ -1,0 +1,9 @@
+dataset,model,baseline,n_rows,parsed_run0_only,parsed_any_run,with_raw_text_rescue,none_after
+sciq,llama3.2_1b,vanilla,1000,994,999,1000,0
+sciq,llama3.2_1b,structured,1000,813,980,982,18
+sciq,llama3.2_3b,vanilla,1000,974,1000,1000,0
+sciq,llama3.2_3b,structured,1000,327,717,743,257
+sciq,qwen3_1.7b,vanilla,1000,998,1000,1000,0
+sciq,qwen3_1.7b,structured,1000,950,976,976,24
+sciq,qwen3_4b,vanilla,1000,998,1000,1000,0
+sciq,qwen3_4b,structured,1000,145,215,215,785

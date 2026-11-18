@@ -1,0 +1,99 @@
+========================================================
+Starting SciQ End-to-End Uncertainty & Accuracy Pipeline
+========================================================
+Tue Nov 17 20:07:15 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4090        Off |   00000000:CA:00.0 Off |                  Off |
+| 31%   31C    P8             20W /  450W |       1MiB /  24564MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+========================================================
+--> [Stage 3] Generating AUROC and AURC Comparison Plots
+========================================================
+ [evaluated_results_sciq_biased_incorrect_llama3.2_1b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+ [results_sciq_biased_incorrect_llama3.2_1b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+[sciq-biased/llama3.2_1b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+ [results_sciq_llama3.2_1b.csv] filter on 'bias_condition': kept 1000/2000 rows (values: ['biased_correct', 'biased_incorrect'])
+[sciq-biased/llama3.2_1b] vanilla confidence parsed (of 1000 questions): run 0 only 994 -> any run 999 -> +raw-text rescue 1000 (none: 0)
+[sciq-biased/llama3.2_1b] structured confidence parsed (of 1000 questions): run 0 only 813 -> any run 980 -> +raw-text rescue 982 (none: 18)
+[sciq-biased/llama3.2_1b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq-biased/llama3.2_1b] confidence rows matched: 798/1000
+  WARNING: only 798/1000 rows matched the confidence file; check that item_idx / question text agree between files.
+ [evaluated_results_sciq_biased_incorrect_llama3.2_3b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+ [results_sciq_biased_incorrect_llama3.2_3b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+[sciq-biased/llama3.2_3b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+ [results_sciq_llama3.2_3b.csv] filter on 'bias_condition': kept 1000/2000 rows (values: ['biased_correct', 'biased_incorrect'])
+[sciq-biased/llama3.2_3b] vanilla confidence parsed (of 1000 questions): run 0 only 974 -> any run 1000 -> +raw-text rescue 1000 (none: 0)
+[sciq-biased/llama3.2_3b] structured confidence parsed (of 1000 questions): run 0 only 327 -> any run 717 -> +raw-text rescue 743 (none: 257)
+[sciq-biased/llama3.2_3b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq-biased/llama3.2_3b] confidence rows matched: 798/1000
+  WARNING: only 798/1000 rows matched the confidence file; check that item_idx / question text agree between files.
+ [evaluated_results_sciq_biased_incorrect_qwen3_1.7b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+ [results_sciq_biased_incorrect_qwen3_1.7b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+[sciq-biased/qwen3_1.7b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+ [results_sciq_qwen3_1.7b.csv] filter on 'bias_condition': kept 1000/2000 rows (values: ['biased_correct', 'biased_incorrect'])
+[sciq-biased/qwen3_1.7b] vanilla confidence parsed (of 1000 questions): run 0 only 998 -> any run 1000 -> +raw-text rescue 1000 (none: 0)
+[sciq-biased/qwen3_1.7b] structured confidence parsed (of 1000 questions): run 0 only 950 -> any run 976 -> +raw-text rescue 976 (none: 24)
+[sciq-biased/qwen3_1.7b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq-biased/qwen3_1.7b] confidence rows matched: 798/1000
+  WARNING: only 798/1000 rows matched the confidence file; check that item_idx / question text agree between files.
+ [evaluated_results_sciq_biased_incorrect_qwen3_4b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+ [results_sciq_biased_incorrect_qwen3_4b.csv] filter on 'bias_type': kept 1000/1000 rows (values: ['biased_incorrect'])
+[sciq-biased/qwen3_4b] entropy rows: 1000 | judged rows: 1000 | joined: 1000
+ [results_sciq_qwen3_4b.csv] filter on 'bias_condition': kept 1000/2000 rows (values: ['biased_correct', 'biased_incorrect'])
+[sciq-biased/qwen3_4b] vanilla confidence parsed (of 1000 questions): run 0 only 998 -> any run 1000 -> +raw-text rescue 1000 (none: 0)
+[sciq-biased/qwen3_4b] structured confidence parsed (of 1000 questions): run 0 only 145 -> any run 215 -> +raw-text rescue 215 (none: 785)
+[sciq-biased/qwen3_4b] index keys don't line up with the confidence file; joining on question text (repeated questions are matched in file order).
+[sciq-biased/qwen3_4b] confidence rows matched: 798/1000
+  WARNING: only 798/1000 rows matched the confidence file; check that item_idx / question text agree between files.
+Saved confidence parse coverage to: figures/biased/confidence_parse_coverage.csv
+Saved per-example results (4000 rows) to: figures/biased/per_example_results.csv
+Saved per-metric AUROC/AURC summary with example counts to: figures/biased/metric_summary.csv
+Saved SciQ Accuracy Bar Chart (with SEM error bars) to: figures/biased/sciq_accuracy_judge_vs_rouge_biased.png
+Saved SciQ Entropy Grouped Bar Chart (with SEM error bars) to: figures/biased/sciq_entropy_bars_sem_biased.png
+Saved SciQ Kuhn style AUROC plot (JUDGE Target) to: figures/biased/sciq_kuhn_auroc_judge_target_biased.png
+Saved SciQ Kuhn style AURC plot (JUDGE Target) to: figures/biased/sciq_kuhn_aurc_judge_target_biased.png
+Saved SciQ Kuhn style AUROC plot (ROUGE Target) to: figures/biased/sciq_kuhn_auroc_rouge_target_biased.png
+Saved SciQ Kuhn style AURC plot (ROUGE Target) to: figures/biased/sciq_kuhn_aurc_rouge_target_biased.png
+
+==============================================================================
+Examples behind each AUROC/AURC point (SciQ biased, JUDGE target)
+==============================================================================
+measure      Semantic Entropy  Discrete SE  LN-PE  Predictive Entropy  Vanilla Self-Report  Structured Self-Report  P(True)
+model                                                                                                                      
+llama3.2_1b               999          999    999                 999                  797                     781      797
+qwen3_1.7b                998          998    998                 998                  796                     775      796
+llama3.2_3b              1000         1000   1000                1000                  798                     596      798
+qwen3_4b                 1000         1000   1000                1000                  798                     174      798
+
+==============================================================================
+Examples behind each AUROC/AURC point (SciQ biased, ROUGE target)
+==============================================================================
+measure      Semantic Entropy  Discrete SE  LN-PE  Predictive Entropy  Vanilla Self-Report  Structured Self-Report  P(True)
+model                                                                                                                      
+llama3.2_1b              1000         1000   1000                1000                  798                     782      798
+qwen3_1.7b               1000         1000   1000                1000                  798                     777      798
+llama3.2_3b              1000         1000   1000                1000                  798                     596      798
+qwen3_4b                 1000         1000   1000                1000                  798                     174      798
+
+A smaller n for the self-report measures means only rows with a parsed confidence are used.
+
+========================================================
+SciQ End-to-End Pipeline Execution Complete!
+Plots saved to: figures/biased/
+========================================================

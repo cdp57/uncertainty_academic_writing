@@ -2,10 +2,9 @@
 #SBATCH -A csds447                          # Course account
 #SBATCH -p markov_gpu                       # GPU partition
 #SBATCH -C "gpu4090|gpul40s"                # Request 4090 or L40S GPU
-#SBATCH -x class21t                         # Exclude faulty CUDA driver node
 #SBATCH --gres=gpu:1                        # Request 1 GPU
 #SBATCH -c 4                                # Request 4 CPU cores
-#SBATCH --mem=48G                           # Request 48GB system RAM
+#SBATCH --mem=32G                           # Request 48GB system RAM
 #SBATCH -t 12:00:00                         # Walltime limit for full suite (12 hours)
 #SBATCH -J full_llm_judge_suite             # Job name
 #SBATCH -o logs/%x-%j.out                   # Standard output log

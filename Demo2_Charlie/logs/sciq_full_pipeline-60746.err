@@ -1,0 +1,7 @@
+  File "/home/cdp57/uncertainty_academic_writing/Demo2_Charlie/evaluate_biased_semantic_entropy.py", line 126
+    "Either reply \"Yes\" or "No, the answer is \{answer\}\n"
+                              ^
+SyntaxError: invalid syntax
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 70.62it/s]
+[2026-11-17T14:09:25.105] error: *** JOB 60746 ON class25t CANCELLED AT 2026-11-17T14:09:25 DUE to SIGNAL Terminated ***

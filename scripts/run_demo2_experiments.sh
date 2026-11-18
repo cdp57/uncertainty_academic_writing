@@ -43,7 +43,7 @@ FIGURES_DIR="figures"
 
 # Models and Datasets matrix
 MODELS=("llama3.2-1b" "llama3.2-3b" "qwen3-1.7b" "qwen3-4b")
-DATASETS=("qasper" "sciq")
+DATASETS=("qasper")
 JUDGE_MODEL="meta-llama/Llama-3.2-3B-Instruct"
 
 echo ""
