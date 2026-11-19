@@ -1,19 +1,32 @@
 """
 Meta-entropy: predict answer correctness from uncertainty metrics with a logistic regression.
 
-For every (dataset, model) and each correctness target (LLM judge, ROUGE-L), runs 5-fold CV on
+For every (dataset, condition, model) and each correctness target (LLM judge, ROUGE-L), runs 5-fold CV on
   * "all_entropy"     - the four entropy metrics together,
   * "all_confidence"  - self-report (vanilla, structured) and P(True) together,
-  * "all_metrics"     - everything together,
+  * "all_persona"     - the persona-elicited confidences together (speculative editor, opposing counsel,
+                        compliance officer, persona panel),
+  * "all_no_persona"  - entropy + confidence (everything except the persona confidences),
+  * "all_metrics"     - everything together (entropy + confidence + persona),
   * one single-metric model per metric (baselines, to show what combining adds),
-and writes AUROC / AURC plus the fitted model weights to one CSV.
+and writes AUROC / AURC plus the fitted model weights to one CSV. Comparing "all_metrics" with
+"all_no_persona" (same rows, same folds) isolates what the persona confidences add.
+
+The persona confidences come from separate persona-prompted generations, but here they are used as predictors
+of the same target as every other metric: whether the greedy answer is correct.
+
+Missing values: rows are never dropped for a missing feature. Gaps are filled with the median of the training
+rows inside each CV fold (the imputer is part of the sklearn pipeline, so test rows never influence it). Only rows
+with no correctness label are dropped. Features covered in fewer than --min-coverage of a group's rows are still
+excluded, since an almost fully imputed feature is just a constant.
 
 Folds: for QASPER, questions are grouped by paper (StratifiedGroupKFold on paper_idx), so no paper is split
 across train and test (questions from one paper share context and are not independent). Datasets with
-independent items (SciQ) use plain StratifiedKFold.
+independent items (SciQ) use plain StratifiedKFold. Conditions (e.g. biased / unbiased) are analyzed
+separately and never pooled: they have very different accuracy, and in SciQ the same questions appear in both.
 
-Input: per_example_results.csv from the plotting script (columns dataset, model, judge_correct and/or
-rouge_l_correct, the metric columns, and paper_idx for QASPER).
+Input: per_example.csv (columns dataset, model, condition, judge_correct and/or rouge_l_correct, the metric
+columns, the *_confidence persona columns, and paper_idx for QASPER). Files without a condition column still work.
 """
 import os
 import argparse
@@ -22,6 +35,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
+from sklearn.impute import SimpleImputer
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
@@ -34,21 +48,39 @@ ENTROPY_FEATURES = [
     "length_normalized_predictive_entropy",
 ]
 CONFIDENCE_FEATURES = ["vanilla_self_report", "structured_self_report", "p_true_probability"]
+# money_betting_confidence is left out on purpose: that persona reports a bet (money_betting_bet_usd), not a
+# confidence, and the confidence column is empty in per_example.csv. Pass it explicitly to include it.
+PERSONA_FEATURES = [
+    "speculative_editor_confidence",
+    "opposing_counsel_confidence",
+    "compliance_officer_confidence",
+    "persona_panel_confidence",
+    "money_betting_bet_usd"
+]
 TARGETS = {"judge": "judge_correct", "rouge": "rouge_l_correct"}
 MODEL_ORDER = ["llama3.2_1b", "qwen3_1.7b", "llama3.2_3b", "qwen3_4b"]
 
 
 def parse_args():
     p = argparse.ArgumentParser(description="Logistic-regression meta-model over uncertainty metrics (5-fold CV)")
-    p.add_argument("--input", type=str, default="figures/biased/per_example_results.csv",
-                   help="per_example_results.csv written by the plotting script.")
-    p.add_argument("--output", type=str, default="figures/biased/meta_entropy_results.csv")
+    p.add_argument("--input", type=str, default="Demo3_Charlie/results/per_example.csv",
+                   help="Per-example CSV (dataset, model, condition, correctness, metric and persona columns).")
+    p.add_argument("--output", type=str, default="Demo3_Charlie/results/meta_entropy_results.csv")
     p.add_argument("--entropy-features", nargs="+", default=ENTROPY_FEATURES)
     p.add_argument("--confidence-features", nargs="+", default=CONFIDENCE_FEATURES,
                    help="Self-report / P(True) columns. Skipped per group if missing or poorly covered.")
+    p.add_argument("--persona-features", nargs="*", default=PERSONA_FEATURES,
+                   help="Persona-elicited confidence columns. Skipped per group if missing or poorly covered. "
+                        "Pass an empty list (--persona-features) to run without them.")
+    p.add_argument("--condition-col", type=str, default="condition",
+                   help="Column holding the experimental condition (e.g. biased / unbiased). Each value is "
+                        "analyzed separately. Ignored if the column is absent.")
+    p.add_argument("--conditions", nargs="+", default=None,
+                   help="Only run these condition values (default: all found).")
     p.add_argument("--min-coverage", type=float, default=0.5,
-                   help="Drop a feature for a (dataset, model) if fewer than this fraction of rows have it "
-                        "(rows missing any used feature are dropped, so a sparse feature would shrink the sample).")
+                   help="Drop a feature for a (dataset, condition, model) if fewer than this fraction of rows have "
+                        "it. Missing values of the kept features are median-imputed within each fold, but a feature "
+                        "that is mostly imputed is close to a constant and only adds noise.")
     p.add_argument("--group-col", type=str, default="paper_idx",
                    help="Column whose values must not be split across train/test folds (default: paper_idx).")
     p.add_argument("--no-group", action="store_true",
@@ -88,14 +120,20 @@ def compute_aurc(y, p):
 # Model + CV
 # ------------------------------------------------------------------------------
 def make_model(C):
+    # Missing feature values are filled with the median of the *training* rows (the imputer is a pipeline step,
+    # so it is re-fit inside every CV fold and never sees test rows). keep_empty_features keeps the column count
+    # fixed if a feature is entirely missing in a training fold (it is then filled with 0 and carries no signal).
     # Standardizing makes the weights comparable across metrics on very different scales
     # (predictive entropy ~20, length-normalized PE ~0.5, confidence 1-10) and keeps the L2 penalty fair.
-    return make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=1000))
+    return make_pipeline(SimpleImputer(strategy="median", keep_empty_features=True),
+                         StandardScaler(),
+                         LogisticRegression(C=C, max_iter=1000))
 
 
 def extract_weights(pipe):
-    """Weights on standardized features, the same weights in raw feature units, and both intercepts."""
-    scaler, lr = pipe[0], pipe[1]
+    """Weights on standardized features, the same weights in raw feature units, and both intercepts.
+    "Raw" means the units of the imputed feature values (the imputer only fills gaps, it does not rescale)."""
+    scaler, lr = pipe[1], pipe[2]
     w_std, b_std = lr.coef_[0], float(lr.intercept_[0])
     w_raw = w_std / scaler.scale_
     b_raw = b_std - float(np.sum(w_std * scaler.mean_ / scaler.scale_))
@@ -135,7 +173,7 @@ def run_feature_set(sub, y, groups, feats, all_feats, args):
         "aurc_pooled": aurc_pooled, "aurc_risk_pooled": 1.0 - aurc_pooled,
     }
 
-    # Final weights: fit on all rows of this (dataset, model, target)
+    # Final weights: fit on all rows of this (dataset, condition, model, target)
     w_std, b_std, w_raw, b_raw = extract_weights(make_model(args.C).fit(X, y))
     row["intercept_std"], row["intercept_raw"] = b_std, b_raw
     for f in all_feats:
@@ -145,15 +183,20 @@ def run_feature_set(sub, y, groups, feats, all_feats, args):
     return row
 
 
-def build_feature_sets(entropy, confidence):
+def build_feature_sets(entropy, confidence, persona):
     sets = []
     if len(entropy) > 1:
         sets.append(("all_entropy", entropy))
     if len(confidence) > 1:
         sets.append(("all_confidence", confidence))
-    if entropy and confidence:
-        sets.append(("all_metrics", entropy + confidence))
-    sets += [(f, [f]) for f in entropy + confidence]
+    if len(persona) > 1:
+        sets.append(("all_persona", persona))
+    # Ablation pair: with vs without the persona confidences (identical rows and folds)
+    if entropy and confidence and persona:
+        sets.append(("all_no_persona", entropy + confidence))
+    if sum(bool(g) for g in (entropy, confidence, persona)) > 1:
+        sets.append(("all_metrics", entropy + confidence + persona))
+    sets += [(f, [f]) for f in entropy + confidence + persona]
     return sets
 
 
@@ -166,17 +209,34 @@ def main():
 
     entropy_all = [f for f in args.entropy_features if f in df.columns]
     confidence_all = [f for f in args.confidence_features if f in df.columns]
+    persona_all = [f for f in args.persona_features if f in df.columns]
     for name, req, have in [("entropy", args.entropy_features, entropy_all),
-                            ("confidence", args.confidence_features, confidence_all)]:
+                            ("confidence", args.confidence_features, confidence_all),
+                            ("persona", args.persona_features, persona_all)]:
         gone = [f for f in req if f not in have]
         if gone:
             print(f"Skipping {name} features not in the CSV: {gone}")
-    if not entropy_all and not confidence_all:
+    if not entropy_all and not confidence_all and not persona_all:
         raise ValueError("None of the requested feature columns exist in the input CSV.")
-    all_feats = entropy_all + confidence_all
+    all_feats = entropy_all + confidence_all + persona_all
+
+    # Conditions (e.g. biased / unbiased) are analyzed separately, never pooled
+    group_keys = ["dataset", "model"]
+    has_condition = args.condition_col in df.columns
+    if has_condition:
+        if args.conditions:
+            df = df[df[args.condition_col].isin(args.conditions)]
+            if df.empty:
+                raise ValueError(f"No rows left after filtering {args.condition_col} to {args.conditions}.")
+        group_keys.append(args.condition_col)
+    elif args.conditions:
+        print(f"--conditions ignored: no '{args.condition_col}' column in {args.input}")
 
     rows = []
-    for (ds, model), g in df.groupby(["dataset", "model"], sort=False):
+    for key, g in df.groupby(group_keys, sort=False):
+        ds, model = key[0], key[1]
+        cond = key[2] if has_condition else "all"
+        tag = f"{ds}/{cond}/{model}"
         # Features with too little coverage in this group would force most rows to be dropped
         keep, dropped = [], []
         for f in all_feats:
@@ -184,24 +244,27 @@ def main():
             (keep if cov >= args.min_coverage else dropped).append((f, cov))
         entropy = [f for f, _ in keep if f in entropy_all]
         confidence = [f for f, _ in keep if f in confidence_all]
+        persona = [f for f, _ in keep if f in persona_all]
         excluded = "|".join(f"{f}({c:.0%})" for f, c in dropped)
         if dropped:
-            print(f"[{ds}/{model}] excluded for low coverage: {excluded}")
-        if not entropy and not confidence:
+            print(f"[{tag}] excluded for low coverage: {excluded}")
+        if not entropy and not confidence and not persona:
             continue
-        feats = entropy + confidence
-        feature_sets = build_feature_sets(entropy, confidence)
+        feats = entropy + confidence + persona
+        feature_sets = build_feature_sets(entropy, confidence, persona)
 
         for target, tcol in TARGETS.items():
             if tcol not in g.columns:
                 continue
             avail = int(g[tcol].notna().sum())
-            # Same complete-case rows for every feature set, so comparisons between sets are fair
-            sub = g.dropna(subset=feats + [tcol]).reset_index(drop=True)
+            # Only rows without a label are dropped. Missing feature values are median-imputed inside each fold,
+            # and every feature set uses the same rows, so comparisons between sets are fair.
+            sub = g.dropna(subset=[tcol]).reset_index(drop=True)
+            n_missing_rows = int(sub[feats].isna().any(axis=1).sum())
             y = (sub[tcol].to_numpy(dtype=float) >= 0.5).astype(int)
             n_pos, n_neg = int(y.sum()), int((1 - y).sum())
             if min(n_pos, n_neg) < args.folds:
-                print(f"[{ds}/{model}/{target}] skipped: {n_pos} correct / {n_neg} incorrect "
+                print(f"[{tag}/{target}] skipped: {n_pos} correct / {n_neg} incorrect "
                       f"(need at least {args.folds} of each for {args.folds}-fold CV)")
                 continue
 
@@ -212,23 +275,26 @@ def main():
                 scheme = f"StratifiedGroupKFold({args.group_col})"
                 n_groups = int(sub[args.group_col].nunique())
 
-            print(f"[{ds}/{model}/{target}] n={len(sub)} of {avail} rows with a label "
-                  f"(rest missing a metric) | CV: {scheme}" + (f", {n_groups} groups" if groups is not None else ""))
+            print(f"[{tag}/{target}] n={len(sub)} ({n_missing_rows} with >=1 imputed feature) | CV: {scheme}"
+                  + (f", {n_groups} groups" if groups is not None else ""))
             for name, fs in feature_sets:
-                rows.append({"dataset": ds, "model": model, "target": target, "feature_set": name,
-                             "n": len(sub), "n_rows_with_label": avail, "cv_scheme": scheme,
+                rows.append({"dataset": ds, "condition": cond, "model": model, "target": target,
+                             "feature_set": name,
+                             "n": len(sub), "n_rows_with_label": avail, "n_rows_imputed": n_missing_rows,
+                             "cv_scheme": scheme,
                              "n_groups": n_groups, "features_excluded_low_coverage": excluded,
                              **run_feature_set(sub, y, groups, fs, all_feats, args)})
 
     if not rows:
-        print("No (dataset, model, target) group had enough data; nothing written.")
+        print("No (dataset, condition, model, target) group had enough data; nothing written.")
         return
 
     out = pd.DataFrame(rows)
     order = {m: i for i, m in enumerate(MODEL_ORDER)}
-    out = out.sort_values(["dataset", "model", "target"],
+    out = out.sort_values(["dataset", "condition", "model", "target"],
                           key=lambda s: s.map(order).fillna(99) if s.name == "model" else s, kind="stable")
-    meta_cols = ["dataset", "model", "target", "feature_set", "features", "n", "n_rows_with_label", "n_correct",
+    meta_cols = ["dataset", "condition", "model", "target", "feature_set", "features", "n", "n_rows_with_label",
+                 "n_rows_imputed", "n_correct",
                  "base_rate", "cv_scheme", "n_groups", "folds", "features_excluded_low_coverage",
                  "auroc_mean", "auroc_std", "auroc_pooled", "aurc_mean", "aurc_std", "aurc_pooled",
                  "aurc_risk_pooled", "intercept_std", "intercept_raw"]
@@ -239,18 +305,15 @@ def main():
     out.to_csv(args.output, index=False)
     print(f"\nSaved {len(out)} rows to: {args.output}\n")
 
-    # Console summary: combined models vs the best single metric
-    combined = {"all_entropy", "all_confidence", "all_metrics"}
-    for (ds, model, target), grp in out.groupby(["dataset", "model", "target"], sort=False):
-        single = grp[~grp.feature_set.isin(combined)]
-        best = single.loc[single.auroc_pooled.idxmax()]
-        line = (f"{ds}/{model}/{target} (n={int(grp.n.iloc[0])}, acc {grp.base_rate.iloc[0]:.3f}): "
-                f"best single {best.feature_set} {best.auroc_pooled:.3f}")
-        for name in ("all_entropy", "all_confidence", "all_metrics"):
-            r = grp[grp.feature_set == name]
-            if len(r):
-                line += f" | {name} {r.auroc_pooled.iloc[0]:.3f} (fold SD {r.auroc_std.iloc[0]:.3f})"
-        print(line)
+    # Console summary: AUROC for every feature-set combination, one block per (dataset, condition, model, target)
+    name_w = max(len(s) for s in out.feature_set)
+    for (ds, cond, model, target), grp in out.groupby(["dataset", "condition", "model", "target"], sort=False):
+        print(f"{ds}/{cond}/{model}/{target}  (n={int(grp.n.iloc[0])}, "
+              f"{int(grp.n_rows_imputed.iloc[0])} rows with imputed values, acc {grp.base_rate.iloc[0]:.3f})")
+        for _, r in grp.iterrows():
+            print(f"    {r.feature_set:<{name_w}}  AUROC pooled {r.auroc_pooled:.3f} | "
+                  f"fold mean {r.auroc_mean:.3f} +/- {r.auroc_std:.3f}")
+        print()
 
 
 if __name__ == "__main__":
